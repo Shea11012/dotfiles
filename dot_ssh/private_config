@@ -1,0 +1,9 @@
+Host github.com
+  HostName github.com
+  User shea
+  IdentityFile ~/.ssh/id_ecdsa
+
+Host openwrt
+  HostName 192.168.32.100
+  User root
+  IdentityFile ~/.ssh/openwrt_ed25519

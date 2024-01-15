@@ -1,0 +1,24 @@
+{{ $email := promptString "email" -}}
+[user]
+    name = "{{ .chezmoi.group }}"
+    email = {{ $email | quote }}
+
+[includeIf "gitdir:~/workspace/work/"]
+    path = ~/workspace/mxy/dotfiles/git/.work.gitconfig
+
+{{ if eq .chezmoi.os "linux" }}
+[core]
+    editor = nvim
+    pager = "bat"
+{{ end }}
+
+[alias]
+    st = "status -s"
+    ci = "commit"
+    co = checkout
+    cb = "checkout -b"
+    br = "branch -vv"
+    lg = "log --name-status"
+
+[pull]
+    rebase = true
