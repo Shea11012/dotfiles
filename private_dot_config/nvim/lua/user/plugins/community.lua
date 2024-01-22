@@ -24,5 +24,6 @@ return {
 
   -- debug
   { import = "astrocommunity.debugging.nvim-dap-virtual-text" },
+  { import = "astrocommunity.code-runner.overseer-nvim" },
   -- { import = "astrocommunity.completion.copilot-lua-cmp" },
 }
