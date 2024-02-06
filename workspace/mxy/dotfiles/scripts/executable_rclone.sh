@@ -5,11 +5,15 @@ onedrive_target=/home/mxy/rclone/onedrive
 
 remote=""
 function mount_smb() {
-	uuid=$(nmcli -g UUID,TYPE c show --active | rg "wireless" | cut -d ":" -f 1)
-	if [[ $uuid == "$EXPECT_UUID" ]]; then
-		rclone mount "$remote:share" "$smb_target" --cache-dir /tmp/rclone/smb --vfs-cache-mode full --daemon
+	if nm-online -q -t 30; then
+		uuid=$(nmcli -g UUID,TYPE c show --active | rg "wireless" | cut -d ":" -f 1)
+		if [[ $uuid == "$EXPECT_UUID" ]]; then
+			rclone mount "$remote:share" "$smb_target" --cache-dir /tmp/rclone/smb --vfs-cache-mode full --daemon
+		else
+			echo "actual uuid: $uuid, expect uuid: $EXPECT_UUID"
+		fi
 	else
-		echo "actual uuid: $uuid, expect uuid: $EXPECT_UUID"
+		echo "network not available"
 	fi
 }
 

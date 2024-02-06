@@ -129,7 +129,7 @@ unset key
 # }}} End configuration added by Zim install
 
 # gobrew
-export PATH="$HOME/.gobrew/current/bin:$HOME/.gobrew/bin:$PATH"
+export PATH="$HOME/bin:$HOME/.gobrew/current/bin:$HOME/.gobrew/bin:$PATH"
 export GOROOT="$HOME/.gobrew/current/go"
 
 eval "$(fnm env --use-on-cd)"
