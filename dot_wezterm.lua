@@ -1,4 +1,4 @@
-local wezterm = require 'wezterm'
+local wezterm = require("wezterm")
 
 local act = wezterm.action
 
@@ -11,39 +11,36 @@ local xim_im_name = ""
 -- windows
 
 if wezterm.target_triple == "x86_64-pc-windows-msvc" then
+	default_prog = { "pwsh", "-NoLogo" }
 
-  default_prog = { "pwsh", "-NoLogo" }
+	--   default_prog = { 'nu' }
 
-  --   default_prog = { 'nu' }
+	table.insert(launch_menu, { label = "pwsh", args = { "pwsh", "-NoLogo" } })
 
-  table.insert(launch_menu, { label = "pwsh", args = { "pwsh", "-NoLogo" } })
+	table.insert(launch_menu, {
 
-  table.insert(launch_menu, {
+		label = "nushell",
 
-    label = "nushell",
+		cwd = "nu",
 
-    cwd = "nu",
-
-    args = { "nu" },
-  })
+		args = { "nu" },
+	})
 end
 
 -- linux
 
 if wezterm.target_triple == "x86_64-unknown-linux-gnu" then
+	default_prog = { "zsh", "-l" }
 
-  default_prog = { "zsh", "-l" }
-
-  xim_im_name = "fcitx5"
+	xim_im_name = "fcitx5"
 end
 
 -- startup
 
 wezterm.on("gui-startup", function(cmd)
+	local tab, pane, window = wezterm.mux.spawn_window(cmd or {})
 
-  local tab, pane, window = wezterm.mux.spawn_window(cmd or {})
-
-  window:gui_window():maximize()
+	window:gui_window():maximize()
 end)
 
 -- function basename(s)
@@ -82,154 +79,153 @@ end)
 
 local keys = {
 
-  {
+	{
 
-    key = "w",
+		key = "w",
 
-    mods = "CTRL",
+		mods = "CTRL",
 
-    action = act { CloseCurrentPane = { confirm = false } },
-  },
+		action = act({ CloseCurrentPane = { confirm = false } }),
+	},
 
-  {
+	{
 
-    key = "-",
+		key = "-",
 
-    mods = "CTRL",
+		mods = "CTRL",
 
-    action = act { CloseCurrentTab = { confirm = false } },
-  },
+		action = act({ CloseCurrentTab = { confirm = false } }),
+	},
 
-  { key = "F2", mods = "NONE", action = act.ActivateCommandPalette },
+	{ key = "F2", mods = "NONE", action = act.ActivateCommandPalette },
 
-  { key = "F3", mods = "NONE", action = act.ShowLauncher }, -- pane
+	{ key = "F3", mods = "NONE", action = act.ShowLauncher }, -- pane
 
-  {
+	{
 
-    key = "LeftArrow",
+		key = "LeftArrow",
 
-    mods = "ALT",
+		mods = "ALT",
 
-    action = act { ActivatePaneDirection = "Next" },
-  },
+		action = act({ ActivatePaneDirection = "Next" }),
+	},
 
-  {
+	{
 
-    key = "RightArrow",
+		key = "RightArrow",
 
-    mods = "ALT",
+		mods = "ALT",
 
-    action = act { ActivatePaneDirection = "Prev" },
-  },
+		action = act({ ActivatePaneDirection = "Prev" }),
+	},
 
-  -- { key = 'UpArrow',    mods = 'ALT',    action = act { ActivatePaneDirection = 'Up' } },
+	-- { key = 'UpArrow',    mods = 'ALT',    action = act { ActivatePaneDirection = 'Up' } },
 
-  -- { key = 'DownArrow',  mods = 'ALT',    action = act { ActivatePaneDirection = 'Down' } },
+	-- { key = 'DownArrow',  mods = 'ALT',    action = act { ActivatePaneDirection = 'Down' } },
 
-  -- tab
+	-- tab
 
-  { key = "LeftArrow", mods = "SHIFT", action = act.ActivateTabRelative(-1) },
+	{ key = "LeftArrow", mods = "SHIFT", action = act.ActivateTabRelative(-1) },
 
-  { key = "RightArrow", mods = "SHIFT", action = act.ActivateTabRelative(1) },
+	{ key = "RightArrow", mods = "SHIFT", action = act.ActivateTabRelative(1) },
 
-  -- split
+	-- split
 
-  {
+	{
 
-    key = "-",
+		key = "-",
 
-    mods = "WIN",
+		mods = "WIN",
 
-    action = act.SplitVertical { domain = "CurrentPaneDomain" },
-  },
+		action = act.SplitVertical({ domain = "CurrentPaneDomain" }),
+	},
 
-  {
+	{
 
-    key = "\\",
+		key = "\\",
 
-    mods = "WIN",
+		mods = "WIN",
 
-    action = act.SplitHorizontal { domain = "CurrentPaneDomain" },
-  },
+		action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }),
+	},
 
-  -- rename tab
+	-- rename tab
 
-  {
+	{
 
-    key = "R",
+		key = "R",
 
-    mods = "CTRL|SHIFT",
+		mods = "CTRL|SHIFT",
 
-    action = act.PromptInputLine {
+		action = act.PromptInputLine({
 
-      description = "Enter new name for tab",
+			description = "Enter new name for tab",
 
-      action = wezterm.action_callback(function(window, pane, line)
-
-        if line then
-
-          window:active_tab():set_title(line)
-        end
-      end),
-    },
-  },
+			action = wezterm.action_callback(function(window, pane, line)
+				if line then
+					window:active_tab():set_title(line)
+				end
+			end),
+		}),
+	},
 }
 
 local config = {
 
-  -- basic
+	-- basic
 
-  enable_scroll_bar = true,
+	enable_scroll_bar = true,
 
-  launch_menu = launch_menu,
+	launch_menu = launch_menu,
 
-  color_scheme = "Tokyo Night",
+	color_scheme = "Tokyo Night",
 
-  default_prog = default_prog,
+	default_prog = default_prog,
 
-  use_ime = true,
+	use_ime = true,
 
-  xim_im_name = xim_im_name,
+	xim_im_name = xim_im_name,
 
---   ime_preedit_rendering = "System",
+	--   ime_preedit_rendering = "System",
 
-  audible_bell = "Disabled",
+	audible_bell = "Disabled",
 
-  window_close_confirmation = "NeverPrompt",
+	window_close_confirmation = "NeverPrompt",
 
-  -- window
+	-- window
 
-  adjust_window_size_when_changing_font_size = true,
+	adjust_window_size_when_changing_font_size = true,
 
-  window_background_opacity = 0.9,
+	window_background_opacity = 0.9,
+	text_background_opacity = 0.3,
 
-  window_padding = { left = 5, right = 5, top = 5, bottom = 5 },
+	window_padding = { left = 5, right = 5, top = 5, bottom = 5 },
 
-  inactive_pane_hsb = { hue = 1.0, saturation = 1.0, brightness = 1.0 },
+	inactive_pane_hsb = { hue = 1.0, saturation = 1.0, brightness = 1.0 },
 
-  -- font
+	-- font
 
-  font = wezterm.font_with_fallback { "JetBrainsMono Nerd Font Mono", "LXGW WenKai GB Screen" },
+	font = wezterm.font_with_fallback({ "JetBrainsMono Nerd Font Mono", "LXGW WenKai GB Screen" }),
 
-  font_size = 18,
+	font_size = 18,
 
-  -- freetype_load_target = "Mono",
+	-- freetype_load_target = "Mono",
 
-  warn_about_missing_glyphs = false,
+	warn_about_missing_glyphs = false,
 
-  -- Tab bar
+	-- Tab bar
 
-  tab_bar_at_bottom = true,
+	tab_bar_at_bottom = true,
 
-  tab_max_width = 25,
+	tab_max_width = 25,
 
-  -- keys
+	-- keys
 
-  disable_default_key_bindings = false,
+	disable_default_key_bindings = false,
 
-  use_dead_keys = false,
+	use_dead_keys = false,
 
-  keys = keys,
+	keys = keys,
 }
 
 return config
