@@ -43,81 +43,31 @@ wezterm.on("gui-startup", function(cmd)
 	window:gui_window():maximize()
 end)
 
--- function basename(s)
+wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_width)
+	-- local index = ""
 
--- return string.gsub(s, '(.*[/\\])(.*)', '%2')
+	-- if #tabs > 1 then
+	-- 	index = string.format("%d: ", tab.tab_index + 1)
+	-- end
 
--- end
-
---
-
--- wezterm.on('format-tab-title', function(tab, tabs, panes, config, hover, max_width)
-
--- local pane = tab.active_pane
-
--- local process = basename(pane.foreground_process_name)
-
---
-
--- local index = ""
-
--- if #tabs > 1 then
-
--- index = string.format("%d: ", tab.tab_index + 1)
-
--- end
-
---
-
--- return { {
-
--- Text = ' ' .. index .. process .. ' '
-
--- } }
-
--- end)
+	return { {
+		Text = " " .. tab.tab_index + 1 .. " ",
+	} }
+end)
 
 local keys = {
 
-	{
+	{ key = "w",          mods = "CTRL",  action = act({ CloseCurrentPane = { confirm = false } }) },
 
-		key = "w",
+	{ key = "-",          mods = "CTRL",  action = act({ CloseCurrentTab = { confirm = false } }) },
 
-		mods = "CTRL",
+	{ key = "F2",         mods = "NONE",  action = act.ActivateCommandPalette },
 
-		action = act({ CloseCurrentPane = { confirm = false } }),
-	},
+	{ key = "F3",         mods = "NONE",  action = act.ShowLauncher }, -- pane
 
-	{
+	{ key = "LeftArrow",  mods = "ALT",   action = act({ ActivatePaneDirection = "Next" }) },
 
-		key = "-",
-
-		mods = "CTRL",
-
-		action = act({ CloseCurrentTab = { confirm = false } }),
-	},
-
-	{ key = "F2", mods = "NONE", action = act.ActivateCommandPalette },
-
-	{ key = "F3", mods = "NONE", action = act.ShowLauncher }, -- pane
-
-	{
-
-		key = "LeftArrow",
-
-		mods = "ALT",
-
-		action = act({ ActivatePaneDirection = "Next" }),
-	},
-
-	{
-
-		key = "RightArrow",
-
-		mods = "ALT",
-
-		action = act({ ActivatePaneDirection = "Prev" }),
-	},
+	{ key = "RightArrow", mods = "ALT",   action = act({ ActivatePaneDirection = "Prev" }) },
 
 	-- { key = 'UpArrow',    mods = 'ALT',    action = act { ActivatePaneDirection = 'Up' } },
 
@@ -125,49 +75,29 @@ local keys = {
 
 	-- tab
 
-	{ key = "LeftArrow", mods = "SHIFT", action = act.ActivateTabRelative(-1) },
+	{ key = "LeftArrow",  mods = "SHIFT", action = act.ActivateTabRelative(-1) },
 
 	{ key = "RightArrow", mods = "SHIFT", action = act.ActivateTabRelative(1) },
 
 	-- split
 
-	{
+	{ key = "-",          mods = "WIN",   action = act.SplitVertical({ domain = "CurrentPaneDomain" }) },
 
-		key = "-",
-
-		mods = "WIN",
-
-		action = act.SplitVertical({ domain = "CurrentPaneDomain" }),
-	},
-
-	{
-
-		key = "\\",
-
-		mods = "WIN",
-
-		action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }),
-	},
+	{ key = "\\",         mods = "WIN",   action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
 
 	-- rename tab
-
-	{
-
-		key = "R",
-
-		mods = "CTRL|SHIFT",
-
-		action = act.PromptInputLine({
-
-			description = "Enter new name for tab",
-
-			action = wezterm.action_callback(function(window, pane, line)
-				if line then
-					window:active_tab():set_title(line)
-				end
-			end),
-		}),
-	},
+	-- {
+	-- 	key = "R",
+	-- 	mods = "CTRL|SHIFT",
+	-- 	action = act.PromptInputLine({
+	-- 		description = "Enter new name for tab",
+	-- 		action = wezterm.action_callback(function(window, pane, line)
+	-- 			if line then
+	-- 				window:active_tab():set_title(line)
+	-- 			end
+	-- 		end),
+	-- 	}),
+	-- },
 }
 
 local config = {
@@ -215,6 +145,7 @@ local config = {
 
 	-- Tab bar
 
+	use_fancy_tab_bar = false,
 	tab_bar_at_bottom = true,
 
 	tab_max_width = 25,

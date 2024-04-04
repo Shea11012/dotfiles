@@ -93,6 +93,7 @@ ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
 # Initialize modules
 # ------------------
 
+
 ZIM_HOME=${ZDOTDIR:-${HOME}}/.zim
 # Download zimfw plugin manager if missing.
 if [[ ! -e ${ZIM_HOME}/zimfw.zsh ]]; then
@@ -133,6 +134,9 @@ export PATH="$HOME/bin:$PATH"
 export PATH="$HOME/go/bin/:$PATH"
 export GOPATH="$HOME/go"
 export GOBIN="$HOME/go/bin"
+
+# rootless docker
+export DOCKER_HOST=unix://$XDG_RUNTIME_DIR/docker.sock
 # zoxide
 eval "$(zoxide init zsh)"
 
@@ -143,32 +147,23 @@ export EDITOR="nvim"
 
 # fzf
 export FZF_DEFAULT_OPTS="--inline-info --height 60% --ansi --border"
-# rootless docker daemon for wsl linux
-if command -v rg &>/dev/null && ! uname -a | rg -i "wsl" >/dev/null; then
-	export DOCKER_HOST=unix://$XDG_RUNTIME_DIR/docker.sock
-fi
 
-
+eval "$(mise activate zsh --shims)"
 eval "$(starship init zsh)"
 eval "$(zoxide init zsh)"
+# rclone completion
+source <(rclone completion zsh -)
+
+# eval "$(zellij setup --generate-auto-start zsh)"
+
 
 # rust mirror
 export RUSTUP_DIST_SERVER="https://rsproxy.cn"
 export RUSTUP_UPDATE_ROOT="https://rsproxy.cn/rustup"
 
-# nerdctl completion
-if command -v nerdctl &>/dev/null; then
-	source <(nerdctl completion zsh)
-fi
-
 # kubeadm completion
 if command -v kubeadm &>/dev/null; then
 	source <(kubeadm completion zsh)
-fi
-
-# rclone completion
-if command -v kubeadm &> /dev/null; then
-    source <(rclone completion zsh -)
 fi
 
 function ya() {
@@ -185,3 +180,4 @@ alias vim="nvim"
 alias ls="lsd"
 alias ll="ls -la"
 alias lt="ls -a --tree --depth 2"
+alias microsoft-edge="microsoft-edge-stable"

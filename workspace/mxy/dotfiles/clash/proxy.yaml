@@ -1,0 +1,4 @@
+rules:
+  - GEOSITE,geolocation-!cn
+  - DOMAIN-KEYWORD,edx
+  - GEOSITE,google

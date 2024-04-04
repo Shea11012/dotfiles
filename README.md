@@ -25,7 +25,9 @@
 - zellij：替代tmuxer
 - xh: 替代curl
 - bat: 替代cat
-- jql: 替代jq
+- procs: 替代ps
+- ripgrep: 替代grep
+- fd: 替代find
 
 # 配置archlinuxcn源
 
