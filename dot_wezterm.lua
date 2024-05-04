@@ -55,35 +55,26 @@ wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_wid
 	} }
 end)
 
+local leader_key = { key = "a", mods = "CTRL", timeout_milliseconds = 1000 }
 local keys = {
 
-	{ key = "w",          mods = "CTRL",  action = act({ CloseCurrentPane = { confirm = false } }) },
-
-	{ key = "-",          mods = "CTRL",  action = act({ CloseCurrentTab = { confirm = false } }) },
-
-	{ key = "F2",         mods = "NONE",  action = act.ActivateCommandPalette },
-
-	{ key = "F3",         mods = "NONE",  action = act.ShowLauncher }, -- pane
-
-	{ key = "LeftArrow",  mods = "ALT",   action = act({ ActivatePaneDirection = "Next" }) },
-
-	{ key = "RightArrow", mods = "ALT",   action = act({ ActivatePaneDirection = "Prev" }) },
+	{ key = "F2", mods = "NONE", action = act.ActivateCommandPalette },
+	{ key = "F3", mods = "NONE", action = act.ShowLauncher },
 
 	-- { key = 'UpArrow',    mods = 'ALT',    action = act { ActivatePaneDirection = 'Up' } },
-
 	-- { key = 'DownArrow',  mods = 'ALT',    action = act { ActivatePaneDirection = 'Down' } },
 
 	-- tab
-
-	{ key = "LeftArrow",  mods = "SHIFT", action = act.ActivateTabRelative(-1) },
-
+	{ key = "-", mods = "CTRL", action = act({ CloseCurrentTab = { confirm = false } }) },
+	{ key = "LeftArrow", mods = "SHIFT", action = act.ActivateTabRelative(-1) },
 	{ key = "RightArrow", mods = "SHIFT", action = act.ActivateTabRelative(1) },
 
-	-- split
-
-	{ key = "-",          mods = "WIN",   action = act.SplitVertical({ domain = "CurrentPaneDomain" }) },
-
-	{ key = "\\",         mods = "WIN",   action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
+	-- pane
+	{ key = "RightArrow", mods = "ALT", action = act({ ActivatePaneDirection = "Prev" }) },
+	{ key = "LeftArrow", mods = "ALT", action = act({ ActivatePaneDirection = "Next" }) },
+	{ key = "w", mods = "CTRL", action = act({ CloseCurrentPane = { confirm = false } }) },
+	{ key = "-", mods = "LEADER", action = act.SplitVertical({ domain = "CurrentPaneDomain" }) },
+	{ key = "|", mods = "LEADER|SHIFT", action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
 
 	-- rename tab
 	-- {
@@ -152,6 +143,7 @@ local config = {
 
 	-- keys
 
+	leader = leader_key,
 	disable_default_key_bindings = false,
 
 	use_dead_keys = false,

@@ -8,7 +8,7 @@ function mount_smb() {
 	if nm-online -q -t 30; then
 		uuid=$(nmcli -g UUID,TYPE c show --active | rg "wireless" | cut -d ":" -f 1)
 		if [[ $uuid == "$EXPECT_UUID" ]]; then
-			rclone mount "$remote:share" "$smb_target" --cache-dir /tmp/rclone/smb --vfs-cache-mode full --daemon
+			rclone mount "$remote:share" "$smb_target" --cache-dir /tmp/rclone/smb --buffer-size 32M --vfs-cache-mode full --vfs-read-chunk-size 128M --vfs-read-chunk-size-limit 1G --daemon
 		else
 			echo "actual uuid: $uuid, expect uuid: $EXPECT_UUID"
 		fi
@@ -22,7 +22,13 @@ function umount_smb() {
 }
 
 function mount_onedrive() {
-	rclone mount "$remote:" "$onedrive_target" --cache-dir /tmp/rclone/onedrive --vfs-cache-mode full --daemon
+	if [[ $(fd -td . ~/rclone/onedrive/rime | wc -l) -gt 0 ]]; then
+		rm -rf ~/rclone/onedrive/rime
+	fi
+
+	if ! rclone mount "$remote:" "$onedrive_target" --cache-dir /tmp/rclone/onedrive --vfs-cache-mode full --daemon; then
+		notify-send "rclone" "onedrive mount failed"
+	fi
 }
 
 function umount_onedrive() {

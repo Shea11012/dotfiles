@@ -1,5 +1,6 @@
 Host github.com
-  HostName github.com
+  HostName ssh.github.com
+  Port 443
   User shea
   IdentityFile ~/.ssh/id_ecdsa
 

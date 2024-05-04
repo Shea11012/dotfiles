@@ -111,7 +111,6 @@ if [[ ! ${ZIM_HOME}/init.zsh -nt ${ZDOTDIR:-${HOME}}/.zimrc ]]; then
 fi
 # Initialize modules.
 source ${ZIM_HOME}/init.zsh
-
 # ------------------------------
 # Post-init module configuration
 # ------------------------------
@@ -137,20 +136,14 @@ export GOBIN="$HOME/go/bin"
 
 # rootless docker
 export DOCKER_HOST=unix://$XDG_RUNTIME_DIR/docker.sock
-# zoxide
-eval "$(zoxide init zsh)"
-
-# mise
-eval "$(mise activate zsh)"
-
 export EDITOR="nvim"
 
 # fzf
 export FZF_DEFAULT_OPTS="--inline-info --height 60% --ansi --border"
 
-eval "$(mise activate zsh --shims)"
+eval "$(mise activate zsh)"
 eval "$(starship init zsh)"
-eval "$(zoxide init zsh)"
+eval "$(zoxide init --cmd cd zsh)"
 # rclone completion
 source <(rclone completion zsh -)
 
@@ -160,11 +153,6 @@ source <(rclone completion zsh -)
 # rust mirror
 export RUSTUP_DIST_SERVER="https://rsproxy.cn"
 export RUSTUP_UPDATE_ROOT="https://rsproxy.cn/rustup"
-
-# kubeadm completion
-if command -v kubeadm &>/dev/null; then
-	source <(kubeadm completion zsh)
-fi
 
 function ya() {
 	local tmp="$(mktemp -t "yazi-cwd.XXXXX")"
@@ -176,7 +164,6 @@ function ya() {
 }
 
 # alias
-alias vim="nvim"
 alias ls="lsd"
 alias ll="ls -la"
 alias lt="ls -a --tree --depth 2"
