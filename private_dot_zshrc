@@ -129,10 +129,10 @@ unset key
 # }}} End configuration added by Zim install
 
 export PATH="$HOME/bin:$PATH"
+export MANPAGER="nvim +Man!"
 # go
-export PATH="$HOME/go/bin/:$PATH"
+export PATH="$HOME/go/bin:$PATH"
 export GOPATH="$HOME/go"
-export GOBIN="$HOME/go/bin"
 
 # rootless docker
 export DOCKER_HOST=unix://$XDG_RUNTIME_DIR/docker.sock
@@ -144,8 +144,6 @@ export FZF_DEFAULT_OPTS="--inline-info --height 60% --ansi --border"
 eval "$(mise activate zsh)"
 eval "$(starship init zsh)"
 eval "$(zoxide init --cmd cd zsh)"
-# rclone completion
-source <(rclone completion zsh -)
 
 # eval "$(zellij setup --generate-auto-start zsh)"
 
@@ -158,7 +156,7 @@ function ya() {
 	local tmp="$(mktemp -t "yazi-cwd.XXXXX")"
 	yazi "$@" --cwd-file="$tmp"
 	if cwd="$(cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
-		cd -- "$cwd"
+		builtin cd -- "$cwd"
 	fi
 	rm -f -- "$tmp"
 }
@@ -166,5 +164,6 @@ function ya() {
 # alias
 alias ls="lsd"
 alias ll="ls -la"
-alias lt="ls -a --tree --depth 2"
 alias microsoft-edge="microsoft-edge-stable"
+alias rime-deploy='qdbus6 org.fcitx.Fcitx5 /controller org.fcitx.Fcitx.Controller1.SetConfig "fcitx://config/addon/rime/deploy" ""'
+alias rime-sync='qdbus6 org.fcitx.Fcitx5 /controller org.fcitx.Fcitx.Controller1.SetConfig "fcitx://config/addon/rime/sync" ""'

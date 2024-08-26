@@ -7,11 +7,11 @@ return {
   -- == Examples of Adding Plugins ==
 
   "andweeb/presence.nvim",
-  {
-    "ray-x/lsp_signature.nvim",
-    event = "BufRead",
-    config = function() require("lsp_signature").setup() end,
-  },
+  -- {
+  --   "ray-x/lsp_signature.nvim",
+  --   event = "BufRead",
+  --   config = function() require("lsp_signature").setup() end,
+  -- },
 
   -- == Examples of Overriding Plugins ==
 
@@ -95,7 +95,7 @@ return {
     "Exafunction/codeium.vim",
     dependencies = {
       {
-        "hrs7th/nvim-cmp",
+        "hrsh7th/nvim-cmp",
         opts = function(_, opts)
           local cmp = require "cmp"
           local luasnip = require "luasnip"
@@ -120,13 +120,24 @@ return {
     end,
   },
   {
-    "folke/noice.nvim",
-    opts = {
-      lsp = {
-        signature = {
-          enabled = false,
+    "ray-x/go.nvim",
+    dependencies = {
+      "ray-x/guihua.lua",
+      "neovim/nvim-lspconfig",
+      "nvim-treesitter/nvim-treesitter",
+      {
+        "stevearc/conform.nvim",
+        optional = true,
+        opts = {
+          formatters_by_ft = {
+            go = { "goimports", "gofumpt" },
+          },
         },
       },
     },
+    config = function() require("go").setup() end,
+    event = { "CmdlineEnter" },
+    ft = { "go", "gomod" },
+    build = ':lua require("go.install").update_all_sync()',
   },
 }

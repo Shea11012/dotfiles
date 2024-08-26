@@ -1,0 +1,238 @@
+allow-lan: true
+mode: rule
+mixed-port: 7890
+tproxy-port: 7894
+external-ui: ui
+external-controller: 0.0.0.0:9090
+external-ui-url: "https://github.com/MetaCubeX/metacubexd/archive/refs/heads/gh-pages.zip" #从 GitHub Pages 分支获取
+tcp-concurrent: true
+find-process-mode: "off"
+ipv6: false
+log-level: info
+global-client-fingerprint: chrome
+
+geodata-mode: true
+geodata-loader: standard
+geo-auto-update: true
+geo-update-interval: 24
+geox-url:
+  geoip: https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/geoip.dat
+  geosite: https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/geosite.dat
+  mmdb: https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/country.mmdb
+
+policy:
+  cn: &cn ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
+  fo:
+    &fo ["https://cloudflare-dns.com/dns-query", "https://dns.google/dns-query"]
+
+dns:
+  enable: true
+  ipv6: false
+  listen: 0.0.0.0:7874
+  enhanced-mode: fake-ip
+  use-hosts: true
+  fake-ip-filter:
+    - "*.local"
+    - "*.test"
+  # 默认的域名服务器
+  nameserver:
+    - https://dns.alidns.com/dns-query
+    - https://doh.pub/dns-query
+  # 用作解析dns的域名服务器
+  default-nameserver:
+    - 119.29.29.29
+    - 223.5.5.5
+  # dns查询失败后的fallback，确保dns正确
+  fallback:
+    - https://208.67.222.222/dns-query
+    - https://dns.google/dns-query
+    - https://cloudflare-dns.com/dns-query
+    - tls://8.8.4.4
+  # 指定DNS代理策略
+  nameserver-policy:
+    "rule-set:china-max-domain,china-dns": *cn
+    "geosite:category-httpdns": *cn
+    "rule-set:proxy": *fo
+  fallback-filter:
+    geoip: true
+    ipcidr: [240.0.0.0/4, 0.0.0.0/32]
+
+hosts:
+  "openwrt.local.com": 192.168.32.100
+
+sniffer:
+  enable: true
+  force-dns-mapping: true
+  parse-pure-ip: true
+  override-destination: false
+  sniff:
+    HTTP:
+      ports: [80, 8080-8880]
+      override-destination: true
+    TLS:
+      ports: [443, 8443]
+  skip-domain:
+    - Mijia Cloud
+
+tun:
+  enable: true
+  stack: system
+  device: utun
+  auto-route: true
+  auto-detect-interface: true
+  auto-redirect: true
+  dns-hijack:
+    - tcp://any:53
+
+profile:
+  store-selected: true
+  store-fake-ip: true
+
+hc: &hc
+  health-check:
+    enable: true
+    url: http://cp.cloudflare.com
+    interval: 300
+
+proxy-providers:
+  baiyueguang:
+    type: http
+    interval: 3600
+    path: ./sub/白月光.yaml
+    url: $baiyueguang
+    <<: *hc
+
+  sanyueqi:
+    type: http
+    interval: 3600
+    path: ./sub/三月七.yaml
+    url: $sanyueqi
+    <<: *hc
+
+  enet:
+    type: http
+    interval: 3600
+    path: ./sub/enet.yaml
+    url: $enet
+    <<: *hc
+
+pr: &pr
+  type: select
+  proxies: [DIRECT, 香港, 台湾, 日本, 新加坡, 其他地区]
+proxy-groups:
+  - name: default
+    <<: *pr
+
+  - name: PROXY
+    <<: *pr
+
+  - name: AI
+    <<: *pr
+
+  - name: Gmail
+    <<: *pr
+
+  - name: TikTok
+    <<: *pr
+
+  - name: 香港
+    type: select
+    include-all-providers: true
+    filter: "(?i)港|hk|hongkong|hong kong"
+
+  - name: 台湾
+    type: select
+    include-all-providers: true
+    filter: "(?i)台|tw|taiwan"
+
+  - name: 新加坡
+    type: select
+    include-all-providers: true
+    filter: "(?i)(新|sg|singapore)"
+
+  - name: 日本
+    type: select
+    include-all-providers: true
+    filter: "(?i)日本|jp|japan"
+
+  - name: 韩国
+    type: select
+    include-all-providers: true
+    filter: "(?i)韩"
+
+  - name: 美国
+    type: select
+    include-all-providers: true
+    filter: "(?i)美|us|unitedstates|united states"
+
+  - name: 其他地区
+    type: select
+    include-all-providers: true
+    filter: "(?i)^(?!.*(?:🇭🇰|🇯🇵|🇺🇸|🇸🇬|🇨🇳|港|hk|hongkong|台|tw|taiwan|日|jp|japan|新|sg|singapore|韩|美|us|unitedstates)).*"
+
+rule-anchor:
+  classical:
+    &classical {
+      type: http,
+      interval: 86400,
+      behavior: classical,
+      format: yaml,
+    }
+  ip: &ip { type: http, interval: 86400, behavior: ipcidr, format: yaml }
+  domain:
+    &domain { type: http, interval: 86400, behavior: domain, format: yaml }
+
+rule-providers:
+  proxy:
+    <<: *classical
+    path: ./rules/proxy.yaml
+    url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Proxy/Proxy_Classical.yaml
+  china-max-domain:
+    <<: *classical
+    path: ./rules/china-max-domain.yaml
+    url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/ChinaMax/ChinaMax_Domain.txt
+  china-max-ip:
+    <<: *ip
+    path: ./rules/china-max-ip.yaml
+    url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/ChinaMax/ChinaMax_IP.txt
+  china-dns:
+    <<: *classical
+    path: ./rules/china-dns.yaml
+    url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/ChinaDNS/ChinaDNS.yaml
+  tiktok:
+    <<: *classical
+    path: ./rules/tiktok.yaml
+    url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/TikTok/TikTok.yaml
+  telegram:
+    <<: *classical
+    path: ./rules/telegram.yaml
+    url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Telegram/Telegram.yaml
+  custom-proxy:
+    <<: *classical
+    path: ./rules/custom-proxy.yaml
+    url: http://192.168.32.100/assets/proxy.yaml
+
+rules:
+  # 过滤广告
+  - GEOSITE,category-ads-all,REJECT
+  # direct
+  - GEOSITE,category-games@cn,DIRECT
+  - GEOSITE,microsoft@cn,DIRECT
+  # proxy
+  - RULE-SET,custom-proxy,PROXY
+  - DOMAIN-KEYWORD,gmail,Gmail
+  - GEOSITE,google,PROXY
+  - GEOSITE,github,PROXY
+  - RULE-SET,tiktok,TikTok
+  - RULE-SET,telegram,PROXY
+  - RULE-SET,proxy,PROXY
+  - GEOSITE,geolocation-!cn,PROXY
+  # AI
+  - GEOSITE,openai,AI
+  - GEOSITE,jetbrains-ai,AI
+  - GEOSITE,anthropic,AI
+  # - GEOSITE,private,DIRECT
+  # - GEOSITE,apple,DIRECT
+
+  # FINAL
+  - MATCH,DIRECT

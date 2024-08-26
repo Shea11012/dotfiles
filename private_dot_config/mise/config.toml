@@ -1,0 +1,13 @@
+[tools]
+node = "21.6.2"
+go = "1.22"
+python = "3.12.2"
+usage = "latest"
+
+[settings]
+legacy_version_file = true
+not_found_auto_install = true
+python_venv_auto_create = true
+experimental = true
+status = { missing_tools = "if_other_versions_installed", show_env = false, show_tools = false }
+go_set_gobin = true

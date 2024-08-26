@@ -8,3 +8,9 @@ Host openwrt
   HostName 192.168.32.100
   User root
   IdentityFile ~/.ssh/openwrt_ed25519
+
+Host android
+  HostName 192.168.32.10
+  User u0_a575
+  Port 8022
+  IdentityFile ~/.ssh/id_ecdsa

@@ -1,4 +1,10 @@
-rules:
-  - GEOSITE,geolocation-!cn
+payload:
+  - DOMAIN-SUFFIX,hlib.cc
   - DOMAIN-KEYWORD,edx
-  - GEOSITE,google
+  - DOMAIN-SUFFIX,codeium.com
+  - DOMAIN-SUFFIX,lyricstranslate.com
+  - DOMAIN-SUFFIX,9y01.xyz
+  - DOMAIN-SUFFIX,z-library.rs
+  - DOMAIN,packages.microsoft.com
+  - DOMAIN,johnvansickle.com
+  - DOMAIN,annas-archive.org

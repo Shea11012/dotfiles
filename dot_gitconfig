@@ -7,7 +7,7 @@
 
 [core]
     editor = nvim
-    pager = "bat"
+    pager = "bat -p"
 
 [alias]
     st = "status -s"
@@ -19,3 +19,6 @@
 
 [pull]
     rebase = true
+
+[core]
+    excludesFile = ~/.gitignore
