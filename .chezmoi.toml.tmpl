@@ -1,16 +1,26 @@
 {{- $email := promptStringOnce . "email" "email address" -}}
 
-{{if eq .chezmoi.os "windows"}}
+{{ if eq .chezmoi.os "windows" }}
 [cd]
-args = ["-NoLogo"]
-command = "pwsh"
-{{end}}
+command = "nu"
+{{ end }}
 
 [git]
 autoAdd = true
 autoCommit = true
-autoPush = true
+
+encryption = "age"
+[age]
+identity = "~/workspace/mxy/key.txt"
+recipient = "age1ve3lsmesxm4azuf8vm8uf28av4t6575kttjh9jqc52wwsrkhhd3stph76r"
+
+[edit]
+command = "nvim"
+watch = true
+
+[git]
+autoAdd = true
+autoCommit = true
 
 [data]
 email = {{ $email | quote }}
-
