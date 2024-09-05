@@ -8,3 +8,4 @@ payload:
   - DOMAIN,packages.microsoft.com
   - DOMAIN,johnvansickle.com
   - DOMAIN,annas-archive.org
+  - DOMAIN,nushell.sh

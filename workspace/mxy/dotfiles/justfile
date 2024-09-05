@@ -1,11 +1,20 @@
 set dotenv-load
 
+host := "http://192.168.32.100:9090"
+
+rsync-default-option := "-zar " + if os() == "windows" { '-e D:/scoop/apps/cwrsync/current/bin/ssh.exe' } else { "" }
+
+
 sync-clash-rules: replace-config
-  @rsync -r clash/ openwrt:utils/caddy/assets/
+  @rsync {{rsync-default-option}} clash/ openwrt:utils/caddy/assets/
+  @xh PUT {{host}}/providers/rules/custom-proxy
   @rm clash/config.yaml
 
 replace-config:
   @sed -e "s|\$baiyueguang|${BAIYUEGUANG}|g" -e "s|\$sanyueqi|${SANYUEQI}|g" -e "s|\$enet|${ENET}|g" clash/config.tp.yaml > clash/config.yaml
 
 update-clash-meta-ui:
-  @xh POST http://192.168.32.100:9090/upgrade/ui
+  @xh POST {{host}}/upgrade/ui
+  
+test:
+  @echo {{join("d:/scoop","apps")}}

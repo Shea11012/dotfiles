@@ -91,34 +91,34 @@ return {
       },
     },
   },
-  {
-    "Exafunction/codeium.vim",
-    dependencies = {
-      {
-        "hrsh7th/nvim-cmp",
-        opts = function(_, opts)
-          local cmp = require "cmp"
-          local luasnip = require "luasnip"
-
-          opts.mapping["<Tab>"] = cmp.mapping(function(fallback)
-            if cmp.visible() then
-              cmp.select_next_item()
-            elseif luasnip.expand_or_locally_jumpable() then
-              luasnip.expand_or_jump()
-            else
-              fallback()
-            end
-          end)
-
-          return opts
-        end,
-      },
-    },
-    event = "BufEnter",
-    config = function()
-      vim.keymap.set("i", "<Tab>", function() vim.fn["codeium#Accept"]() end, { expr = true, silent = true })
-    end,
-  },
+  -- {
+  --   "Exafunction/codeium.vim",
+  --   dependencies = {
+  --     {
+  --       "hrsh7th/nvim-cmp",
+  --       opts = function(_, opts)
+  --         local cmp = require "cmp"
+  --         local luasnip = require "luasnip"
+  --
+  --         opts.mapping["<Tab>"] = cmp.mapping(function(fallback)
+  --           if cmp.visible() then
+  --             cmp.select_next_item()
+  --           elseif luasnip.expand_or_locally_jumpable() then
+  --             luasnip.expand_or_jump()
+  --           else
+  --             fallback()
+  --           end
+  --         end)
+  --
+  --         return opts
+  --       end,
+  --     },
+  --   },
+  --   event = "BufEnter",
+  --   config = function()
+  --     vim.keymap.set("i", "<Tab>", function() vim.fn["codeium#Accept"]() end, { expr = true, silent = true })
+  --   end,
+  -- },
   {
     "ray-x/go.nvim",
     dependencies = {
