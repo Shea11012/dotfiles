@@ -1,8 +1,8 @@
 [tools]
 node = "21.6.2"
 go = "1.22"
-python = "3.12.2"
 usage = "latest"
+python = "latest"
 
 [settings]
 legacy_version_file = true

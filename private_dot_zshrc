@@ -131,8 +131,7 @@ unset key
 export PATH="$HOME/bin:$PATH"
 export MANPAGER="nvim +Man!"
 # go
-export PATH="$HOME/go/bin:$PATH"
-export GOPATH="$HOME/go"
+# export GOPATH="$HOME/go"
 
 # rootless docker
 export DOCKER_HOST=unix://$XDG_RUNTIME_DIR/docker.sock
@@ -141,9 +140,11 @@ export EDITOR="nvim"
 # fzf
 export FZF_DEFAULT_OPTS="--inline-info --height 60% --ansi --border"
 
-eval "$(mise activate zsh)"
+eval "$(mise activate zsh --shims)"
 eval "$(starship init zsh)"
 eval "$(zoxide init --cmd cd zsh)"
+# python env manager tool
+eval "$(uv generate-shell-completion zsh)"
 
 # eval "$(zellij setup --generate-auto-start zsh)"
 
