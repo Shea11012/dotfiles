@@ -1,4 +1,4 @@
-if vim.loop.os_uname().sysname ~= "window" then
+if vim.loop.os_uname().sysname == "Windows_NT" then
   vim.opt.sh = "nu"
   vim.opt.shelltemp = false
   vim.opt.shellredir = "out+err> %s"
