@@ -1,0 +1,37 @@
+networks:
+  tools:
+
+services:
+  it-tools:
+    image: corentinth/it-tools:latest
+    container_name: it-tools
+    ports:
+      - 3002:80
+    restart: always
+    networks:
+      - tools
+
+  chatgpt-web:
+    image: yidadaa/chatgpt-next-web:latest
+    container_name: chatgpt-web
+    ports:
+      - 3000:3000
+    environment:
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - BASE_URL=https://apic.ohmygpt.com/
+      - WHITE_WEBDEV_ENDPOINTS=https://dav.jianguoyun.com/dav,http://192.168.32.100:5244/dav/本地
+    restart: always
+    networks:
+      - tools
+
+  watchtower:
+    image: containrrr/watchtower
+    container_name: watchtower
+    environment:
+      - TZ=Asia/Shanghai
+    volumes:
+      - /run/user/1000/docker.sock:/var/run/docker.sock
+    command: watchtower it-tools chatgpt-web --cleanup --schedule "0 0 1 * * *"
+    restart: on-failure:3
+    networks:
+      - tools

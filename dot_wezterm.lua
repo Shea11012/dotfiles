@@ -30,7 +30,7 @@ end
 -- linux
 
 if wezterm.target_triple == "x86_64-unknown-linux-gnu" then
-	default_prog = { "zsh", "-l" }
+	default_prog = { "fish" }
 
 	xim_im_name = "fcitx5"
 end
@@ -58,23 +58,23 @@ end)
 local leader_key = { key = "a", mods = "CTRL", timeout_milliseconds = 1000 }
 local keys = {
 
-	{ key = "F2",         mods = "NONE",         action = act.ActivateCommandPalette },
-	{ key = "F3",         mods = "NONE",         action = act.ShowLauncher },
+	{ key = "F2", mods = "NONE", action = act.ActivateCommandPalette },
+	{ key = "F3", mods = "NONE", action = act.ShowLauncher },
 
 	-- { key = 'UpArrow',    mods = 'ALT',    action = act { ActivatePaneDirection = 'Up' } },
 	-- { key = 'DownArrow',  mods = 'ALT',    action = act { ActivatePaneDirection = 'Down' } },
 
 	-- tab
-	{ key = "-",          mods = "CTRL",         action = act({ CloseCurrentTab = { confirm = false } }) },
-	{ key = "LeftArrow",  mods = "SHIFT",        action = act.ActivateTabRelative(-1) },
-	{ key = "RightArrow", mods = "SHIFT",        action = act.ActivateTabRelative(1) },
+	{ key = "-", mods = "CTRL", action = act({ CloseCurrentTab = { confirm = false } }) },
+	{ key = "LeftArrow", mods = "SHIFT", action = act.ActivateTabRelative(-1) },
+	{ key = "RightArrow", mods = "SHIFT", action = act.ActivateTabRelative(1) },
 
 	-- pane
-	{ key = "RightArrow", mods = "ALT",          action = act({ ActivatePaneDirection = "Prev" }) },
-	{ key = "LeftArrow",  mods = "ALT",          action = act({ ActivatePaneDirection = "Next" }) },
-	{ key = "w",          mods = "CTRL",         action = act({ CloseCurrentPane = { confirm = false } }) },
-	{ key = "-",          mods = "LEADER",       action = act.SplitVertical({ domain = "CurrentPaneDomain" }) },
-	{ key = "|",          mods = "LEADER|SHIFT", action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
+	{ key = "RightArrow", mods = "ALT", action = act({ ActivatePaneDirection = "Prev" }) },
+	{ key = "LeftArrow", mods = "ALT", action = act({ ActivatePaneDirection = "Next" }) },
+	{ key = "w", mods = "CTRL", action = act({ CloseCurrentPane = { confirm = false } }) },
+	{ key = "-", mods = "LEADER", action = act.SplitVertical({ domain = "CurrentPaneDomain" }) },
+	{ key = "|", mods = "LEADER|SHIFT", action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
 
 	-- rename tab
 	-- {
