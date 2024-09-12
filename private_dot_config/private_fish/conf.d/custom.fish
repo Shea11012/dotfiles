@@ -2,24 +2,27 @@ if not status is-interactive
     return
 end
 
-for item in (fd . --base-directory ~/.config/fish/completions | string split -f1 '.')
-    set filename (printf "~/.config/fish/completions/%s.fish" $item)
-    if echo $filename | test -e
+set tools atlas chezmoi just mise procs
+
+for item in $tools
+    set filename (printf "%s/.config/fish/completions/%s.fish" $HOME $item)
+
+    if test -e "$filename"
         continue
     end
 
     printf "generate completion for %s\n" $item
     switch $item
     case "atlas"
-        atlas completion fish > ~/.config/fish/completions/atlas.fish
+        atlas completion fish > $filename 
     case "chezmoi"
-        chezmoi completion fish > ~/.config/fish/completions/chezmoi.fish
+        chezmoi completion fish > $filename
     case "just"
-        just --completions fish > ~/.config/fish/completions/just.fish
+        just --completions fish > $filename
     case "mise"
-        mise completion fish > ~/.config/fish/completions/mise.fish
+        mise completion fish > $filename
     case "procs"
-        procs --gen-completion-out fish > ~/.config/fish/completions/procs.fish
+        procs --gen-completion-out fish > $filename
     end
 end
 
