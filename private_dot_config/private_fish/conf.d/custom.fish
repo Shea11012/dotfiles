@@ -43,15 +43,3 @@ function update_mirrors -d "update arch and archlinuxcn mirrors"
     rate-mirrors archlinuxcn | sudo tee /etc/pacman.d/archlinuxcn-mirrorlist
 end
 
-function lt -d "show directory tree"
-    argparse "d/depth=" -- $argv
-    if not set -q _flag_d
-        set _flag_d 2
-    end
-
-    if not [ -n $argv[1] ]
-        set argv[1] $PWD
-    end
-    
-    lsd -a --tree --depth $_flag_d $argv[1]
-end

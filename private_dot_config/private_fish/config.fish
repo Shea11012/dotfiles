@@ -15,12 +15,14 @@ if status is-interactive
   set -gx DOCKER_HOST unix://$XDG_RUNTIME_DIR/docker.sock
   set -gx EDITOR "nvim"
   set -gx RUSTUP_DIST_SERVER "https://rsproxy.cn"
-  set -gx  RUSTUP_UPDATE_ROOT "https://rsproxy.cn/rustup"
+  set -gx RUSTUP_UPDATE_ROOT "https://rsproxy.cn/rustup"
+  set -gx MANPAGER "nvim +Man!"
+  set -gx BROWSER librewolf
 
   # alias
   alias ls="lsd"
-  alias ll="ls -la"
-  # alias microsoft-edge="microsoft-edge-stable"
+  alias ll="lsd -la"
+  alias lt="lsd -a --tree"
   alias rime-deploy='qdbus6 org.fcitx.Fcitx5 /controller org.fcitx.Fcitx.Controller1.SetConfig "fcitx://config/addon/rime/deploy" ""'
   alias rime-sync='qdbus6 org.fcitx.Fcitx5 /controller org.fcitx.Fcitx.Controller1.SetConfig "fcitx://config/addon/rime/sync" ""'
 end

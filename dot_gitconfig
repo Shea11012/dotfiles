@@ -3,7 +3,7 @@
     email = "mxyinvoker@gmail.com"
 
 [includeIf "gitdir:~/workspace/work/"]
-    path = ~/workspace/mxy/config/editor/git/.work.gitconfig
+    path = ~/workspace/mxy/dotfiles/git/.work.gitconfig
 
 [core]
     editor = nvim
