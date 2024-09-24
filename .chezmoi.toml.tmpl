@@ -1,4 +1,5 @@
 {{- $email := promptStringOnce . "email" "email address" -}}
+{{- $ip := promptStringOnce . "ip" "open-webui ip" -}}
 
 {{ if eq .chezmoi.os "windows" }}
 [cd]
@@ -20,3 +21,4 @@ watch = true
 
 [data]
 email = {{ $email | quote }}
+ip = {{ $ip | quote }}
