@@ -16,3 +16,5 @@ payload:
   - DOMAIN-KEYWORD,69shu
   - DOMAIN-SUFFIX,ohmygpt.com
   - DOMAIN-KEYWORD,banzhu
+  - DOMAIN-SUFFIX,openwebui.com
+  - DOMAIN-SUFFIX,chezmoi.io

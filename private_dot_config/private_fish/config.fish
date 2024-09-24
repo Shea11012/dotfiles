@@ -1,3 +1,10 @@
+function is_wsl
+  if test (string length (string match "*WSL2*" (uname -r))) -gt 0
+    return 0
+  end
+  return 1
+end
+
 if status is-interactive
   if not type -q fisher
     echo "install fisher"
@@ -12,12 +19,15 @@ if status is-interactive
 
   # 配置全局变量
   set -g fish_greeting
-  set -gx DOCKER_HOST unix://$XDG_RUNTIME_DIR/docker.sock
   set -gx EDITOR "nvim"
   set -gx RUSTUP_DIST_SERVER "https://rsproxy.cn"
   set -gx RUSTUP_UPDATE_ROOT "https://rsproxy.cn/rustup"
   set -gx MANPAGER "nvim +Man!"
-  set -gx BROWSER librewolf
+
+  if not is_wsl
+    set -gx DOCKER_HOST unix://$XDG_RUNTIME_DIR/docker.sock
+    set -gx BROWSER librewolf
+  end
 
   # alias
   alias ls="lsd"
@@ -26,6 +36,5 @@ if status is-interactive
   alias rime-deploy='qdbus6 org.fcitx.Fcitx5 /controller org.fcitx.Fcitx.Controller1.SetConfig "fcitx://config/addon/rime/deploy" ""'
   alias rime-sync='qdbus6 org.fcitx.Fcitx5 /controller org.fcitx.Fcitx.Controller1.SetConfig "fcitx://config/addon/rime/sync" ""'
 end
-
 
 
