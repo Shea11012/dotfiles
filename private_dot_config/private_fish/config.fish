@@ -1,3 +1,4 @@
+test ! -e "$HOME/.x-cmd.root/local/data/fish/rc.fish" || source "$HOME/.x-cmd.root/local/data/fish/rc.fish" # boot up x-cmd.
 function is_wsl
   if test (string length (string match "*WSL2*" (uname -r))) -gt 0
     return 0
@@ -24,7 +25,7 @@ if status is-interactive
   set -gx RUSTUP_UPDATE_ROOT "https://rsproxy.cn/rustup"
   set -gx MANPAGER "nvim +Man!"
 
-  if not is_wsl
+  if not test is_wsl
     set -gx DOCKER_HOST unix://$XDG_RUNTIME_DIR/docker.sock
     set -gx BROWSER librewolf
   end
@@ -32,9 +33,7 @@ if status is-interactive
   # alias
   alias ls="lsd"
   alias ll="lsd -la"
-  alias lt="ll --depth 2"
+  alias lt="lsd -a --tree"
   alias rime-deploy='qdbus6 org.fcitx.Fcitx5 /controller org.fcitx.Fcitx.Controller1.SetConfig "fcitx://config/addon/rime/deploy" ""'
   alias rime-sync='qdbus6 org.fcitx.Fcitx5 /controller org.fcitx.Fcitx.Controller1.SetConfig "fcitx://config/addon/rime/sync" ""'
 end
-
-
