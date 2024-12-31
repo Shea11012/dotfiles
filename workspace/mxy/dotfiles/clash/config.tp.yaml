@@ -16,9 +16,10 @@ geodata-loader: standard
 geo-auto-update: true
 geo-update-interval: 24
 geox-url:
-  geoip: https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/geoip.dat
-  geosite: https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/geosite.dat
-  mmdb: https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/country.mmdb
+  geoip: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/geoip.dat
+  geosite: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/geosite.dat
+  mmdb: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/country.mmdb
+  asn: "https://github.com/xishang0128/geoip/releases/download/latest/GeoLite2-ASN.mmdb"
 
 policy:
   cn: &cn ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"]
@@ -34,6 +35,7 @@ dns:
   fake-ip-filter:
     - "*.local"
     - "*.test"
+    - "ntp.tencent.com"
   # 默认的域名服务器
   nameserver:
     - https://dns.alidns.com/dns-query
@@ -51,7 +53,6 @@ dns:
   # 指定DNS代理策略
   nameserver-policy:
     "rule-set:china-max-domain,china-dns": *cn
-    "geosite:category-httpdns": *cn
     "rule-set:proxy": *fo
   fallback-filter:
     geoip: true
@@ -84,6 +85,13 @@ tun:
   dns-hijack:
     - tcp://any:53
 
+ntp:
+  enable: true
+  write-to-system: true
+  server: ntp.tencent.com
+  port: 123
+  interval: 30
+
 profile:
   store-selected: true
   store-fake-ip: true
@@ -109,6 +117,12 @@ proxy-providers:
     url: $sanyueqi
     <<: *hc
 
+  enet:
+    type: http
+    interval: 3600
+    path: ./sub/enet.yaml
+    url: $enet
+    <<: *hc
 
 pr: &pr
   type: select
@@ -205,9 +219,14 @@ rule-providers:
     <<: *classical
     path: ./rules/custom-proxy.yaml
     url: http://192.168.32.100/assets/proxy.yaml
+  ad:
+    <<: *domain
+    path: ./rules/ad.yaml
+    url: https://raw.githubusercontent.com/TG-Twilight/AWAvenue-Ads-Rule/main/Filters/AWAvenue-Ads-Rule-Clash.yaml
 
 rules:
   # 过滤广告
+  - RULE-SET,ad,REJECT
   - GEOSITE,category-ads-all,REJECT
   # direct
   - GEOSITE,category-games@cn,DIRECT
@@ -225,8 +244,6 @@ rules:
   - GEOSITE,openai,AI
   - GEOSITE,jetbrains-ai,AI
   - GEOSITE,anthropic,AI
-  # - GEOSITE,private,DIRECT
-  # - GEOSITE,apple,DIRECT
 
   # FINAL
-  - MATCH,DIRECT
+  - MATCH,default

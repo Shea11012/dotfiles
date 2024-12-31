@@ -1,6 +1,6 @@
 [tools]
 node = "21.6.2"
-go = "1.22"
+go = "latest"
 usage = "latest"
 python = "latest"
 
