@@ -1,8 +1,13 @@
 test ! -e "$HOME/.x-cmd.root/local/data/fish/rc.fish" || source "$HOME/.x-cmd.root/local/data/fish/rc.fish" # boot up x-cmd.
 function is_wsl
-  if test (string length (string match "*WSL2*" (uname -r))) -gt 0
+  if rg -i 'microsoft|wsl' /proc/version 2>/dev/null
     return 0
   end
+
+  if set -q WSL_DISTRO_NAME || set -q WSL_INTEROP
+    return 0
+  end
+
   return 1
 end
 
