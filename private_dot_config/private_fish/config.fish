@@ -30,7 +30,7 @@ if status is-interactive
   set -gx RUSTUP_UPDATE_ROOT "https://rsproxy.cn/rustup"
   set -gx MANPAGER "nvim +Man!"
 
-  if not test is_wsl
+  if not is_wsl
     set -gx DOCKER_HOST unix://$XDG_RUNTIME_DIR/docker.sock
     set -gx BROWSER librewolf
   end
