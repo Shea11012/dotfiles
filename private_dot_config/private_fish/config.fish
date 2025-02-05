@@ -1,6 +1,6 @@
 test ! -e "$HOME/.x-cmd.root/local/data/fish/rc.fish" || source "$HOME/.x-cmd.root/local/data/fish/rc.fish" # boot up x-cmd.
 function is_wsl
-  if rg -i 'microsoft|wsl' /proc/version 2>/dev/null
+  if rg -i 'microsoft|wsl' /proc/version >/dev/null
     return 0
   end
 
