@@ -43,3 +43,8 @@ function update_mirrors -d "update arch and archlinuxcn mirrors"
     rate-mirrors archlinuxcn | sudo tee /etc/pacman.d/archlinuxcn-mirrorlist
 end
 
+# check last system update
+function last_update -d "check system last update"
+    rg 'system upgrade' /var/log/pacman.log | tail -n 1
+end
+
