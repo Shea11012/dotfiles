@@ -1,42 +1,51 @@
+name: image-tools
+
 networks:
   tools:
+    driver: bridge
 
 services:
-  it-tools:
-    image: corentinth/it-tools:latest
-    container_name: it-tools
+  network-service:
+    image: alpine
+    container_name: tool-network
     ports:
-      - 3002:80
-    restart: always
+      - "3001:8080" # openwebui
+    command: tail -f /dev/null
     networks:
       - tools
 
-  chatgpt-web:
-    image: yidadaa/chatgpt-next-web:latest
-    container_name: chatgpt-web
-    ports:
-      - 3000:3000
-    environment:
-      - PROXY_URL=http://192.168.32.100:7890
-      - OPENAI_API_KEY=${OPENAI_API_KEY}
-      - BASE_URL=https://apic.ohmygpt.com/
-      - WHITE_WEBDEV_ENDPOINTS=https://dav.jianguoyun.com/dav,http://192.168.32.100:5244/dav/本地
-    restart: always
-    networks:
-      - tools
-  
+  # it-tools:
+  #   image: corentinth/it-tools:latest
+  #   container_name: it-tools
+  #   ports:
+  #     - 3002:80
+  #   restart: always
+  #   networks:
+  #     - tools
+
+  # chatgpt-web:
+  #   image: yidadaa/chatgpt-next-web:latest
+  #   container_name: chatgpt-web
+  #   ports:
+  #     - 3000:3000
+  #   environment:
+  #     - PROXY_URL=http://192.168.32.100:7890
+  #     - OPENAI_API_KEY=${OPENAI_API_KEY}
+  #     - BASE_URL=https://apic.ohmygpt.com/
+  #     - WHITE_WEBDEV_ENDPOINTS=https://dav.jianguoyun.com/dav,http://192.168.32.100:5244/dav/本地
+  #   restart: always
+  #   networks:
+  #     - tools
+
   open-webui:
     image: ghcr.io/open-webui/open-webui:main
     container_name: open-webui
-    ports:
-      - 3001:8080
     environment:
       - OLLAMA_BASE_URL=${OLLAMA_BASE_URL}
     volumes:
       - ./sources/open-webui:/app/backend/data
     restart: always
-    networks:
-      - tools
+    network_mode: "service:network-service"
 
   watchtower:
     image: containrrr/watchtower
@@ -45,7 +54,8 @@ services:
       - TZ=Asia/Shanghai
     volumes:
       - /run/user/1000/docker.sock:/var/run/docker.sock
-    command: watchtower it-tools chatgpt-web open-webui --cleanup --schedule "0 0 1 * * *"
+    command: watchtower open-webui --cleanup --schedule "0 0 1 * * *"
     restart: on-failure:3
-    networks:
-      - tools
+    network_mode: "service:network-service"
+    # networks:
+    #   - tools

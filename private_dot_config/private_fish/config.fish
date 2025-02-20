@@ -31,7 +31,7 @@ if status is-interactive
   set -gx MANPAGER "nvim +Man!"
 
   if not is_wsl
-    set -gx DOCKER_HOST unix://$XDG_RUNTIME_DIR/docker.sock
+    # set -gx DOCKER_HOST unix://$XDG_RUNTIME_DIR/docker.sock
     set -gx BROWSER librewolf
   end
 

@@ -231,6 +231,10 @@ rules:
   # direct
   - GEOSITE,category-games@cn,DIRECT
   - GEOSITE,microsoft@cn,DIRECT
+  # AI
+  - GEOSITE,openai,AI
+  - GEOSITE,jetbrains-ai,AI
+  - GEOSITE,anthropic,AI
   # proxy
   - RULE-SET,custom-proxy,PROXY
   - DOMAIN-KEYWORD,gmail,Gmail
@@ -238,12 +242,8 @@ rules:
   - GEOSITE,github,PROXY
   - RULE-SET,tiktok,TikTok
   - RULE-SET,telegram,PROXY
-  - RULE-SET,proxy,PROXY
   - GEOSITE,geolocation-!cn,PROXY
-  # AI
-  - GEOSITE,openai,AI
-  - GEOSITE,jetbrains-ai,AI
-  - GEOSITE,anthropic,AI
+  - RULE-SET,proxy,PROXY
 
   # FINAL
   - MATCH,default
