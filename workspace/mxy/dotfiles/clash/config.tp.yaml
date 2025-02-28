@@ -30,12 +30,17 @@ dns:
   enable: true
   ipv6: false
   listen: 0.0.0.0:7874
-  enhanced-mode: fake-ip
+  enhanced-mode: redir-host
   use-hosts: true
   fake-ip-filter:
     - "*.local"
     - "*.test"
     - "ntp.tencent.com"
+    - "ntp1.tencent.com"
+    - "ntp2.tencent.com"
+    - "ntp3.tencent.com"
+    - "ntp4.tencent.com"
+    - "ntp5.tencent.com"
   # 默认的域名服务器
   nameserver:
     - https://dns.alidns.com/dns-query
@@ -225,6 +230,7 @@ rule-providers:
     url: https://raw.githubusercontent.com/TG-Twilight/AWAvenue-Ads-Rule/main/Filters/AWAvenue-Ads-Rule-Clash.yaml
 
 rules:
+  - AND,((NETWORK,UDP),(DST-PORT,123)),DIRECT
   # 过滤广告
   - RULE-SET,ad,REJECT
   - GEOSITE,category-ads-all,REJECT

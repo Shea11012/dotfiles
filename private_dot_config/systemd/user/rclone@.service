@@ -4,7 +4,6 @@ Description=rclone user service
 [Service]
 Type=forking
 Environment="PATH=/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin"
-Environment="EXPECT_UUID=a9fb169b-98a2-4f7f-bbfd-99455ba9a281"
 ExecStart=/home/mxy/workspace/mxy/dotfiles/scripts/rclone.sh --mount %i
 ExecStop=/home/mxy/workspace/mxy/dotfiles/scripts/rclone.sh --umount %i
 

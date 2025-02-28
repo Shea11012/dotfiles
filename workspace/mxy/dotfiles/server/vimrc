@@ -6,6 +6,7 @@ filetype indent on
 
 set noswapfile
 set nobackup
+set mouse=a
 
 " show location
 set cursorcolumn
