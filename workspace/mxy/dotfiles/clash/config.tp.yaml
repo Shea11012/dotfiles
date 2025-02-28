@@ -30,7 +30,7 @@ dns:
   enable: true
   ipv6: false
   listen: 0.0.0.0:7874
-  enhanced-mode: redir-host
+  enhanced-mode: fake-ip
   use-hosts: true
   fake-ip-filter:
     - "*.local"
