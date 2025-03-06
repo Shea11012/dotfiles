@@ -6,7 +6,7 @@ rsync-default-option := "-zar " + if os() == "windows" { '-e D:/scoop/apps/cwrsy
 
 
 sync-clash-rules: replace-config
-  @rsync {{rsync-default-option}} clash/ openwrt:utils/searxng-docker/assets/
+  @rsync {{rsync-default-option}} clash/{config,proxy}.yaml openwrt:utils/caddy/assets/
   @echo "更新规则"
   @xh -q PUT {{host}}/providers/rules/custom-proxy
   @rm clash/config.yaml
