@@ -108,27 +108,6 @@ return {
   --     vim.keymap.set("i", "<Tab>", function() vim.fn["codeium#Accept"]() end, { expr = true, silent = true })
   --   end,
   -- },
-  {
-    "ray-x/go.nvim",
-    dependencies = {
-      "ray-x/guihua.lua",
-      "neovim/nvim-lspconfig",
-      "nvim-treesitter/nvim-treesitter",
-      {
-        "stevearc/conform.nvim",
-        optional = true,
-        opts = {
-          formatters_by_ft = {
-            go = { "goimports", "gofumpt" },
-          },
-        },
-      },
-    },
-    config = function() require("go").setup() end,
-    event = { "CmdlineEnter" },
-    ft = { "go", "gomod" },
-    build = ':lua require("go.install").update_all_sync()',
-  },
   ---@type LazySpec
   {
     "mikavilpas/yazi.nvim",
@@ -154,7 +133,6 @@ return {
         desc = "Resume the last yazi session",
       },
     },
-    ---@type YaziConfig
     opts = {
       -- if you want to open yazi instead of netrw, see below for more info
       open_for_directories = false,
@@ -162,5 +140,27 @@ return {
         show_help = "<f1>",
       },
     },
+  },
+  ---@type LazySpec
+  {
+    "ojroques/nvim-osc52",
+    cond = function() return vim.fn.exists "$SSH_CONNECTION" == 1 end,
+    config = function()
+      local function copy(lines, _) require("osc52").copy(table.concat(lines, "\n")) end
+
+      local function paste() return { vim.fn.split(vim.fn.getreg "", "\n"), vim.fn.getregtype "" } end
+
+      vim.g.clipboard = {
+        name = "OSC 52",
+        copy = {
+          ["+"] = copy,
+          ["*"] = copy,
+        },
+        paste = {
+          ["+"] = paste,
+          ["*"] = paste,
+        },
+      }
+    end,
   },
 }
