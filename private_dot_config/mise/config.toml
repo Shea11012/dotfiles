@@ -1,8 +1,9 @@
 [tools]
-node = "21.6.2"
+node = "23.9.0"
 go = "1.24.0"
 usage = "latest"
 python = "latest"
+pnpm = "10.6.2"
 
 [settings]
 legacy_version_file = true

@@ -65,16 +65,16 @@ local keys = {
 	-- { key = 'DownArrow',  mods = 'ALT',    action = act { ActivatePaneDirection = 'Down' } },
 
 	-- tab
-	{ key = "-", mods = "CTRL", action = act({ CloseCurrentTab = { confirm = false } }) },
+	-- { key = "-", mods = "CTRL", action = act({ CloseCurrentTab = { confirm = false } }) },
 	{ key = "LeftArrow", mods = "SHIFT", action = act.ActivateTabRelative(-1) },
 	{ key = "RightArrow", mods = "SHIFT", action = act.ActivateTabRelative(1) },
 
 	-- pane
-	{ key = "RightArrow", mods = "ALT", action = act({ ActivatePaneDirection = "Prev" }) },
-	{ key = "LeftArrow", mods = "ALT", action = act({ ActivatePaneDirection = "Next" }) },
-	{ key = "w", mods = "CTRL", action = act({ CloseCurrentPane = { confirm = false } }) },
-	{ key = "-", mods = "LEADER", action = act.SplitVertical({ domain = "CurrentPaneDomain" }) },
-	{ key = "|", mods = "LEADER|SHIFT", action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
+	-- { key = "RightArrow", mods = "ALT", action = act({ ActivatePaneDirection = "Prev" }) },
+	-- { key = "LeftArrow", mods = "ALT", action = act({ ActivatePaneDirection = "Next" }) },
+	-- { key = "w", mods = "CTRL", action = act({ CloseCurrentPane = { confirm = false } }) },
+	-- { key = "-", mods = "LEADER", action = act.SplitVertical({ domain = "CurrentPaneDomain" }) },
+	-- { key = "|", mods = "LEADER|SHIFT", action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
 
 	-- rename tab
 	-- {

@@ -4,7 +4,7 @@
 --       as this provides autocomplete and documentation while editing
 
 ---@type LazySpec
-return {
+local o = {
   "AstroNvim/astrocore",
   ---@type AstroCoreOpts
   opts = {
@@ -76,3 +76,10 @@ return {
     },
   },
 }
+
+local options = o.opts.options.opt
+if vim.fn.has "win32" == 1 then
+  options.shellslash = true -- 在win上 \ 转换为 /
+end
+
+return o
