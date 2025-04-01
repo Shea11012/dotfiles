@@ -5,6 +5,7 @@
 ---@type LazySpec
 return {
   "AstroNvim/astrocommunity",
+  { import = "astrocommunity.completion.blink-cmp" },
   -- import/override with your plugins folder
   { import = "astrocommunity.colorscheme.catppuccin" },
 
@@ -20,7 +21,6 @@ return {
   { import = "astrocommunity.diagnostics.trouble-nvim" },
 
   -- languages
-  -- { import = "astrocommunity.pack.go" },
   { import = "astrocommunity.pack.rust" },
   { import = "astrocommunity.pack.lua" },
   { import = "astrocommunity.pack.typescript" },

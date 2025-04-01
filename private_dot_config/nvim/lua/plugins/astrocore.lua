@@ -30,6 +30,24 @@ local o = {
         spell = false, -- sets vim.opt.spell
         signcolumn = "auto", -- sets vim.opt.signcolumn to auto
         wrap = true, -- sets vim.opt.wrap
+        showcmdloc = "statusline",
+        ignorecase = true,
+        smartcase = true,
+        expandtab = true,
+        tabstop = 4,
+        softtabstop = 4,
+        shiftwidth = 4,
+        smarttab = true,
+        list = true,
+        showbreak = "↪ ",
+        listchars = {
+          tab = "→ ",
+          eol = "↲",
+          nbsp = "␣",
+          trail = "•",
+          extends = "⟩",
+          precedes = "⟨",
+        },
       },
       g = { -- vim.g.<key>
         -- configure global vim variables (vim.g)
