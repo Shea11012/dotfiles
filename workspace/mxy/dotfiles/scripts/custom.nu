@@ -16,3 +16,5 @@ def update_docker_context [] {
 
     docker context use wsl
 }
+
+alias rsync = ^rsync -e D:/scoop/apps/cwrsync/current/bin/ssh.exe
