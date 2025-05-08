@@ -40,6 +40,7 @@ dns:
   proxy-server-nameserver:
     - https://8.8.8.8/dns-query
     - https://1.0.0.1/dns-query
+    - https://1.12.12.12/dns-query
   # 用作解析dns的域名服务器,如果dns使用ip，则不需要配置
   # default-nameserver:
   #   - 119.29.29.29
@@ -80,7 +81,7 @@ sniffer:
 
 tun:
   enable: true
-  stack: system
+  stack: gvisor
   device: utun
   auto-route: true
   auto-detect-interface: true

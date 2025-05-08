@@ -1,4 +1,5 @@
 -- You can also add or configure plugins by creating files in this `plugins/` folder
+-- PLEASE REMOVE THE EXAMPLES YOU HAVE NO INTEREST IN BEFORE ENABLING THIS FILE
 -- Here are some examples:
 
 ---@type LazySpec
@@ -7,34 +8,36 @@ return {
   -- == Examples of Adding Plugins ==
 
   "andweeb/presence.nvim",
-  -- {
-  --   "ray-x/lsp_signature.nvim",
-  --   event = "BufRead",
-  --   config = function() require("lsp_signature").setup() end,
-  -- },
+  {
+    "ray-x/lsp_signature.nvim",
+    event = "BufRead",
+    config = function() require("lsp_signature").setup() end,
+  },
 
   -- == Examples of Overriding Plugins ==
 
-  -- customize alpha options
+  -- customize dashboard options
   {
-    "goolord/alpha-nvim",
-    opts = function(_, opts)
-      -- customize the dashboard header
-      opts.section.header.val = {
-        " █████  ███████ ████████ ██████   ██████",
-        "██   ██ ██         ██    ██   ██ ██    ██",
-        "███████ ███████    ██    ██████  ██    ██",
-        "██   ██      ██    ██    ██   ██ ██    ██",
-        "██   ██ ███████    ██    ██   ██  ██████",
-        " ",
-        "    ███    ██ ██    ██ ██ ███    ███",
-        "    ████   ██ ██    ██ ██ ████  ████",
-        "    ██ ██  ██ ██    ██ ██ ██ ████ ██",
-        "    ██  ██ ██  ██  ██  ██ ██  ██  ██",
-        "    ██   ████   ████   ██ ██      ██",
-      }
-      return opts
-    end,
+    "folke/snacks.nvim",
+    opts = {
+      dashboard = {
+        preset = {
+          header = table.concat({
+            " █████  ███████ ████████ ██████   ██████ ",
+            "██   ██ ██         ██    ██   ██ ██    ██",
+            "███████ ███████    ██    ██████  ██    ██",
+            "██   ██      ██    ██    ██   ██ ██    ██",
+            "██   ██ ███████    ██    ██   ██  ██████ ",
+            "",
+            "███    ██ ██    ██ ██ ███    ███",
+            "████   ██ ██    ██ ██ ████  ████",
+            "██ ██  ██ ██    ██ ██ ██ ████ ██",
+            "██  ██ ██  ██  ██  ██ ██  ██  ██",
+            "██   ████   ████   ██ ██      ██",
+          }, "\n"),
+        },
+      },
+    },
   },
 
   -- You can disable default plugins as follows:
@@ -80,36 +83,7 @@ return {
       )
     end,
   },
-  -- {
-  --   "Exafunction/codeium.vim",
-  --   dependencies = {
-  --     {
-  --       "hrsh7th/nvim-cmp",
-  --       opts = function(_, opts)
-  --         local cmp = require "cmp"
-  --         local luasnip = require "luasnip"
-  --
-  --         opts.mapping["<Tab>"] = cmp.mapping(function(fallback)
-  --           if cmp.visible() then
-  --             cmp.select_next_item()
-  --           elseif luasnip.expand_or_locally_jumpable() then
-  --             luasnip.expand_or_jump()
-  --           else
-  --             fallback()
-  --           end
-  --         end)
-  --
-  --         return opts
-  --       end,
-  --     },
-  --   },
-  --   event = "BufEnter",
-  --   config = function()
-  --     vim.keymap.set("i", "<Tab>", function() vim.fn["codeium#Accept"]() end, { expr = true, silent = true })
-  --   end,
-  -- },
-  ---@type LazySpec
-  {
+{
     "mikavilpas/yazi.nvim",
     event = "VeryLazy",
     keys = {
@@ -141,4 +115,47 @@ return {
       },
     },
   },
+{
+  "ray-x/go.nvim",
+  dependencies = {
+    "ray-x/guihua.lua",
+    "neovim/nvim-lspconfig",
+    "nvim-treesitter/nvim-treesitter",
+    "leoluz/nvim-dap-go",
+    {
+      "stevearc/conform.nvim",
+      optional = true,
+      opts = {
+        formatters_by_ft = {
+          go = { "goimports", "gofumpt" },
+        },
+      },
+    },
+  },
+  config = function()
+    local capabilities = require("blink.cmp").get_lsp_capabilities()
+    require("go").setup {
+      capabilities = capabilities,
+      lsp_cfg = true,
+      lsp_keymaps = false,
+      dap_debug_keymap = false,
+    }
+  end,
+  event = { "CmdlineEnter" },
+  ft = { "go", "gomod" },
+  build = ':lua require("go.install").update_all_sync()',
+},
+{
+  "mistweaverco/kulala.nvim",
+  event = "VeryLazy",
+  ft = { "http", "rest" },
+  opts = {
+    global_keymaps = true,
+  },
+  -- config = function()
+  --   require("kulala").setup {
+  --     global_keymaps = true,
+  --   }
+  -- end,
+},
 }

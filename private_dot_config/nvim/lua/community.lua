@@ -5,16 +5,15 @@
 ---@type LazySpec
 return {
   "AstroNvim/astrocommunity",
-  { import = "astrocommunity.completion.blink-cmp" },
   -- import/override with your plugins folder
-  { import = "astrocommunity.colorscheme.catppuccin" },
+  { import = "astrocommunity.colorscheme.tokyonight-nvim" },
 
   -- interaction with vscode
   { import = "astrocommunity.recipes.vscode" },
 
   -- editing
   { import = "astrocommunity.editing-support.todo-comments-nvim" },
-  { import = "astrocommunity.editing-support.rainbow-delimiters-nvim" },
+  -- { import = "astrocommunity.editing-support.rainbow-delimiters-nvim" },
   { import = "astrocommunity.utility.noice-nvim" },
 
   -- diagnostics
@@ -31,5 +30,4 @@ return {
 
   -- debug
   { import = "astrocommunity.debugging.nvim-dap-virtual-text" },
-  { import = "astrocommunity.code-runner.overseer-nvim" },
 }
