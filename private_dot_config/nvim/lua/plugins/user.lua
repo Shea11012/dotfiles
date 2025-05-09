@@ -141,6 +141,8 @@ return {
     opts = {
       formatters_by_ft = {
         go = { "goimports", "gofumpt" },
+        js = { "biome" },
+        http = { "kulala-fmt" },
       },
       format_on_save = {
         lsp_format = "fallback",

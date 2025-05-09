@@ -5,6 +5,7 @@ usage = "latest"
 python = "latest"
 pnpm = "10.6.2"
 golangci-lint = "latest"
+biome = "1.9.4"
 
 [settings]
 legacy_version_file = true

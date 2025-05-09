@@ -46,7 +46,7 @@ return {
       rust_analyzer = {
         settings = {
           ["rust-analyzer"] = {
-            checkOnSave = { command = "clippy", allFeatures = true, extraArgs = { "--no-deps" } },
+            check = { command = "clippy" },
             cargo = {
               extraEnv = { CARGO_PROFILE_RUST_ANALYZER_INHERITS = "dev" },
               extraArgs = { "--profile", "rust-analyzer" },
@@ -57,13 +57,28 @@ return {
       gopls = {
         settings = {
           gopls = {
+            analyses = {
+              ST1003 = true,
+              fillreturns = true,
+              nilness = true,
+              shadow = true,
+              useany = true,
+              unusedwrite = true,
+            },
             usePlaceholders = true,
             gofumpt = true,
             codelenses = {
               generate = false,
-              gc_details = true,
               test = true,
               tidy = true,
+            },
+            hints = {
+              compositeLiteralFields = true,
+              compositeLiteralTypes = true,
+              constantValues = true,
+              functionTypeParameters = true,
+              parameterNames = true,
+              rangeVariableTypes = true,
             },
           },
         },
