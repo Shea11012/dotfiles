@@ -83,7 +83,7 @@ return {
       )
     end,
   },
-{
+  {
     "mikavilpas/yazi.nvim",
     event = "VeryLazy",
     keys = {
@@ -115,47 +115,53 @@ return {
       },
     },
   },
-{
-  "ray-x/go.nvim",
-  dependencies = {
-    "ray-x/guihua.lua",
-    "neovim/nvim-lspconfig",
-    "nvim-treesitter/nvim-treesitter",
-    "leoluz/nvim-dap-go",
-    {
-      "stevearc/conform.nvim",
-      optional = true,
-      opts = {
-        formatters_by_ft = {
-          go = { "goimports", "gofumpt" },
-        },
+  {
+    "ray-x/go.nvim",
+    dependencies = {
+      "ray-x/guihua.lua",
+      "neovim/nvim-lspconfig",
+      "nvim-treesitter/nvim-treesitter",
+      "leoluz/nvim-dap-go",
+    },
+    config = function()
+      local capabilities = require("blink.cmp").get_lsp_capabilities()
+      require("go").setup {
+        capabilities = capabilities,
+        lsp_cfg = true,
+        lsp_keymaps = false,
+        dap_debug_keymap = false,
+      }
+    end,
+    event = { "CmdlineEnter" },
+    ft = { "go", "gomod" },
+    build = ':lua require("go.install").update_all_sync()',
+  },
+  {
+    "stevearc/conform.nvim",
+    opts = {
+      formatters_by_ft = {
+        go = { "goimports", "gofumpt" },
+      },
+      format_on_save = {
+        lsp_format = "fallback",
+        timeout_ms = 500,
+      },
+      format_after_save = {
+        lsp_format = "fallback",
       },
     },
   },
-  config = function()
-    local capabilities = require("blink.cmp").get_lsp_capabilities()
-    require("go").setup {
-      capabilities = capabilities,
-      lsp_cfg = true,
-      lsp_keymaps = false,
-      dap_debug_keymap = false,
-    }
-  end,
-  event = { "CmdlineEnter" },
-  ft = { "go", "gomod" },
-  build = ':lua require("go.install").update_all_sync()',
-},
-{
-  "mistweaverco/kulala.nvim",
-  event = "VeryLazy",
-  ft = { "http", "rest" },
-  opts = {
-    global_keymaps = true,
+  {
+    "mistweaverco/kulala.nvim",
+    event = "VeryLazy",
+    ft = { "http", "rest" },
+    opts = {
+      global_keymaps = true,
+    },
+    -- config = function()
+    --   require("kulala").setup {
+    --     global_keymaps = true,
+    --   }
+    -- end,
   },
-  -- config = function()
-  --   require("kulala").setup {
-  --     global_keymaps = true,
-  --   }
-  -- end,
-},
 }
