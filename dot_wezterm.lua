@@ -125,7 +125,7 @@ local config = {
 
 	-- font
 
-	-- font = wezterm.font_with_fallback({ "JetBrains Mono", "","Symbols Nerd Font Mono" }),
+	font = wezterm.font_with_fallback({ "JetbrainsMono NFM", "LXGW WenKai" }),
 
 	font_size = 18,
 

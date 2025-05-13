@@ -160,10 +160,5 @@ return {
     opts = {
       global_keymaps = true,
     },
-    -- config = function()
-    --   require("kulala").setup {
-    --     global_keymaps = true,
-    --   }
-    -- end,
   },
 }

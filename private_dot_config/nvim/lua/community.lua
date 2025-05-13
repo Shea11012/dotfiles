@@ -7,6 +7,7 @@ return {
   "AstroNvim/astrocommunity",
   -- import/override with your plugins folder
   { import = "astrocommunity.colorscheme.tokyonight-nvim" },
+  { import = "astrocommunity.recipes.vscode-icons" },
 
   -- interaction with vscode
   { import = "astrocommunity.recipes.vscode" },
