@@ -3,7 +3,7 @@ set dotenv-load
 host := "http://192.168.32.100:9090"
 
 sync-clash-rules: replace-config
-  @rsync clash/{config,proxy}.yaml openwrt:utils/caddy/assets/
+  @rsync -avz --files-from=./clash/filelist.txt ./clash openwrt:utils/caddy/assets/
   @echo "更新规则"
   @xh -q PUT {{host}}/providers/rules/custom-proxy
   @rm clash/config.yaml
@@ -15,4 +15,5 @@ update-clash-meta-ui:
   @xh POST {{host}}/upgrade/ui
   
 test:
-  @echo {{join("d:/scoop","apps")}}
+  ls clash/{config,proxy,direct}.yaml
+  echo $SHELL

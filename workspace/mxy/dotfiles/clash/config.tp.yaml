@@ -18,7 +18,7 @@ geo-update-interval: 24
 geox-url:
   geosite: "https://github.com/DustinWin/ruleset_geodata/releases/download/mihomo/geosite-all.dat"
   geoip: "https://github.com/DustinWin/ruleset_geodata/releases/download/mihomo/geoip-all.dat"
-  mmdb: "hhttps://github.com/DustinWin/ruleset_geodata/releases/download/mihomo/Country-all.mmdb"
+  mmdb: "https://github.com/DustinWin/ruleset_geodata/releases/download/mihomo/Country-all.mmdb"
   asn: "https://github.com/DustinWin/ruleset_geodata/releases/download/mihomo/Country-ASN-all.mmdb"
 
 dns:
@@ -202,9 +202,14 @@ rule-providers:
     <<: *classical
     path: ./rules/custom-proxy.yaml
     url: http://openwrt.local.com/assets/proxy.yaml
+  custom-direct:
+    <<: *classical
+    path: ./rules/custom-direct.yaml
+    url: http://openwrt.local.com/assets/direct.yaml
 
 rules:
   - GEOSITE,private,DIRECT
+  - RULE-SET,custom-direct,DIRECT
   # 过滤广告
   - GEOSITE,ads,REJECT
   - GEOSITE,trackerslist,Trackerslist
