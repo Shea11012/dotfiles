@@ -27,4 +27,16 @@ zoxide init nushell | save -f ($nu.data-dir | path join "vendor/autoload/zoxide.
 
 just --completions nushell | save -f ($nu.data-dir | path join "vendor/autoload/just.nu")
 
+vfox activate nushell $nu.vendor-autoload-dirs.1 | ignore
+
 alias rsync = ^rsync -e D:/scoop/apps/cwrsync/current/bin/ssh.exe
+
+def --env y [...args] {
+    let tmp = (mktemp -t "yazi-cw.XXXXXX")
+    yazi ...$args --cwd-file $tmp
+    let cwd = (open $tmp)
+    if $cwd != "" and $cwd != $env.PWD {
+        cd $cwd
+    }
+    rm -fp $tmp
+}

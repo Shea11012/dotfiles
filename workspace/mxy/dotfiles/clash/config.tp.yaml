@@ -201,11 +201,11 @@ rule-providers:
   custom-proxy:
     <<: *classical
     path: ./rules/custom-proxy.yaml
-    url: http://openwrt.local.com/assets/proxy.yaml
+    url: http://192.168.32.100/assets/proxy.yaml
   custom-direct:
     <<: *classical
     path: ./rules/custom-direct.yaml
-    url: http://openwrt.local.com/assets/direct.yaml
+    url: http://192.168.32.100/assets/direct.yaml
 
 rules:
   - GEOSITE,private,DIRECT
