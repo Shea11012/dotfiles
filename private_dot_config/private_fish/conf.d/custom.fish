@@ -1,31 +1,3 @@
-if not status is-interactive
-    return
-end
-
-set tools atlas chezmoi just mise procs
-
-for item in $tools
-    set filename (printf "%s/.config/fish/completions/%s.fish" $HOME $item)
-
-    if test -e "$filename"
-        continue
-    end
-
-    printf "generate completion for %s\n" $item
-    switch $item
-    case "atlas"
-        atlas completion fish > $filename 
-    case "chezmoi"
-        chezmoi completion fish > $filename
-    case "just"
-        just --completions fish > $filename
-    case "mise"
-        mise completion fish > $filename
-    case "procs"
-        procs --gen-completion-out fish > $filename
-    end
-end
-
 # Update aur package by select
 function paru_update -d "update specify package"
     paru -Qauq | fzf -m | xargs -ro paru -S
