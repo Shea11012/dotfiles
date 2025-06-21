@@ -39,8 +39,12 @@ function paru_clean -d "clean unused package"
 end
 
 function update_mirrors -d "update arch and archlinuxcn mirrors"
-    rate-mirrors arch | sudo tee /etc/pacman.d/mirrorlist
-    rate-mirrors archlinuxcn | sudo tee /etc/pacman.d/archlinuxcn-mirrorlist
+    set tmpfile (mktemp)
+    rate-mirrors --disable-comments-in-file --save=$tmpfile arch 
+    sudo mv $tmpfile /etc/pacman.d/mirrorlist
+    set tmpfile (mktemp)
+    rate-mirrors --disable-comments-in-file --save=$tmpfile archlinuxcn
+    sudo mv $tmpfile /etc/pacman.d/archlinuxcn-mirrorlist
 end
 
 # check last system update
