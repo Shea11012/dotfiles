@@ -15,6 +15,11 @@ source = [
 ]
 skip-if-unchanged = true
 exclude-file = "excludes.txt"
-[widnow.list]
 
-[window.snapshots]
+[window.restore]
+# 只覆盖更新的
+overwrite = "if-newer"
+
+[window.forget]
+# 只保留最近一天的
+keep-daily = 1
