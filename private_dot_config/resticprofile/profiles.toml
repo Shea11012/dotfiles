@@ -1,25 +1,38 @@
+#:schema https://creativeprojects.github.io/resticprofile/jsonschema/config-2.json
+version = "2"
+
 [global]
 # 如果不存在,则初始化仓库
 initialize = true
 
-
-[window]
-repository = "local:z:/aliyun/backup"
+[profiles.window]
+# repository = "s3:http://192.168.32.100:5246/backup"
+repository = "local:z:/baidu/backup"
 password-file = "key"
+pack-size = 128
+http-user-agent = "pan.baidu.com"
 
-[window.backup]
+[profiles.window.env]
+AWS_ACCESS_KEY_ID = "aeonYDWWCfjZrEcGd8eG"
+AWS_SECRET_ACCESS_KEY = "U8rFWWDvlQV0lV5pANmCbtSWwF5nSV98gG3xmPsb"
+
+[profiles.window.backup]
 tag = ["window"]
 source = [
     "c:/Users/18723/workspace/mxy/mxy-wiki",
     "c:/Users/18723/workspace/mxy/mxy-private-diary",
+    "d:/data",
 ]
 skip-if-unchanged = true
 exclude-file = "excludes.txt"
+# run-after = [
+#     "rclone sync -P --transfers 1 alist:/local/backup alist:/baidu/backup", # 百度网盘有传输要求必须在30s内上传完一个分片,如果带宽过小且文件很大在多线程传输会导致一个分片在30s内不能传输完毕导致失败
+# ]
 
-[window.restore]
+[profiles.window.restore]
 # 只覆盖更新的
 overwrite = "if-newer"
 
-[window.forget]
+[profiles.window.forget]
 # 只保留最近一天的
 keep-daily = 1

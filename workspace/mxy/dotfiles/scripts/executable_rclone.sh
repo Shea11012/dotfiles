@@ -3,6 +3,20 @@
 alist_target=/home/mxy/rclone/alist
 # onedrive_target=/home/mxy/rclone/onedrive
 expect_uuid="c037f03d-4541-4207-ac1b-2661dae52086"
+mount_opt="--attr-timeout 1h \
+    --buffer-size 128M \
+    --dir-cache-time 30m \
+    --poll-interval 1m \
+    --vfs-cache-mode full \
+    --vfs-cache-max-size 100G \
+    --vfs-fast-fingerprint \
+    --vfs-read-ahead 512M \
+    --vfs-refresh \
+    --transfers 16 \
+    --checkers 16 \
+    --multi-thread-streams 8 \
+    --log-file /var/log/rclone.log
+    "
 
 remote=""
 function mount_alist() {
@@ -10,7 +24,7 @@ function mount_alist() {
 	if nm-online -q -t 30; then
 		uuid=$(nmcli -g UUID,TYPE c show --active | rg "wireless" | cut -d ":" -f 1)
 		if [[ $uuid == "$expect_uuid" ]]; then
-			rclone mount "$remote:" "$alist_target" --dir-cache-time 12h --buffer-size 512M --vfs-cache-mode full --vfs-read-chunk-size 16M --vfs-read-chunk-size-limit 64G --vfs-cache-max-size 10G --use-mmap --daemon
+			rclone mount "$remote:" "$alist_target" "$mount_opt"
 		else
 			echo "actual uuid: $uuid, expect uuid: $expect_uuid"
 		fi

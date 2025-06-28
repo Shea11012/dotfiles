@@ -12,10 +12,22 @@ if (-not (Test-Path -Path $targetDir -PathType Container)) {
 }
 
 rclone mount alist: Z: `
+    --attr-timeout 1h `
+    --buffer-size 128M `
+    --dir-cache-time 30m `
+    --poll-interval 1m `
+    --vfs-cache-mode full `
+    --vfs-cache-max-age 12h `
+    --vfs-cache-max-size 100G `
+    --vfs-cache-min-free-space 1G `
+    --vfs-fast-fingerprint `
+    --vfs-read-ahead 512M `
+    --vfs-refresh `
+    --transfers 16 `
+    --checkers 16 `
+    --multi-thread-streams 8 `
+    --volname "Alist-WebDav" `
     --cache-dir $targetDir `
-    --vfs-cache-mode writes `
-    --local-no-sparse `
-    --log-file $logFile `
     --log-level INFO `
-    # --volname "Alist云存储" `
+    --log-file $logFile `
     # --allow-other
