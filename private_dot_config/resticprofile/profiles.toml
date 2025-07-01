@@ -38,3 +38,15 @@ overwrite = "if-newer"
 [profiles.window.forget]
 # 只保留最近一天的
 keep-daily = 1
+
+[profiles.linux]
+repository = "local:/home/mxy/rclone/alist/baidu/backup"
+password-file = "key"
+pack-size = 128
+[profiles.linux.backup]
+tag = ["linux"]
+skip-if-unchanged = true
+exclude-file = "excludes.txt"
+source = ["/home/mxy/Documents/obsidian", "/home/mxy/Documents/data"]
+[profiles.linux.restore]
+overwrite = "if-newer"

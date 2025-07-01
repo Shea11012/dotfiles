@@ -24,3 +24,11 @@ function last_update -d "check system last update"
     rg 'system upgrade' /var/log/pacman.log | tail -n 1
 end
 
+function y -d "yazi shell wrapper"
+    set tmp (mktemp -t "yazi-cwd.XXXXXX")
+    yazi $argv --cwd-file="$tmp"
+    if read -z cwd < "$tmp"; and [ -n "$cwd" ]; and [ "$cwd" != "$PWD" ]
+      builtin cd -- "$cwd"
+    end
+    rm -f -- "$tmp"
+end
