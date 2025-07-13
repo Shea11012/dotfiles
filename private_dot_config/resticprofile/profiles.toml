@@ -34,6 +34,7 @@ run-after = [
 [profiles.window.restore]
 # 只覆盖更新的
 overwrite = "if-newer"
+delete = true
 
 [profiles.window.forget]
 # 只保留最近一天的
@@ -43,6 +44,8 @@ keep-daily = 1
 repository = "local:/home/mxy/rclone/alist/baidu/backup"
 password-file = "key"
 pack-size = 128
+verbose = 2
+
 [profiles.linux.backup]
 tag = ["linux"]
 skip-if-unchanged = true
@@ -50,3 +53,4 @@ exclude-file = "excludes.txt"
 source = ["/home/mxy/Documents/obsidian", "/home/mxy/Documents/data"]
 [profiles.linux.restore]
 overwrite = "if-newer"
+delete = true
