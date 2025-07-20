@@ -14,7 +14,7 @@ if (-not (Test-Path -Path $targetDir -PathType Container)) {
 rclone mount alist: Z: `
     --attr-timeout 1h `
     --buffer-size 128M `
-    --dir-cache-time 30m `
+    --dir-cache-time 10m `
     --poll-interval 1m `
     --vfs-cache-mode full `
     --vfs-cache-max-age 12h `
