@@ -16,3 +16,5 @@
 #
 # You can remove these comments if you want or leave
 # them for future reference.
+$env.EDITOR = "nvim"
+$env.CLIPBOARD_HISTORY = 100

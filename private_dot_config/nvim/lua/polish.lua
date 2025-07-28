@@ -24,19 +24,20 @@ if vim.env.SSH_TTY then
   }
 end
 
--- if vim.fn.has "win64" == 1 or vim.fn.has "win32" == 1 then
---   vim.o.shell = "nu"
---   -- Setting shell command flags
---   vim.o.shellcmdflag = ""
---
---   -- Setting shell redirection
---   vim.o.shellredir = ""
---
---   -- Setting shell pipe
---   vim.o.shellpipe = ""
---
---   -- Setting shell quote options
---   vim.o.shellquote = ""
---   vim.o.shellxquote = ""
---   -- vim.o.shellslash = true
--- end
+if vim.fn.has "win64" == 1 or vim.fn.has "win32" == 1 then
+  if vim.o.shell:find("bash", 1) then vim.o.shellcmdflag = "-s" end
+  --   vim.o.shell = "nu"
+  --   -- Setting shell command flags
+  --   vim.o.shellcmdflag = ""
+  --
+  --   -- Setting shell redirection
+  --   vim.o.shellredir = ""
+  --
+  --   -- Setting shell pipe
+  --   vim.o.shellpipe = ""
+  --
+  --   -- Setting shell quote options
+  --   vim.o.shellquote = ""
+  --   vim.o.shellxquote = ""
+  --   -- vim.o.shellslash = true
+end

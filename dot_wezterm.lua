@@ -120,7 +120,7 @@ local config = {
 
 	-- font
 
-	font = wezterm.font_with_fallback({ "JetBrainsMono NFM", "LXGW WenKai" }),
+	font = wezterm.font_with_fallback({ "Maple Mono NF CN", "LXGW WenKai GB Screen" }),
 
 	font_size = 18,
 

@@ -19,14 +19,18 @@ mount_opt="--attr-timeout 1h \
     "
 
 remote=""
+host="http://192.168.32.100:5244"
 function mount_alist() {
 	check_rime
 	if nm-online -q -t 30; then
-		uuid=$(nmcli -g UUID,TYPE c show --active | rg "wireless" | cut -d ":" -f 1)
-		if [[ $uuid == "$expect_uuid" ]]; then
+		pong=$(xh -b "$host/ping")
+		# uuid=$(nmcli -g UUID,TYPE c show --active | rg "wireless" | cut -d ":" -f 1)
+		# if [[ $uuid == "$expect_uuid" ]]; then
+		if [[ "$pong" == "pong" ]]; then
 			rclone mount "$remote:" "$alist_target" "$mount_opt"
 		else
-			echo "actual uuid: $uuid, expect uuid: $expect_uuid"
+			# echo "actual uuid: $uuid, expect uuid: $expect_uuid"
+			echo "ping fail: $host"
 		fi
 	else
 		echo "network not available"
