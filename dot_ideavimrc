@@ -37,6 +37,9 @@ nmap <leader>fg <Action>(FindInPath)
 " 全局替换
 nmap <leader>fr <Action>(ReplaceInPath)
 
+" 显示当前包结构
+nmap <leader>o <Action>(FileStructurePopup)
+
 " 跳转到定义或引用处
 nmap gd <Action>(GotoDeclaration)
 " 跳转到类型定义
@@ -53,7 +56,7 @@ nmap gcc <Action>(CommentByLineComment)
 xmap gc <Action>(CommentByLineComment)<Esc>
 
 " 打开终端
-nmap `` <Action>(ActivateTerminalToolWindow)
+nmap <A-f12> <Action>(ActivateTerminalToolWindow)
 
 " 跳转到上一个操作
 nmap [d <Action>(Forward)
