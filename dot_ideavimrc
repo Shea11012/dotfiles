@@ -51,6 +51,9 @@ nmap gs <Action>(GotoSuperMethod)
 " 当前文件所有函数
 nmap gf <Action>(FileStructurePopup)
 
+" 重构
+nmap <leader>lt <Action>(Refactorings.QuickListPopupAction)
+
 " 注释
 nmap gcc <Action>(CommentByLineComment)
 xmap gc <Action>(CommentByLineComment)<Esc>
