@@ -93,7 +93,7 @@ local config = {
 
 	launch_menu = launch_menu,
 
-	color_scheme = "Tokyo Night",
+	color_scheme = "Catppuccin Macchiato",
 
 	default_prog = default_prog,
 
