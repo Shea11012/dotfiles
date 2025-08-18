@@ -22,6 +22,7 @@ if status is-interactive
   zoxide init --cmd cd fish | source
   starship init fish | source
   uv generate-shell-completion fish | source
+  navi widget fish | source
 
   if not is_wsl
     # set -gx DOCKER_HOST unix://$XDG_RUNTIME_DIR/docker.sock
