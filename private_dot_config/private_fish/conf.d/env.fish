@@ -4,4 +4,5 @@ set -gx EDITOR "nvim"
 set -gx RUSTUP_DIST_SERVER "https://rsproxy.cn"
 set -gx RUSTUP_UPDATE_ROOT "https://rsproxy.cn/rustup"
 set -gx MANPAGER "nvim +Man!"
-set -x GithubToken {{ (fromToml (joinPath .chezmoi.sourceDir "workspace/mxy/dotfiles/encrypted_env.toml.age" | include | decrypt)).GithubToken }}
+{{- /* chezmoi:modify-template */ -}}
+{{ set -x GithubToken  (fromToml (joinPath .chezmoi.sourceDir "workspace/mxy/dotfiles/encrypted_env.toml.age" | include | decrypt)).GithubToken }}
