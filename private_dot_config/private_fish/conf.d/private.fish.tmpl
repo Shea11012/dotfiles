@@ -1,2 +1,2 @@
-set -x GithubToken {{ "{{" }} (fromToml (joinPath .chezmoi.sourceDir "workspace{{ .chezmoi.pathSeparator }}{{ .chezmoi.group }}{{ .chezmoi.pathSeparator }}dotfiles{{ .chezmoi.pathSeparator }}encrypted_env.toml{{ .chezmoi.config.{{ .chezmoi.config.encryption }}.suffix }}" | include | decrypt)).GithubToken {{ "}}" }}
+set -x GithubToken {{ (fromToml (joinPath .chezmoi.sourceDir "workspace/mxy/dotfiles/encrypted_env.toml.age" | include | decrypt)).GithubToken }}
 
