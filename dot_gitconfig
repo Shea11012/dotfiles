@@ -7,7 +7,18 @@
 
 [core]
     editor = nvim
-    pager = "bat -p"
+    pager = delta
+
+[interactive]
+    diffFilter = delta --color-only
+
+[delta]
+    navigate = true
+    line-numbers = true
+    side-by-side = true
+
+[merge]
+    conflictStyle = zdiff3
 
 [alias]
     st = "status -s"
