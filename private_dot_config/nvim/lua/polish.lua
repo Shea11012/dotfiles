@@ -24,8 +24,27 @@ if vim.env.SSH_TTY then
   }
 end
 
+local nu_shell_options = {
+  sh = "nu",
+  shellslash = true,
+  shellcmdflag = "--stdin --no-newline -c",
+  shellpipe = "| complete | update stderr { ansi strip } | tee { get stderr | save --froce --raw %s } | into record",
+  shellquote = "",
+  shellredir = "out+err> %s",
+  shelltemp = false,
+  shellxescape = "",
+  shellxquote = "",
+}
+
+local function set_options(options)
+  for k, v in pairs(options) do
+    vim.opt[k] = v
+  end
+end
+
 if vim.fn.has "win64" == 1 or vim.fn.has "win32" == 1 then
-  if vim.o.shell:find("bash", 1) then vim.o.shellcmdflag = "-s" end
+  set_options(nu_shell_options)
+  -- if vim.o.shell:find("bash", 1) then vim.o.shellcmdflag = "-s" end
   --   vim.o.shell = "nu"
   --   -- Setting shell command flags
   --   vim.o.shellcmdflag = ""

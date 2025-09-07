@@ -27,7 +27,12 @@ zoxide init nushell | save -f ($nu.data-dir | path join "vendor/autoload/zoxide.
 
 just --completions nushell | save -f ($nu.data-dir | path join "vendor/autoload/just.nu")
 
-vfox activate nushell $nu.vendor-autoload-dirs.1 | ignore
+mise activate nu | save -f ($nu.vendor-autoload-dirs.1 | path join "mise.nu")
+carapace _carapace nushell | save -f ($nu.vendor-autoload-dirs.1 | path join "carapace.nu")
+
+# vfox activate nushell $nu.vendor-autoload-dirs.1 | ignore
+
+navi widget nushell | save -f ($nu.vendor-autoload-dirs.1 | path join 'navi-widget.nu')
 
 alias rsync = ^rsync -e D:/scoop/apps/cwrsync/current/bin/ssh.exe
 

@@ -53,16 +53,14 @@ end)
 local leader_key = { key = "a", mods = "CTRL", timeout_milliseconds = 1000 }
 local keys = {
 
-	{ key = "F2",         mods = "NONE",  action = act.ActivateCommandPalette },
-	{ key = "F3",         mods = "NONE",  action = act.ShowLauncher },
-
+	{ key = "F2", mods = "NONE",       action = act.ActivateCommandPalette },
+	{ key = "F3", mods = "NONE",       action = act.ShowLauncher },
+	{ key = "}",  mods = "CTRL|SHIFT", action = act.ActivateCopyMode },
 	-- { key = 'UpArrow',    mods = 'ALT',    action = act { ActivatePaneDirection = 'Up' } },
 	-- { key = 'DownArrow',  mods = 'ALT',    action = act { ActivatePaneDirection = 'Down' } },
 
 	-- tab
 	-- { key = "-", mods = "CTRL", action = act({ CloseCurrentTab = { confirm = false } }) },
-	{ key = "LeftArrow",  mods = "SHIFT", action = act.ActivateTabRelative(-1) },
-	{ key = "RightArrow", mods = "SHIFT", action = act.ActivateTabRelative(1) },
 
 	-- pane
 	-- { key = "RightArrow", mods = "ALT", action = act({ ActivatePaneDirection = "Prev" }) },

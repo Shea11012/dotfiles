@@ -18,3 +18,6 @@
 # them for future reference.
 $env.EDITOR = "nvim"
 $env.CLIPBOARD_HISTORY = 100
+
+# carapace configure
+$env.CARAPACE_BRIDGES = 'zsh,fish,bash,inshellisense' # optional

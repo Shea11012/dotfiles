@@ -6,8 +6,8 @@ $env:GOBREW_REGISTRY = "https://golang.google.cn/dl/"
 $env:RUSTUP_DIST_SERVER = "https://rsproxy.cn"
 $env:RUSTUP_UPDATE_ROOT = "https://rsproxy.cn/rustup"
 
-$a = @("rm", "del", "dir", "cat", "pwd", "mv", "ls", "kill")
-Remove-Alias -Name $a
+# $a = @("rm", "del", "dir", "cat", "pwd", "mv", "ls", "kill")
+# Remove-Alias -Name $a
 
 function Get-ls {
     if ($args[0] -eq "") {
@@ -31,6 +31,5 @@ function customRsync {
     & rsync.exe -e 'D:/scoop/apps/cwrsync/current/bin/ssh.exe' @args
 }
 
-Invoke-Expression (& { (zoxide init powershell | Out-String) })
-
+Invoke-Expression "$(zoxide init powershell)"
 Invoke-Expression "$(vfox activate pwsh)"
