@@ -5,4 +5,4 @@ set -gx RUSTUP_DIST_SERVER "https://rsproxy.cn"
 set -gx RUSTUP_UPDATE_ROOT "https://rsproxy.cn/rustup"
 set -gx MANPAGER "nvim +Man!"
 {{- /* chezmoi:modify-template */ -}}
-{{ set -x GithubToken  (fromToml (joinPath .chezmoi.sourceDir "workspace/mxy/dotfiles/encrypted_env.toml.age" | include | decrypt)).GithubToken }}
+{{ .chezmoi.stdin | replaceAllRegex "set -x GithubToken .*" (printf "set -x GithubToken %s" (fromToml (joinPath .chezmoi.sourceDir "workspace/mxy/dotfiles/encrypted_env.toml.age" | include | decrypt)).GithubToken | toString )}}
