@@ -19,13 +19,16 @@ if status is-interactive
 
   # 配置tool
   mise activate fish | source
-  zoxide init --cmd cd fish | source
-  starship init fish | source
+  # zoxide init --cmd cd fish | source
+  zoxide init fish | source
+  # starship init fish | source
   uv generate-shell-completion fish | source
   navi widget fish | source
+  carapace _carapace | source
+
 
   if not is_wsl
     # set -gx DOCKER_HOST unix://$XDG_RUNTIME_DIR/docker.sock
-    set -gx BROWSER librewolf
+    set -gx BROWSER zen-browser
   end
 end

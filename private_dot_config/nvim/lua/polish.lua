@@ -43,8 +43,7 @@ local function set_options(options)
 end
 
 if vim.fn.has "win64" == 1 or vim.fn.has "win32" == 1 then
-  set_options(nu_shell_options)
-  -- if vim.o.shell:find("bash", 1) then vim.o.shellcmdflag = "-s" end
+  if vim.o.shell:find("bash", 1) then vim.o.shellcmdflag = "-s" end
   --   vim.o.shell = "nu"
   --   -- Setting shell command flags
   --   vim.o.shellcmdflag = ""
@@ -60,3 +59,10 @@ if vim.fn.has "win64" == 1 or vim.fn.has "win32" == 1 then
   --   vim.o.shellxquote = ""
   --   -- vim.o.shellslash = true
 end
+
+vim.on_key(function(char)
+  if vim.fn.mode() == "n" then
+    local new_hlsearch = vim.tbl_contains({ "<CR>", "n", "N", "*", "#", "?", "/" }, vim.fn.keytrans(char))
+    if vim.opt.hlsearch ~= new_hlsearch then vim.opt.hlsearch = new_hlsearch end
+  end
+end, vim.api.nvim_create_namespace "auto_hlsearch")
