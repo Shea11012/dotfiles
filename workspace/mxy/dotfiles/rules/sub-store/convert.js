@@ -12,14 +12,14 @@ const ruleProviders = {
     type: "http",
     behavior: "classical",
     interval: 86400,
-    url: "http://192.168.32.16/assets/custom-direct.yaml",
+    url: "http://raw.githubusercontent.com/Shea11012/dotfiles/main/workspace/mxy/dotfiles/clash/custom-direct.yaml",
     path: "./ruleset/custom-direct.yaml",
   },
   "custom-proxy": {
     type: "http",
     behavior: "classical",
     interval: 86400,
-    url: "http://192.168.32.16/assets/custom-proxy.yaml",
+    url: "http://raw.githubusercontent.com/Shea11012/dotfiles/main/workspace/mxy/dotfiles/clash/custom-proxy.yaml",
     path: "./ruleset/custom-proxy.yaml",
   },
 };
