@@ -13,5 +13,4 @@ not_found_auto_install = true
 python_venv_auto_create = true
 experimental = true
 status = { missing_tools = "if_other_versions_installed", show_env = false, show_tools = false }
-go_set_gobin = true
 idiomatic_version_file_enable_tools = []
