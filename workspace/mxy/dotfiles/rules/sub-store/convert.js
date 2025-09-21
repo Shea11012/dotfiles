@@ -72,12 +72,12 @@ const dnsConfig = {
   ],
   "fake-ip-range": "198.18.0.1/16",
   "nameserver-policy": {
-    "rule-set:custom-direct,cn": [
+    "geosite:cn": [
       "system",
       "https://120.53.53.53/dns-query",
       "https://223.5.5.5/dns-query",
     ],
-    "rule-set:gfw,proxy": [
+    "geosite:gfw,proxy": [
       "https://1.0.0.1/dns-query",
       "https://8.8.8.8/dns-query",
     ],
