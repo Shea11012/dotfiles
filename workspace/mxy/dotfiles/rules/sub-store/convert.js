@@ -58,6 +58,14 @@ const sniffConfig = {
   "skip-domain": ["Mijia Cloud", "dlg.io.mi.com", "+.push.apple.com"],
 };
 
+const tunConfig = {
+  enable: true,
+  stack: "mixed",
+  "auto-route": true,
+  "auto-detect-interfacce": true,
+  "auto-redirect": true,
+};
+
 const dnsConfig = {
   enable: true,
   "prefer-h3": true,
@@ -252,6 +260,7 @@ function main(config) {
       "allow-lan": true,
       mode: "rule",
       "unified-delay": true,
+      tun: tunConfig,
       "tcp-concurrent": true,
       "external-controller": ":9090",
       profile: {
