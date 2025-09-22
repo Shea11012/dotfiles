@@ -31,21 +31,39 @@ services:
     volumes:
       - ./sub-store/data:/opt/app/data
 
+  metacubexd:
+    image: ghcr.io/metacubex/metacubexd
+    container_name: metacubexd
+    restart: always
+
   caddy:
     build: ./caddy
     container_name: caddy-upload
+    user: "1000:1000"
     cap_add:
       - NET_ADMIN
     ports:
       - "80:80"
       - "443:443"
       - "443:443/udp"
-    environment:
-      - PUID=1000
-      - PGID=1000
     volumes:
       - ./caddy/conf:/etc/caddy
       - ./caddy/assets:/srv
+    restart: unless-stopped
+
+  openlist:
+    image: openlistteam/openlist:latest-aio
+    container_name: openlist
+    user: "1000:1000"
+    volumes:
+      - "./openlist/data:/opt/openlist/data"
+    ports:
+      - "5244:5244"
+    environment:
+      - UMASK=022
+      - TZ=Asia/Shanghai
+      - OPENLIST_ADMIN_PASSWORD=admin
+    restart: unless-stopped
 
   watchtower:
     image: containrrr/watchtower
@@ -55,7 +73,7 @@ services:
     volumes:
       # - /run/user/1000/docker.sock:/var/run/docker.sock
       - /var/run/docker.sock:/var/run/docker.sock
-    command: watchtower sub-store --cleanup --schedule "0 0 1 * * *"
+    command: watchtower sub-store openlist --cleanup --schedule "0 0 1 * * *"
     restart: on-failure:3
     network_mode: "service:network-service"
     # networks:
