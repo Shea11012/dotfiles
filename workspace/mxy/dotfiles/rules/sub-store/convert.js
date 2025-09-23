@@ -25,20 +25,23 @@ const ruleProviders = {
 };
 
 const rules = [
-  "GEOSITE,private,DIRECT",
-  "RULE-SET,custom-direct,DIRECT",
   "GEOSITE,ads,REJECT",
+  "RULE-SET,custom-direct,DIRECT",
+  "RULE-SET,custom-proxy,PROXY",
+
+  "GEOSITE,private,DIRECT",
+  "GEOIP,private,DIRECT,no-resolve",
+  "GEOSITE,cn,DIRECT",
+  "GEOIP,cn,DIRECT,no-resolve",
   "GEOSITE,games-cn,DIRECT",
   "GEOSITE,microsoft-cn,DIRECT",
-  "GEOSITE,ai,AI",
-  "RULE-SET,custom-proxy,PROXY",
-  "GEOSITE,tld-proxy,PROXY",
-  "GEOSITE,proxy,PROXY",
-  "GEOSITE,cn,DIRECT",
-  "GEOIP,private,DIRECT,no-resolve",
-  "GEOIP,cn,DIRECT",
+
   "GEOIP,cloudflare,PROXY,no-resolve",
   "GEOIP,telegram,PROXY,no-resolve",
+  "GEOSITE,ai,AI",
+  "GEOSITE,tld-proxy,PROXY",
+  "GEOSITE,proxy,PROXY",
+
   "MATCH,default",
 ];
 
@@ -88,14 +91,20 @@ const dnsConfig = {
     //   "https://223.5.5.5/dns-query",
     // ],
     // Cloudflare和谷歌
-    "geosite:!cn": ["https://1.0.0.1/dns-query", "https://8.8.8.8/dns-query"],
+    "geosite:proxy": [
+      "https://cloudflare-dns.com/dns-query",
+      "https://dns.google/dns-query",
+    ],
   },
   nameserver: [
     "system",
     "https://119.29.29.29/dns-query",
     "https://223.5.5.5/dns-query",
   ],
-  fallback: ["https://1.0.0.1/dns-query", "https://8.8.8.8/dns-query"],
+  fallback: [
+    "https://cloudflare-dns.com/dns-query",
+    "https://dns.google/dns-query",
+  ],
 };
 
 const geoxURL = {

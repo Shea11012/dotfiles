@@ -1,6 +1,5 @@
 payload:
   - DOMAIN-SUFFIX,oplist.org
-  - DOMAIN-SUFFIX,caddyserver.com
   - DOMAIN-SUFFIX,userstyles.org
   - DOMAIN-SUFFIX,deepwiki.com
   - DOMAIN-SUFFIX,hlib.cc
@@ -21,7 +20,6 @@ payload:
   - DOMAIN-SUFFIX,ohmygpt.com
   - DOMAIN-KEYWORD,banzhu
   - DOMAIN-SUFFIX,openwebui.com
-  - DOMAIN-SUFFIX,chezmoi.io
   - DOMAIN-SUFFIX,metacubex.one
   - DOMAIN-SUFFIX,wezfurlong.org
   - DOMAIN-SUFFIX,catbox.moe
