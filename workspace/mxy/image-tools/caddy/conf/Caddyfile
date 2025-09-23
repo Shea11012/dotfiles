@@ -10,6 +10,15 @@
         header Cookie "*app_context=metacubex*"
     }
 
+    @substore {
+        header Cookie "*app_context=substore*"
+    }
+
+    handle @substore {
+        header x-Route-by "sub-store"
+        reverse_proxy sub-store:3001
+    }
+
     handle_path /assets/* {
         handle @metacubex {
             rewrite * "/assets{uri}"
@@ -29,8 +38,10 @@
     }
 
     handle_path /sub-store {
-    	# rewrite * ?api=http://192.168.32.16:3001/cD7wiTGitLyoBdEguAnFWmqCpHKwhLQh4opXfFhFCEpmY9K7YnPgFu9e2iiUoty2
-    	redir http://192.168.32.16:3001?api=http://192.168.32.16:3001/cD7wiTGitLyoBdEguAnFWmqCpHKwhLQh4opXfFhFCEpmY9K7YnPgFu9e2iiUoty2
+    	rewrite * "?api=http://sub-store:3001/cD7wiTGitLyoBdEguAnFWmqCpHKwhLQh4opXfFhFCEpmY9K7YnPgFu9e2iiUoty2"
+        reverse_proxy sub-store:3001 {
+            header_down Set-Cookie "app_context=substore; Path=/; Max-Age=3600; SameSite=Lax; HttpOnly"
+        }
     }
 
     handle_path /metacubex {

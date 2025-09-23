@@ -80,19 +80,19 @@ const dnsConfig = {
   ],
   "fake-ip-range": "198.18.0.1/16",
   "nameserver-policy": {
-    "geosite:cn": [
-      "system",
-      "https://120.53.53.53/dns-query",
-      "https://223.5.5.5/dns-query",
-    ],
-    "geosite:gfw,proxy": [
-      "https://1.0.0.1/dns-query",
-      "https://8.8.8.8/dns-query",
-    ],
+    // "geosite:cn": [
+    //   "system",
+    //   // dnspod 腾讯
+    //   "https://119.29.29.29/dns-query",
+    //   // alidns
+    //   "https://223.5.5.5/dns-query",
+    // ],
+    // Cloudflare和谷歌
+    "geosite:!cn": ["https://1.0.0.1/dns-query", "https://8.8.8.8/dns-query"],
   },
   nameserver: [
     "system",
-    "https://120.53.53.53/dns-query",
+    "https://119.29.29.29/dns-query",
     "https://223.5.5.5/dns-query",
   ],
   fallback: ["https://1.0.0.1/dns-query", "https://8.8.8.8/dns-query"],
