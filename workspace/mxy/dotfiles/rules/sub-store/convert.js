@@ -10,14 +10,14 @@ const loadBalance = parseBool(inArg.loadbalance) || false;
 const ruleProviders = {
   "custom-direct": {
     type: "http",
-    behavior: "classical",
+    behavior: "domain",
     interval: 86400,
     url: "http://raw.githubusercontent.com/Shea11012/dotfiles/main/workspace/mxy/dotfiles/clash/custom-direct.yaml",
     path: "./ruleset/custom-direct.yaml",
   },
   "custom-proxy": {
     type: "http",
-    behavior: "classical",
+    behavior: "domain",
     interval: 86400,
     url: "http://raw.githubusercontent.com/Shea11012/dotfiles/main/workspace/mxy/dotfiles/clash/custom-proxy.yaml",
     path: "./ruleset/custom-proxy.yaml",
@@ -25,22 +25,21 @@ const ruleProviders = {
 };
 
 const rules = [
-  "GEOSITE,ads,REJECT",
+  "GEOSITE,category-ads-all,REJECT",
   "RULE-SET,custom-direct,DIRECT",
   "RULE-SET,custom-proxy,PROXY",
 
-  "GEOSITE,private,DIRECT",
-  "GEOIP,private,DIRECT,no-resolve",
-  "GEOSITE,cn,DIRECT",
-  "GEOIP,cn,DIRECT,no-resolve",
-  "GEOSITE,games-cn,DIRECT",
-  "GEOSITE,microsoft-cn,DIRECT",
-
   "GEOIP,cloudflare,PROXY,no-resolve",
   "GEOIP,telegram,PROXY,no-resolve",
-  "GEOSITE,ai,AI",
-  "GEOSITE,tld-proxy,PROXY",
-  "GEOSITE,proxy,PROXY",
+  "GEOSITE,category-ai-!cn,AI",
+  "GEOSITE,geolocation-!cn,PROXY",
+
+  "GEOSITE,private,DIRECT",
+  "GEOIP,private,DIRECT,no-resolve",
+  "GEOSITE,geolocation-cn,DIRECT",
+  "GEOIP,cn,DIRECT,no-resolve",
+  "GEOSITE,category-games-cn,DIRECT",
+  "GEOSITE,microsoft@cn,DIRECT",
 
   "MATCH,default",
 ];
@@ -73,15 +72,9 @@ const dnsConfig = {
   enable: true,
   "prefer-h3": true,
   "enhanced-mode": "fake-ip",
-  "fake-ip-filter": [
-    "geosite:fakeip-filter",
-    "geosite:private",
-    "geosite:cn",
-    "time.*.com",
-    "ntp.*.com",
-    "+.market.xiaomi.com",
-  ],
+  "fake-ip-filter": ["geosite:connectivity-check", "geosite:private"],
   "fake-ip-range": "198.18.0.1/16",
+  "default-nameserver": ["233.5.5.5"],
   "nameserver-policy": {
     // "geosite:cn": [
     //   "system",
@@ -91,10 +84,8 @@ const dnsConfig = {
     //   "https://223.5.5.5/dns-query",
     // ],
     // Cloudflare和谷歌
-    "geosite:proxy": [
-      "https://cloudflare-dns.com/dns-query",
-      "https://dns.google/dns-query",
-    ],
+    "geosite:geolocation-cn,category-games-cn,category-game-platforms-download":
+      ["https://119.29.29.29/dns-query", "https://223.5.5.5/dns-query"],
   },
   nameserver: [
     "system",
@@ -109,11 +100,11 @@ const dnsConfig = {
 
 const geoxURL = {
   geosite:
-    "https://ghfast.top/https://github.com/DustinWin/ruleset_geodata/releases/download/mihomo-geodata/geosite-all.dat",
+    "https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/geosite.dat",
   geoip:
-    "https://ghfast.top/https://github.com/DustinWin/ruleset_geodata/releases/download/mihomo-geodata/geoip-all.dat",
-  mmdb: "https://ghfast.top/https://github.com/DustinWin/ruleset_geodata/releases/download/mihomo-geodata/Country-all.mmdb",
-  asn: "https://ghfast.top/https://github.com/DustinWin/ruleset_geodata/releases/download/mihomo-geodata/Country-ASN-all.mmdb",
+    "https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/geoip.dat",
+  mmdb: "https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/geoip.metadb",
+  asn: "https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/GeoLite2-ASN.mmdb",
 };
 
 const countryMeta = {
