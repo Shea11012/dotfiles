@@ -21,7 +21,7 @@ if status is-interactive
   mise activate fish | source
   # zoxide init --cmd cd fish | source
   zoxide init fish | source
-  # starship init fish | source
+  starship init fish | source
   uv generate-shell-completion fish | source
   navi widget fish | source
   carapace _carapace | source

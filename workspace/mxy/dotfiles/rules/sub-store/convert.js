@@ -74,7 +74,7 @@ const dnsConfig = {
   "enhanced-mode": "fake-ip",
   "fake-ip-filter": ["geosite:connectivity-check", "geosite:private"],
   "fake-ip-range": "198.18.0.1/16",
-  "default-nameserver": ["233.5.5.5"],
+  "default-nameserver": ["223.5.5.5"],
   "nameserver-policy": {
     // "geosite:cn": [
     //   "system",
@@ -87,11 +87,7 @@ const dnsConfig = {
     "geosite:geolocation-cn,category-games-cn,category-game-platforms-download":
       ["https://119.29.29.29/dns-query", "https://223.5.5.5/dns-query"],
   },
-  nameserver: [
-    "system",
-    "https://119.29.29.29/dns-query",
-    "https://223.5.5.5/dns-query",
-  ],
+  nameserver: ["https://119.29.29.29/dns-query", "https://223.5.5.5/dns-query"],
   fallback: [
     "https://cloudflare-dns.com/dns-query",
     "https://dns.google/dns-query",
