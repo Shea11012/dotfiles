@@ -10,14 +10,14 @@ const loadBalance = parseBool(inArg.loadbalance) || false;
 const ruleProviders = {
   "custom-direct": {
     type: "http",
-    behavior: "domain",
+    behavior: "classical",
     interval: 86400,
     url: "http://raw.githubusercontent.com/Shea11012/dotfiles/main/workspace/mxy/dotfiles/clash/custom-direct.yaml",
     path: "./ruleset/custom-direct.yaml",
   },
   "custom-proxy": {
     type: "http",
-    behavior: "domain",
+    behavior: "classical",
     interval: 86400,
     url: "http://raw.githubusercontent.com/Shea11012/dotfiles/main/workspace/mxy/dotfiles/clash/custom-proxy.yaml",
     path: "./ruleset/custom-proxy.yaml",

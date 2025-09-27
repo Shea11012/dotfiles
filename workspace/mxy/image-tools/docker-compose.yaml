@@ -65,6 +65,22 @@ services:
       - OPENLIST_ADMIN_PASSWORD=admin
     restart: unless-stopped
 
+  gpt-load:
+    image: ghcr.io/tbphp/gpt-load:latest
+    container_name: gpt-load
+    restart: always
+    user: "1000:1000"
+    volumes:
+      - ./gpt-load/data:/app/data
+    env_file:
+      - ./gpt-load/.env
+    healthcheck:
+      test: wget -q --spider -T 10 -O /dev/null http://localhost:${PORT:-3001}/health
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
   watchtower:
     image: containrrr/watchtower
     container_name: watchtower

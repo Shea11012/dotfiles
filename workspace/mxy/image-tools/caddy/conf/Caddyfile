@@ -14,9 +14,8 @@
         header Cookie "*app_context=substore*"
     }
 
-    handle @substore {
-        header x-Route-by "sub-store"
-        reverse_proxy sub-store:3001
+    @fromGPTLoad {
+        header Cookie "*app_context=gpt-load*"
     }
 
     handle_path /assets/* {
@@ -26,19 +25,33 @@
             reverse_proxy http://metacubexd 
         }
 
+        handle @fromGPTLoad {
+            rewrite * "/assets{uri}"
+            reverse_proxy http://gpt-load:3001
+        }
+
         root * /srv
         file_server browse
     }
 
-    @mypost method POST
-    upload @mypost {
-        root_dir /srv
-        dest_dir_field_name upload_dir
-        response_template templates/upload-resp-template.txt
+    handle_path /upload { 
+        upload {
+            root_dir /srv
+            dest_dir_field_name upload_dir
+            response_template templates/upload-resp-template.txt
+        }
     }
 
-    handle_path /sub-store {
-    	rewrite * "?api=http://sub-store:3001/cD7wiTGitLyoBdEguAnFWmqCpHKwhLQh4opXfFhFCEpmY9K7YnPgFu9e2iiUoty2"
+    handle /sub-store {
+    	redir ss?api=http://192.168.32.16:3001/cD7wiTGitLyoBdEguAnFWmqCpHKwhLQh4opXfFhFCEpmY9K7YnPgFu9e2iiUoty2 302
+    }
+
+    @subStoreWithParam {
+        path /ss
+        query api=*
+    }
+    handle @subStoreWithParam {
+        rewrite * "?{http.request.uri.query}"
         reverse_proxy sub-store:3001 {
             header_down Set-Cookie "app_context=substore; Path=/; Max-Age=3600; SameSite=Lax; HttpOnly"
         }
@@ -48,5 +61,26 @@
         reverse_proxy http://metacubexd {
             header_down Set-Cookie "app_context=metacubex; Path=/; Max-Age=3600; SameSite=Lax; HttpOnly"
         }
+    }
+
+    handle_path /gpt-load* {
+        reverse_proxy http://gpt-load:3001 {
+            header_down Set-Cookie "app_context=gpt-load; Path=/; Max-Age=3600; SameSite=Lax; HttpOnly"
+        } 
+    }
+
+    handle_path /test* {
+        respond "path: {path}, uri: {uri}"
+    }
+
+    handle @substore {
+        header x-Route-by "sub-store"
+        reverse_proxy sub-store:3001
+    }
+
+    handle @fromGPTLoad {
+        #rewrite * "/assets{uri}"
+        header x-router-by "gpt-load"
+        reverse_proxy http://gpt-load:3001
     }
 }
