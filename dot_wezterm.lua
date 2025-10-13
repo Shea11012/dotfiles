@@ -27,7 +27,7 @@ end
 if wezterm.target_triple == "x86_64-unknown-linux-gnu" then
 	default_prog = { "fish" }
 
-	xim_im_name = "fcitx5"
+	-- xim_im_name = "fcitx5"
 end
 
 -- startup
@@ -53,9 +53,9 @@ end)
 local leader_key = { key = "a", mods = "CTRL", timeout_milliseconds = 1000 }
 local keys = {
 
-	{ key = "F2", mods = "NONE",       action = act.ActivateCommandPalette },
-	{ key = "F3", mods = "NONE",       action = act.ShowLauncher },
-	{ key = "}",  mods = "CTRL|SHIFT", action = act.ActivateCopyMode },
+	{ key = "F2", mods = "NONE", action = act.ActivateCommandPalette },
+	{ key = "F3", mods = "NONE", action = act.ShowLauncher },
+	{ key = "}", mods = "CTRL|SHIFT", action = act.ActivateCopyMode },
 	-- { key = 'UpArrow',    mods = 'ALT',    action = act { ActivatePaneDirection = 'Up' } },
 	-- { key = 'DownArrow',  mods = 'ALT',    action = act { ActivatePaneDirection = 'Down' } },
 
@@ -97,7 +97,7 @@ local config = {
 
 	use_ime = true,
 
-	xim_im_name = xim_im_name,
+	-- xim_im_name = xim_im_name,
 
 	--   ime_preedit_rendering = "System",
 
@@ -118,7 +118,7 @@ local config = {
 
 	-- font
 
-	font = wezterm.font_with_fallback({ "Maple Mono NF CN", "LXGW WenKai GB Screen" }),
+	font = wezterm.font_with_fallback({ "Maple Mono NF", "LXGW WenKai" }),
 
 	font_size = 18,
 

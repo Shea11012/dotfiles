@@ -27,8 +27,8 @@ skip-if-unchanged = true
 exclude-file = "excludes.txt"
 run-after = [
     # "rclone sync -P --transfers 1 alist:/local/backup alist:/baidu/backup", # 百度网盘有传输要求必须在30s内上传完一个分片,如果带宽过小且文件很大在多线程传输会导致一个分片在30s内不能传输完毕导致失败
-    "rsync -P -z -r /cygdrive/d/data /cygdrive/e/",
-    "rsync -p -z -r /cygdrive/d/data /cygdrive/z/local/",
+    "rsync -avP /cygdrive/d/data /cygdrive/e/",
+    # "rsync -p -z -r /cygdrive/d/data /cygdrive/z/local/",
 ]
 
 [profiles.window.restore]
@@ -50,7 +50,7 @@ verbose = 2
 tag = ["linux"]
 skip-if-unchanged = true
 exclude-file = "excludes.txt"
-source = ["/home/mxy/Documents/obsidian", "/home/mxy/Documents/data"]
+source = ["/home/mxy/Documents/obsidian", "/home/mxy/Documents/backup"]
 [profiles.linux.restore]
 overwrite = "if-newer"
 delete = true
