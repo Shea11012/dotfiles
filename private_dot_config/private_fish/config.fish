@@ -25,7 +25,6 @@ if status is-interactive
   uv generate-shell-completion fish | source
   navi widget fish | source
   carapace _carapace | source
-  fzf --fish | source
 
 
   if not is_wsl
