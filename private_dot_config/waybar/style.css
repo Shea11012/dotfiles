@@ -8,8 +8,8 @@
 }
 
 #waybar {
-  background-color: rgba(0, 0, 0, 0.15);
-  color: #000;
+  background-color: #2a2a2a; /* 统一主背景 */
+  color: #e0e0e0; /* 统一默认文字颜色 */
 }
 
 #workspaces {
@@ -19,11 +19,13 @@
 
 #tray {
   margin: 6px 3px;
-  padding: 6px 12px; /* 保持内部间距 */
+  padding: 6px 12px;
   border-radius: 6px;
   border-width: 0px;
+  background-color: #333333; /* 统一模块背景 */
 }
 
+/* 所有左侧和右侧的模块统一背景和样式 */
 #clock,
 #bluetooth,
 #pulseaudio,
@@ -35,63 +37,90 @@
   border-radius: 4px;
   margin: 6px 3px;
   padding: 6px 12px;
-  background-color: rgba(0, 0, 0, 0.15);
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-  transition:
-    background-color 0.2s ease-in-out,
-    color 0.2s ease-in-out;
-  color: #333333;
+  background-color: #333333; /* 统一模块背景 */
+  color: #e0e0e0; /* 统一默认文字颜色 */
+  transition: background-color 0.2s ease-in-out;
 }
 
+/* 根据功能调整前景色，而不是背景色 */
+
+/* 时钟 - 关键信息，用淡蓝色 */
 #clock {
-  background-color: #66b2ff;
+  color: #bbdefb;
 }
+
+/* 蓝牙 - 连接状态，用淡绿色 */
 #bluetooth {
-  background-color: #f9e2af;
+  color: #81c784;
 }
+
+/* 音量 - 正常状态，用淡绿色 */
 #pulseaudio {
-  background-color: #89dceb;
+  color: #81c784;
 }
+
+/* 亮度 - 中性信息，用默认浅灰白 */
 #backlight {
-  background-color: #a6a3a1;
+  color: #e0e0e0;
 }
+
+/* 温度 - 状态信息，用淡蓝色 */
 #temperature {
-  background-color: #74c7ec;
+  color: #bbdefb;
 }
+
+/* 内存 - 警告状态，用淡橙色 */
 #memory {
-  background-color: #f7768e;
+  color: #ffab91;
 }
+
+/* CPU - 警告状态，用淡橙色 */
 #cpu {
-  background-color: #f38ba8;
+  color: #ffab91;
 }
+
+/* 网络 - 关键信息，用淡蓝色 */
 #network {
-  background-color: #fab387;
+  color: #bbdefb;
+}
+
+/* 鼠标悬停时的高亮效果 */
+#clock:hover,
+#bluetooth:hover,
+#pulseaudio:hover,
+#backlight:hover,
+#temperature:hover,
+#memory:hover,
+#cpu:hover,
+#network:hover {
+  background-color: #444444; /* 高亮背景 */
 }
 
 #waybar.hidden {
   opacity: 0.5;
 }
 
+/* 工作区按钮 - 保持原有结构，但颜色与整体协调 */
 #workspaces button {
-  /* Remove GTK theme values (waybar #1351) */
   min-width: 0;
-  /* Fix weird spacing in materia (waybar #450) */
-  /* Use box-shadow instead of border so the text isn't offset */
   padding: 6px 18px;
   margin: 6px 3px;
   border-radius: 4px;
-  background-color: #181842;
-  color: #d3e0f7;
+  background-color: #333333; /* 与模块背景一致 */
+  color: #e0e0e0; /* 与默认文字颜色一致 */
 }
 
 #workspaces button.active {
-  background-color: #3ac569;
+  background-color: #444444; /* 高亮背景 */
+  color: #bbdefb; /* 淡蓝色，表示活跃 */
 }
 
 #workspaces button:hover {
-  background: #0080ff;
+  background-color: #444444; /* 高亮背景 */
+  color: #ffffff; /* 白色，表示悬停 */
 }
 
+/* 工具提示 - 保持原有风格，但颜色更协调 */
 tooltip {
   border-radius: 8px;
   padding: 16px;

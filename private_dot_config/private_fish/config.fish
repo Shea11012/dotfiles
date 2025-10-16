@@ -17,7 +17,15 @@ if status is-interactive
     curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher install jorgebucaran/fisher   
   end
 
-  # 配置tool
+  if not is_wsl
+    # set -gx DOCKER_HOST unix://$XDG_RUNTIME_DIR/docker.sock
+    set -gx BROWSER zen-browser
+  end
+end
+
+fzf_configure_bindings --git_status= --git_log= --directory= --processes= --variables=
+
+# 配置tool
   mise activate fish | source
   # zoxide init --cmd cd fish | source
   zoxide init fish | source
@@ -26,9 +34,3 @@ if status is-interactive
   navi widget fish | source
   carapace _carapace | source
 
-
-  if not is_wsl
-    # set -gx DOCKER_HOST unix://$XDG_RUNTIME_DIR/docker.sock
-    set -gx BROWSER zen-browser
-  end
-end

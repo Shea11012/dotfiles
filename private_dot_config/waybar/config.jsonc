@@ -4,12 +4,11 @@
     "network",
     "wlr/taskbar",
     "pulseaudio",
-    "custom/media",
     "bluetooth",
     "niri/workspaces",
   ],
   "modules-center": ["niri/window"],
-  "modules-right": ["clock", "group/hardware", "tray"],
+  "modules-right": ["custom/media", "clock", "group/hardware", "tray"],
   "custom/logout": {
     "format": "⏻",
     "tooltip": false,
@@ -52,6 +51,7 @@
   },
   "wlr/taskbar": {
     "format": "{icon}",
+    "icon-theme": "Papirus",
     "tooltip-format": "{title} | {app_id}",
     "on-click": "activate",
     "on-click-middle": "close",

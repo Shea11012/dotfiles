@@ -311,8 +311,6 @@ window-rule {
 window-rule {
     match app-id="io.github.waylyrics.Waylyrics"
     default-floating-position x=0 y=5 relative-to="top"
-    // default-column-width { fixed 50; }
-    default-window-height { fixed 10; }
 }
 
 window-rule {
@@ -342,7 +340,7 @@ binds {
     // shows a list of important hotkeys.
     Mod+Shift+Slash { show-hotkey-overlay; }
 
-    // Mod+T hotkey-overlay-title="Open a Terminal: alacritty" { spawn "alacritty"; }
+    Mod+T hotkey-overlay-title="Open a Terminal: alacritty" { spawn "alacritty"; }
     Mod+Ctrl+v { spawn "copyq" "toggle"; }
     // Mod+D hotkey-overlay-title="Run an Application: fuzzel" { spawn "fuzzel"; }
     alt+space { spawn "vicinae" "toggle"; }
