@@ -142,19 +142,19 @@ layout {
         // off
 
         // How many logical pixels the ring extends out from the windows.
-        width 2
+        // width 4
 
         // Color of the ring on the active monitor.
-        active-color "#a7c080"
+        // active-color "#a7c080"
 
         // Color of the ring on inactive monitors.
-        inactive-color "#d3c6aa"
+        // inactive-color "#d3c6aa"
 
         // active-gradient from="#80c8ff" to="#c7ff7f" angle=45
 
         // inactive-gradient from="#505050" to="#808080" angle=45 relative-to="workspace-view"
-        // active-gradient from="#33ccffee" to="#00ff99ee" angle=45 
-        // inactive-gradient from="#585b70" to="#7f849c" angle=45 relative-to="workspace-view"
+        active-gradient from="#33ccffee" to="#00ff99ee" angle=45 
+        inactive-gradient from="#585b70" to="#7f849c" angle=45 relative-to="workspace-view"
         // inactive-color 89 89 89 170
     }
 
