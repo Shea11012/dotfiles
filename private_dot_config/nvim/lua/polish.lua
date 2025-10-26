@@ -69,3 +69,6 @@ vim.on_key(function(char)
 end, vim.api.nvim_create_namespace "auto_hlsearch")
 
 vim.opt.iskeyword:append "-"
+
+local im_switch = require "utils.im-switch"
+im_switch.setup()

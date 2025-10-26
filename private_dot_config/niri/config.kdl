@@ -227,10 +227,9 @@ layout {
     }
 }
 
-// This line starts waybar, a commonly used bar for Wayland compositors.
 spawn-at-startup "waybar"
-spawn-at-startup "copyq"
 spawn-at-startup "swww-daemon"
+spawn-sh-at-startup "~/workspace/mxy/dotfiles/scripts/start.sh"
 
 hotkey-overlay {
     // skip-at-startup
@@ -241,7 +240,7 @@ prefer-no-csd
 screenshot-path null
 
 environment {
-    QT_IM_MODULES "wayland;fcitx;ibus"
+    // QT_IM_MODULES "wayland;fcitx;ibus"
 }
 
 animations {
@@ -293,10 +292,14 @@ window-rule {
     open-on-workspace "chat"
 }
 
+window-rule {
+    match app-id=r#"wechat"#
+    open-focused false // 解决搜索框失去焦点
+}
+
 // floating rule
 window-rule {
     match title="CopyQ" app-id="com.github.hluk.copyq"
-    match app-id="io.github.waylyrics.Waylyrics"
     open-floating true
     shadow { on; }
 }
@@ -344,7 +347,7 @@ binds {
     Mod+Ctrl+v { spawn "copyq" "toggle"; }
     // Mod+D hotkey-overlay-title="Run an Application: fuzzel" { spawn "fuzzel"; }
     alt+space { spawn "vicinae" "toggle"; }
-    Super+Alt+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn "swaylock"; }
+    Super+Alt+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn "hyprlock"; }
 
     // Using spawn-sh allows to pass multiple arguments together with the command.
     XF86AudioRaiseVolume allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1+"; }
