@@ -28,7 +28,7 @@
 /* 所有左侧和右侧的模块统一背景和样式 */
 #clock,
 #bluetooth,
-#pulseaudio,
+#wireplumber,
 #backlight,
 #temperature,
 #memory,
@@ -55,7 +55,7 @@
 }
 
 /* 音量 - 正常状态，用淡绿色 */
-#pulseaudio {
+#wireplumber {
   color: #81c784;
 }
 
@@ -87,7 +87,7 @@
 /* 鼠标悬停时的高亮效果 */
 #clock:hover,
 #bluetooth:hover,
-#pulseaudio:hover,
+#wireplumber:hover,
 #backlight:hover,
 #temperature:hover,
 #memory:hover,

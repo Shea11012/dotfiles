@@ -91,7 +91,7 @@ local config = {
 
 	launch_menu = launch_menu,
 
-	color_scheme = "Catppuccin Macchiato",
+	color_scheme = "Catppuccin Mocha",
 
 	default_prog = default_prog,
 

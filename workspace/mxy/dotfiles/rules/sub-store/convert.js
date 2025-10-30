@@ -215,7 +215,7 @@ function buildProxyGroups(countryProxyGroups) {
       name: "PROXY",
       icon: "https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Proxy.png",
       type: "select",
-      proxies: ["香港节点", "台湾节点", "新加坡节点", "ALL"],
+      proxies: ["DIRECT", "香港节点", "台湾节点", "新加坡节点", "ALL"],
     },
     {
       name: "AI",
