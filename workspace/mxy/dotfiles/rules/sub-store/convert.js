@@ -89,6 +89,7 @@ const dnsConfig = {
   },
   nameserver: ["https://119.29.29.29/dns-query", "https://223.5.5.5/dns-query"],
   fallback: [
+    "https://223.5.5.5/dns-query",
     "https://cloudflare-dns.com/dns-query",
     "https://dns.google/dns-query",
   ],

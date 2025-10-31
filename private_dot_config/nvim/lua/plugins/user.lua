@@ -161,7 +161,7 @@ return {
         -- dap_debug_keymap = false,
       }
     end,
-    event = { "CmdlineEnter" },
+    -- event = { "CmdlineEnter" },
     ft = { "go", "gomod" },
     build = ':lua require("go.install").update_all_sync()',
   },

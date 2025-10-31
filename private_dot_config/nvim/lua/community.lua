@@ -28,7 +28,7 @@ return {
   { import = "astrocommunity.pack.bash" },
   { import = "astrocommunity.pack.docker" },
   { import = "astrocommunity.pack.yaml" },
-  { import = "astrocommunity.pack.python" },
+  { import = "astrocommunity.pack.python-ruff" },
 
   -- debug
   { import = "astrocommunity.debugging.nvim-dap-virtual-text" },
