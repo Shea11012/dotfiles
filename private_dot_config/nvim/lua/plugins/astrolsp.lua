@@ -83,15 +83,6 @@ return {
           },
         },
       },
-      lua_ls = {
-        settings = {
-          Lua = {
-            diagnostics = {
-              globals = { "vim" },
-            },
-          },
-        },
-      },
     },
     -- customize how language servers are attached
     handlers = {

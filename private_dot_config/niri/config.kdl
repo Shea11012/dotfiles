@@ -297,6 +297,15 @@ window-rule {
     open-focused false // 解决搜索框失去焦点
 }
 
+// 使wechat一些功能窗口悬浮在当前窗口上
+window-rule {
+    match title=r#"Photos|Videos"# app-id="wechat"
+    match title="WeChat$"
+    open-floating true
+    default-floating-position x=5 y=5 relative-to="top"
+    open-focused true
+}
+
 // floating rule
 window-rule {
     match title="CopyQ" app-id="com.github.hluk.copyq"
@@ -347,7 +356,7 @@ binds {
     Mod+Ctrl+v { spawn "copyq" "toggle"; }
     // Mod+D hotkey-overlay-title="Run an Application: fuzzel" { spawn "fuzzel"; }
     alt+space { spawn "vicinae" "toggle"; }
-    Super+Alt+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn "hyprlock"; }
+    Super+Alt+L hotkey-overlay-title="Lock the Screen: hyprlock" { spawn "hyprlock"; }
 
     // Using spawn-sh allows to pass multiple arguments together with the command.
     XF86AudioRaiseVolume allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1+"; }

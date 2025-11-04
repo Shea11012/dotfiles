@@ -30,7 +30,7 @@
     "separate-outputs": true,
   },
   "clock": {
-    "format": "  {:%H:%M:%S %A} ",
+    "format": "  {:%m-%d %H:%M:%S %A} ",
     "tooltip-format": "{:%Y-%m-%d}",
     // "tooltip-format": "<span size='9pt' font='Maple Mono NF CN'> {:%Y %B}\n\n{calendar}</span>",
     "interval": 1,
