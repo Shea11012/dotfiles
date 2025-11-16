@@ -34,4 +34,5 @@ starship init fish | source
 uv generate-shell-completion fish | source
 navi widget fish | source
 carapace _carapace | source
+jj util completion fish | source
 
