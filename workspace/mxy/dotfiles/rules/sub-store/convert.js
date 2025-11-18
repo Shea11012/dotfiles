@@ -29,17 +29,22 @@ const rules = [
   "RULE-SET,custom-direct,DIRECT",
   "RULE-SET,custom-proxy,PROXY",
 
-  "GEOIP,cloudflare,PROXY,no-resolve",
-  "GEOIP,telegram,PROXY,no-resolve",
-  "GEOSITE,category-ai-!cn,AI",
-  "GEOSITE,geolocation-!cn,PROXY",
-
+  // 内网流量
   "GEOSITE,private,DIRECT",
   "GEOIP,private,DIRECT,no-resolve",
+
+  // 国内流量
   "GEOSITE,geolocation-cn,DIRECT",
-  "GEOIP,cn,DIRECT,no-resolve",
   "GEOSITE,category-games-cn,DIRECT",
   "GEOSITE,microsoft@cn,DIRECT",
+  "GEOIP,cn,DIRECT,no-resolve",
+
+  // 国外流量
+  "GEOSITE,category-ai-!cn,AI",
+  "GEOSITE,geolocation-!cn,PROXY",
+  "GEOIP,google,PROXY,no-resolve",
+  "GEOIP,cloudflare,PROXY,no-resolve",
+  "GEOIP,telegram,PROXY,no-resolve",
 
   "MATCH,default",
 ];
@@ -74,22 +79,20 @@ const dnsConfig = {
   "enhanced-mode": "fake-ip",
   "fake-ip-filter": ["geosite:connectivity-check", "geosite:private"],
   "fake-ip-range": "198.18.0.1/16",
+  // 用于解析dns域名
   "default-nameserver": ["223.5.5.5"],
+  // 直连走这里
+  "direct-nameserver": ["system"],
+  // 会优先走这个配置项
   "nameserver-policy": {
-    // "geosite:cn": [
-    //   "system",
-    //   // dnspod 腾讯
-    //   "https://119.29.29.29/dns-query",
-    //   // alidns
-    //   "https://223.5.5.5/dns-query",
-    // ],
-    // Cloudflare和谷歌
+    "rule-set:custom-direct": ["https://223.5.5.5/dns-query"],
     "geosite:geolocation-cn,category-games-cn,category-game-platforms-download":
       ["https://119.29.29.29/dns-query", "https://223.5.5.5/dns-query"],
   },
+  // 其次nameserver 与 fallback 一起查询，使用fallback-filter确认该采用哪个
   nameserver: ["https://119.29.29.29/dns-query", "https://223.5.5.5/dns-query"],
+  // 国外doh 必须使用域名请求
   fallback: [
-    "https://223.5.5.5/dns-query",
     "https://cloudflare-dns.com/dns-query",
     "https://dns.google/dns-query",
   ],
