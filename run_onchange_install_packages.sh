@@ -12,6 +12,10 @@ passwd
 # 设置自启, 默认端口是 8022
 sv-enable sshd
 
+# 下载公钥
+PUB_KEY=$(xh -b https://github.com/Shea11012.keys)
+echo -e "$PUB_KEY\n" > ~/.ssh/authorized_keys
+
 # 在Documents中创建rime
 mkdir -p ~/storage/shared/Documents/input/rime
 # 下载万象输入法的更新脚本
