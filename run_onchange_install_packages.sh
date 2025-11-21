@@ -6,9 +6,6 @@
 pkg update -y
 pkg install git wget curl openssh python termux-services neovim ripgrep fd yazi bat xh
 
-# 设置密码 123
-passwd
-
 # 设置自启, 默认端口是 8022
 sv-enable sshd
 
