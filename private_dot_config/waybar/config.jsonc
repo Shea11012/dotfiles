@@ -89,7 +89,7 @@
       "car": "  ",
       "default": ["  ", "  ", "  "],
     },
-    "scroll-step": 1,
+    "scroll-step": 0.5,
     "on-click-right": "pavucontrol",
     "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
   },
