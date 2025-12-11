@@ -1,0 +1,9 @@
+#:schema https://jj-vcs.github.io/jj/latest/config-schema.json
+
+[user]
+name = "mxy"
+email = "mxyinvoker@gmail.com"
+
+[ui]
+pager = "delta"
+diff-formatter = ":git"

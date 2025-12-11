@@ -32,6 +32,7 @@
 - ripgrep: 替代grep
 - fd: 替代find
 - ncdu: 替代du
+- wf-recorder: 录屏 https://github.com/ammen99/wf-recorder
 
 # 配置archlinuxcn源
 
