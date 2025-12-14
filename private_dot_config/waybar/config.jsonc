@@ -104,13 +104,13 @@
     // "interface": "wlp2*", // (Optional) To force the use of this interface
     "interval": 1,
     "format": "{ifname}",
-    "format-wifi": "{essid}  ",
+    "format-alt": "{essid}",
     "format-ethernet": "{ipaddr}/{cidr} 󰊗 ",
-    "tooltip-format": "{ifname} via {gwaddr}",
+    "tooltip-format": "{essid} via {gwaddr}",
     "format-disconnected": "",
     // "format-alt": "󰇚 {bandwidthDownBytes}  󰇛 {bandwidthUpBytes}",
     // "format-alt": "<span color='#FF1493'> 󰅧 </span>{bandwidthUpBytes}  <span color='#00BFFF'> 󰅢 </span>{bandwidthDownBytes}",
-    "format-alt": "󰅧 {bandwidthUpBytes} 󰅢 {bandwidthDownBytes}",
+    "format-wifi": "󰅧 {bandwidthUpBytes} 󰅢 {bandwidthDownBytes}",
   },
   "custom/media": {
     "exec": "playerctl -p yesplaymusic metadata -f '{{emoji(status)}} «{{title}} - {{artist}}»' -F",

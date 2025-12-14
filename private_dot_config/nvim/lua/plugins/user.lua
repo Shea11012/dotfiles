@@ -99,8 +99,6 @@ return {
         desc = "Open the file manager in nvim's working directory",
       },
       {
-        -- NOTE: this requires a version of yazi that includes
-        -- https://github.com/sxyazi/yazi/pull/1305 from 2024-07-18
         "<c-up>",
         "<cmd>Yazi toggle<cr>",
         desc = "Resume the last yazi session",
@@ -112,37 +110,6 @@ return {
       keymaps = {
         show_help = "<f1>",
       },
-    },
-  }, 
-  {
-    "mistweaverco/kulala.nvim",
-    event = "VeryLazy",
-    init = function()
-      local fs = require "kulala.utils.fs"
-      fs.get_os = function() return "unix" end
-    end,
-    config = function(_, opts)
-      require("kulala").setup(opts)
-      if opts.global_keymaps_prefix then
-        require("astrocore").set_mappings {
-          n = {
-            [opts.global_keymaps_prefix] = { desc = require("astroui").get_icon("KulalaNvim", 1, true) .. "KulalaNvim" },
-          },
-        }
-      end
-    end,
-    specs = {
-      {
-        "AstroNvim/astroui",
-        ---@type AstroUIOpts
-        opts = { icons = { KulalaNvim = "󱜿" } },
-      },
-    },
-    ft = { "http", "rest" },
-    opts = {
-      global_keymaps = true,
-      global_keymaps_prefix = "<leader>r",
-      lsp = { on_attach = function(...) return require("astrolsp").on_attach(...) end },
     },
   },
 }

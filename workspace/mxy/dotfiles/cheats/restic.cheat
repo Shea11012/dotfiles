@@ -14,3 +14,5 @@ resticprofile -n linux restore -t ~/Documents/obsidian latest:/c/Users/18723/wor
 
 # restore data to linux
 resticprofile -n linux restore -t ~/Documents latest:/d -i data
+
+$profile: resticprofile profiles | fzf --header-lines 3 | rg -o -P '^\s*\K\w+(?=:)'

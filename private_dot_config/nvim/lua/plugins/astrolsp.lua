@@ -54,35 +54,6 @@ return {
           },
         },
       },
-      gopls = {
-        settings = {
-          gopls = {
-            analyses = {
-              ST1003 = true,
-              fillreturns = true,
-              nilness = true,
-              shadow = true,
-              useany = true,
-              unusedwrite = true,
-            },
-            usePlaceholders = true,
-            gofumpt = true,
-            codelenses = {
-              generate = false,
-              test = true,
-              tidy = true,
-            },
-            hints = {
-              compositeLiteralFields = true,
-              compositeLiteralTypes = true,
-              constantValues = true,
-              functionTypeParameters = true,
-              parameterNames = true,
-              rangeVariableTypes = true,
-            },
-          },
-        },
-      },
     },
     -- customize how language servers are attached
     handlers = {

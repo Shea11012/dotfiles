@@ -6,7 +6,7 @@
 return {
   "AstroNvim/astrocommunity",
   -- import/override with your plugins folder
-  { import = "astrocommunity.colorscheme.tokyonight-nvim" },
+  { import = "astrocommunity.colorscheme.catppuccin" },
   { import = "astrocommunity.recipes.vscode-icons" },
 
   -- interaction with vscode
@@ -15,11 +15,12 @@ return {
   -- editing
   { import = "astrocommunity.editing-support.todo-comments-nvim" },
   { import = "astrocommunity.motion.nvim-surround" },
-  -- { import = "astrocommunity.editing-support.rainbow-delimiters-nvim" },
   { import = "astrocommunity.utility.noice-nvim" },
 
-  -- diagnostics
-  { import = "astrocommunity.diagnostics.trouble-nvim" },
+  { import = "astrocommunity.editing-support.conform-nvim" },
+  { import = "astrocommunity.code-runner.overseer-nvim" },
+  -- test
+  { import = "astrocommunity.test.neotest" },
 
   -- languages
   { import = "astrocommunity.pack.rust" },
