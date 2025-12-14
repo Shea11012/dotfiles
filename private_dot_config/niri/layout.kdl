@@ -1,0 +1,74 @@
+layout {
+    // Set gaps around windows in logical pixels.
+    gaps 4
+
+    center-focused-column "never"
+
+    // You can customize the widths that "switch-preset-column-width" (Mod+R) toggles between.
+    preset-column-widths {
+        proportion 0.33333
+        proportion 0.5
+        proportion 0.66667
+    }
+
+    // You can also customize the heights that "switch-preset-window-height" (Mod+Shift+R) toggles between.
+    // preset-window-heights { }
+
+    // You can change the default width of the new windows.
+    default-column-width { proportion 0.5; }
+    focus-ring {
+        // off
+
+        // How many logical pixels the ring extends out from the windows.
+        // width 4
+
+        // Color of the ring on the active monitor.
+        // active-color "#a7c080"
+
+        // Color of the ring on inactive monitors.
+        // inactive-color "#d3c6aa"
+
+        // active-gradient from="#80c8ff" to="#c7ff7f" angle=45
+
+        // inactive-gradient from="#505050" to="#808080" angle=45 relative-to="workspace-view"
+        active-gradient from="#33ccffee" to="#00ff99ee" angle=45 
+        inactive-gradient from="#585b70" to="#7f849c" angle=45 relative-to="workspace-view"
+        // inactive-color 89 89 89 170
+    }
+
+    border {
+        // If you enable the border, you probably want to disable the focus ring.
+        off
+
+        // width 4
+        // active-color "#ffc87f"
+        // inactive-color "#505050"
+
+        // Color of the border around windows that request your attention.
+        // urgent-color "#9b0000"
+
+        // Gradients can use a few different interpolation color spaces.
+        // For example, this is a pastel rainbow gradient via in="oklch longer hue".
+        //
+        // active-gradient from="#e5989b" to="#ffb4a2" angle=45 relative-to="workspace-view" in="oklch longer hue"
+
+        // inactive-gradient from="#505050" to="#808080" angle=45 relative-to="workspace-view"
+    }
+
+    // You can enable drop shadows for windows.
+    shadow {
+        softness 30
+
+        // Spread expands the shadow.
+        spread 5
+
+        // Offset moves the shadow relative to the window.
+        offset x=0 y=5
+
+        // You can also change the shadow color and opacity.
+        color "#0007"
+    }
+
+    struts {
+    }
+}

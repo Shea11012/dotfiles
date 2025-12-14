@@ -1,0 +1,82 @@
+workspace "chat"
+
+// Work around WezTerm's initial configure bug
+// by setting an empty default-column-width.
+window-rule {
+    // This regular expression is intentionally made as specific as possible,
+    // since this is the default config, and we want no false positives.
+    // You can get away with just app-id="wezterm" if you want.
+    match app-id=r#"^org\.wezfurlong\.wezterm$"#
+    default-column-width {}
+}
+
+// Open the Firefox picture-in-picture player as floating by default.
+window-rule {
+    // This app-id regular expression will work for both:
+    // - host Firefox (app-id is "firefox")
+    // - Flatpak Firefox (app-id is "org.mozilla.firefox")
+    match app-id=r#"firefox$"# title="^Picture-in-Picture$"
+    open-floating true
+}
+
+// move to chat workspace
+window-rule {
+    match app-id="org.telegram.desktop"
+    match app-id="wechat"
+    open-on-workspace "chat"
+}
+
+window-rule {
+    match app-id=r#"wechat"#
+    open-focused false // 解决搜索框失去焦点
+}
+
+// 使wechat一些功能窗口悬浮在当前窗口上
+window-rule {
+    match title=r#"Photos|Videos"# app-id="wechat"
+    match title="WeChat$"
+    open-floating true
+    default-floating-position x=5 y=5 relative-to="top"
+    open-focused true
+}
+
+// floating rule
+window-rule {
+    match title="CopyQ" app-id="com.github.hluk.copyq"
+    open-floating true
+    shadow { on; }
+}
+
+window-rule {
+    match title="CopyQ" app-id="com.github.hluk.copyq"
+    default-floating-position x=5 y=5 relative-to="top-right"
+    default-column-width { fixed 550; }
+    default-window-height { fixed 800; }
+}
+
+window-rule {
+    match app-id="io.github.waylyrics.Waylyrics"
+    default-floating-position x=0 y=5 relative-to="top"
+}
+
+window-rule {
+    match app-id="zen"
+    open-maximized true
+}
+
+// block out two password managers from screen capture.
+window-rule {
+    match app-id=r#"^org\.keepassxc\.KeePassXC$"#
+    match app-id=r#"^org\.gnome\.World\.Secrets$"#
+
+    block-out-from "screen-capture"
+
+    // Use this instead if you want them visible on third-party screenshot tools.
+    // block-out-from "screencast"
+}
+
+// enable rounded corners for all windows.
+window-rule {
+    geometry-corner-radius 8
+    clip-to-geometry true
+}
