@@ -20,49 +20,6 @@ local ensure_installed = {
   "http",
 }
 
-local ts = require "nvim-treesitter"
-local available_set = {}
-vim.tbl_map(function(v) available_set[v] = true end, ts.get_available())
-
-local installed = ts.get_installed()
-local installed_set = {}
-for _, name in ipairs(installed) do
-  installed_set[name] = true
-end
-
-local function treesitter_init(bufnr)
-  -- 确保缓冲区加载
-  if not vim.api.nvim_buf_is_loaded(bufnr) then return end
-
-  -- 避免重复初始化
-  if vim.b[bufnr].treesitter_initialized then return end
-
-  -- 大多数ui插件都是只可读和不可写
-  if vim.bo[bufnr].readonly or not vim.bo[bufnr].modifiable then return end
-
-  local ft = vim.bo[bufnr].filetype
-  if not available_set[ft] then
-    -- vim.notify("treesitter not available " .. ft, vim.log.levels.DEBUG)
-    return
-  end
-
-  if not installed_set[ft] then
-    -- 如果可用，则下载，限时5分钟
-    ts.install(ft):wait(300000)
-    installed_set[ft] = true
-  end
-
-  -- syntax highlighting, provided by Neovim
-  vim.treesitter.start()
-  -- folds, provided by Neovim
-  vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
-  vim.wo.foldmethod = "expr"
-  -- indentation, provided by nvim-treesitter
-  vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
-
-  vim.b[bufnr].treesitter_initialized = true
-end
-
 ---@type LazySpec
 return {
   {
@@ -112,6 +69,49 @@ return {
     end,
     version = false,
     config = function()
+      local ts = require "nvim-treesitter"
+      local available_set = {}
+      vim.tbl_map(function(v) available_set[v] = true end, ts.get_available())
+
+      local installed = ts.get_installed()
+      local installed_set = {}
+      for _, name in ipairs(installed) do
+        installed_set[name] = true
+      end
+
+      local function treesitter_init(bufnr)
+        -- 确保缓冲区加载
+        if not vim.api.nvim_buf_is_loaded(bufnr) then return end
+
+        -- 避免重复初始化
+        if vim.b[bufnr].treesitter_initialized then return end
+
+        -- 大多数ui插件都是只可读和不可写
+        if vim.bo[bufnr].readonly or not vim.bo[bufnr].modifiable then return end
+
+        local ft = vim.bo[bufnr].filetype
+        if not available_set[ft] then
+          -- vim.notify("treesitter not available " .. ft, vim.log.levels.DEBUG)
+          return
+        end
+
+        if not installed_set[ft] then
+          -- 如果可用，则下载，限时5分钟
+          ts.install(ft):wait(300000)
+          installed_set[ft] = true
+        end
+
+        -- syntax highlighting, provided by Neovim
+        vim.treesitter.start()
+        -- folds, provided by Neovim
+        vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+        vim.wo.foldmethod = "expr"
+        -- indentation, provided by nvim-treesitter
+        vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+
+        vim.b[bufnr].treesitter_initialized = true
+      end
+
       -- 在BufWinEnter加载 treesitter 更合理，方便其它插件的ui加载完成
       vim.api.nvim_create_autocmd("BufWinEnter", {
         callback = function(ev)

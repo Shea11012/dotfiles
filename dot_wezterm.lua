@@ -53,8 +53,8 @@ end)
 local leader_key = { key = "a", mods = "CTRL", timeout_milliseconds = 1000 }
 local keys = {
 
-	{ key = "F2",    mods = "NONE",       action = act.ActivateCommandPalette },
-	{ key = "F3",    mods = "NONE",       action = act.ShowLauncher },
+	{ key = "F2", mods = "NONE", action = act.ActivateCommandPalette },
+	{ key = "F3", mods = "NONE", action = act.ShowLauncher },
 	{ key = "Space", mods = "CTRL|SHIFT", action = act.ActivateCopyMode },
 	-- { key = 'UpArrow',    mods = 'ALT',    action = act { ActivatePaneDirection = 'Up' } },
 	-- { key = 'DownArrow',  mods = 'ALT',    action = act { ActivatePaneDirection = 'Down' } },
