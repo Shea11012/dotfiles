@@ -23,7 +23,6 @@ return {
   { import = "astrocommunity.test.neotest" },
 
   -- languages
-  { import = "astrocommunity.pack.rust" },
   { import = "astrocommunity.pack.lua" },
   { import = "astrocommunity.pack.typescript" },
   { import = "astrocommunity.pack.bash" },

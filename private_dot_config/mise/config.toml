@@ -6,6 +6,7 @@ python = "latest"
 pnpm = "latest"
 golangci-lint = "latest"
 biome = "latest"
+rust-analyzer = "latest"
 
 [settings]
 legacy_version_file = true

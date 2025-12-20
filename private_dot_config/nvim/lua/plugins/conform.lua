@@ -20,6 +20,7 @@ return {
     opts.formatters_by_ft["go"] = { "goimports", "gofumpt" }
     opts.formatters_by_ft["http"] = { "kulala-fmt" }
     opts.formatters_by_ft["lua"] = { "stylua" }
+    opts.formatters_by_ft["rust"] = { "rustfmt" }
 
     -- opts.format_on_save = {
     --   timeout_ms = 500,

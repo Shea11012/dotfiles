@@ -5,9 +5,9 @@ end
 
 # Clean unused package
 function paru_clean -d "clean unused package"
-    paru -Qdtq | paru -Rns -
-    paru -Qqd | paru -Rsu -
+    paru -Rns (paru -Qqdt)
     sudo paccache -rk3
+    paru -Sc --noconfirm
 end
 
 function update_mirrors -d "update arch and archlinuxcn mirrors"
