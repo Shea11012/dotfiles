@@ -8,33 +8,12 @@ services:
   network-service:
     image: alpine
     container_name: tool-network
-    # ports:
-    #   - "3001:8080" # openwebui
+    ports:
+      - "3003:3001" # gpt-load
+      - '3004:8080' # octopus 
     command: tail -f /dev/null
     networks:
       - tools
-
-  sub-store:
-    image: xream/sub-store:http-meta
-    container_name: sub-store
-    restart: always
-    # network_mode: host
-    ports:
-      - 3002:3002
-      - 9876:9876
-      - 3001:3001
-    environment:
-      SUB_STORE_BACKEND_API_PORT: 3002
-      SUB_STORE_FRONTEND_BACKEND_PATH: /cD7wiTGitLyoBdEguAnFWmqCpHKwhLQh4opXfFhFCEpmY9K7YnPgFu9e2iiUoty2
-      PORT: 9876
-      HOST: 127.0.0.1
-    volumes:
-      - ./sub-store/data:/opt/app/data
-
-  metacubexd:
-    image: ghcr.io/metacubex/metacubexd
-    container_name: metacubexd
-    restart: always
 
   caddy:
     build: ./caddy
@@ -70,8 +49,6 @@ services:
     container_name: gpt-load
     restart: always
     user: "1000:1000"
-    ports:
-      - "3003:3001"
     volumes:
       - ./gpt-load/data:/app/data
     env_file:
@@ -82,6 +59,7 @@ services:
       timeout: 10s
       retries: 3
       start_period: 40s
+    network_mode: "service:network-service"
 
   watchtower:
     image: containrrr/watchtower
@@ -91,7 +69,7 @@ services:
     volumes:
       # - /run/user/1000/docker.sock:/var/run/docker.sock
       - /var/run/docker.sock:/var/run/docker.sock
-    command: watchtower sub-store openlist --cleanup --schedule "0 0 1 * * *"
+    command: watchtower gpt-load openlist --cleanup --schedule "0 0 1 * * *"
     restart: on-failure:3
     network_mode: "service:network-service"
     # networks:

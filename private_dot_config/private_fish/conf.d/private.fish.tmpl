@@ -1,2 +1,0 @@
-set -x GithubToken {{ (fromToml (joinPath .chezmoi.sourceDir "workspace/mxy/dotfiles/encrypted_env.toml.age" | include | decrypt)).GithubToken }}
-

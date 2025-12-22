@@ -118,7 +118,7 @@ local config = {
 
 	-- font
 
-	font = wezterm.font_with_fallback({ "Maple Mono NF", "LXGW WenKai Screen" }),
+	font = wezterm.font_with_fallback({ "Maple Mono NF", "LXGW WenKai GB Medium" }),
 
 	font_size = 18,
 

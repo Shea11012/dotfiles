@@ -35,9 +35,12 @@ starship init fish | source
 uv generate-shell-completion fish | source
 # 自定义cheat补全
 navi widget fish | source
-# 补全工具
-carapace _carapace | source
 # 新版本管理工具
 jj util completion fish | source
 # 自动加载环境变量
 direnv hook fish | source
+# zellij
+zellij setup --generate-completion fish | source
+# 补全工具
+set -Ux CARAPACE_BRIDGES 'zsh,fish,bash,inshellisense'
+carapace _carapace | source
