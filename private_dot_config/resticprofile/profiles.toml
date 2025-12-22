@@ -12,10 +12,6 @@ password-file = "key"
 pack-size = 128
 http-user-agent = "pan.baidu.com"
 
-[profiles.window.env]
-AWS_ACCESS_KEY_ID = "aeonYDWWCfjZrEcGd8eG"
-AWS_SECRET_ACCESS_KEY = "U8rFWWDvlQV0lV5pANmCbtSWwF5nSV98gG3xmPsb"
-
 [profiles.window.backup]
 tag = ["window"]
 source = [
