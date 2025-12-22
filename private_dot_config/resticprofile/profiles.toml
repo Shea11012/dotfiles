@@ -51,6 +51,15 @@ tag = ["linux"]
 skip-if-unchanged = true
 exclude-file = "excludes.txt"
 source = ["/home/mxy/Documents/obsidian", "/home/mxy/Documents/backup"]
+
 [profiles.linux.restore]
 overwrite = "if-newer"
 delete = true
+run-after = [
+    "chmod -R 644 /home/mxy/Documents/backup",
+    "chmod -R 644 /home/mxy/Documents/obsidian"
+]
+
+[profiles.linux.forget]
+# 只保留最近一天的
+keep-daily = 1
