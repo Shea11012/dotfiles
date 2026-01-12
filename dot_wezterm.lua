@@ -55,7 +55,7 @@ local keys = {
 
 	{ key = "F2", mods = "NONE", action = act.ActivateCommandPalette },
 	{ key = "F3", mods = "NONE", action = act.ShowLauncher },
-	{ key = "Space", mods = "CTRL|SHIFT", action = act.ActivateCopyMode },
+	-- { key = "Space", mods = "CTRL|SHIFT", action = act.ActivateCopyMode },
 	-- { key = 'UpArrow',    mods = 'ALT',    action = act { ActivatePaneDirection = 'Up' } },
 	-- { key = 'DownArrow',  mods = 'ALT',    action = act { ActivatePaneDirection = 'Down' } },
 
@@ -65,35 +65,20 @@ local keys = {
 	-- pane
 	-- { key = "RightArrow", mods = "ALT", action = act({ ActivatePaneDirection = "Prev" }) },
 	-- { key = "LeftArrow", mods = "ALT", action = act({ ActivatePaneDirection = "Next" }) },
-	-- { key = "w", mods = "CTRL", action = act({ CloseCurrentPane = { confirm = false } }) },
+	-- { key = "w", mods = "CTRL", action = act({ CloseCurrentPane = { confirm = false } }) ,
 	-- { key = "-", mods = "LEADER", action = act.SplitVertical({ domain = "CurrentPaneDomain" }) },
 	-- { key = "|", mods = "LEADER|SHIFT", action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
-
-	-- rename tab
-	-- {
-	-- 	key = "R",
-	-- 	mods = "CTRL|SHIFT",
-	-- 	action = act.PromptInputLine({
-	-- 		description = "Enter new name for tab",
-	-- 		action = wezterm.action_callback(function(window, pane, line)
-	-- 			if line then
-	-- 				window:active_tab():set_title(line)
-	-- 			end
-	-- 		end),
-	-- 	}),
-	-- },
 }
 
 local config = {
 
-	-- basic
-	enable_scroll_bar = true,
 
 	launch_menu = launch_menu,
 
 	color_scheme = "Catppuccin Mocha",
 
 	default_prog = default_prog,
+
 
 	use_ime = true,
 
@@ -141,5 +126,7 @@ local config = {
 
 	keys = keys,
 }
-
+local modal = wezterm.plugin.require("https://github.com/MLFlexer/modal.wezterm")
+modal.apply_to_config(config)
+modal.set_default_keys(config)
 return config

@@ -11,6 +11,7 @@ return {
 
   -- interaction with vscode
   { import = "astrocommunity.recipes.vscode" },
+  { import = "astrocommunity.recipes.picker-lsp-mappings" },
 
   -- editing
   { import = "astrocommunity.editing-support.todo-comments-nvim" },

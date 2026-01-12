@@ -2,6 +2,7 @@ local models = require "plugins.llm.models"
 local app_handler = require "plugins.llm.tools"
 return {
   "Kurama622/llm.nvim",
+  enabled = false,
   dependencies = { "nvim-lua/plenary.nvim", "MunifTanjim/nui.nvim" },
   cmd = { "LLMSessionToggle", "LLMSelectedTextHandler", "LLMAppHandler" },
   config = function()
@@ -19,7 +20,7 @@ return {
       lsp = {
         python = { methods = { "definition" } },
         lua = { methods = { "definition", "declaration" } },
-        go = { methods = { "definition", "implementation" } },
+        go = { methods = { "definition" } },
         typescript = { methods = { "definition", "typeDefinition", "declaration" } },
         javascript = { methods = { "definition" } },
       },

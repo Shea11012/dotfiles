@@ -5,29 +5,29 @@
     "wlr/taskbar",
     "wireplumber",
     // "bluetooth",
-    "niri/workspaces",
+    "niri/workspaces"
   ],
   "modules-center": ["niri/window"],
   "modules-right": ["custom/media", "clock", "group/hardware", "tray"],
   "custom/logout": {
     "format": "⏻",
     "tooltip": false,
-    "on-click": "niri msg action quit",
+    "on-click": "niri msg action quit"
   },
   "group/hardware": {
     "orientation": "horizontal",
-    "modules": ["cpu", "memory", "temperature"],
+    "modules": ["cpu", "memory", "temperature"]
   },
   "niri/workspaces": {
     "format": "{value}: {icon}",
     "format-icons": {
       "active": "",
-      "default": "",
-    },
+      "default": ""
+    }
   },
   "niri/window": {
     "format": "{title}",
-    "separate-outputs": true,
+    "separate-outputs": true
   },
   "clock": {
     "format": "  {:%m-%d %H:%M:%S %A} ",
@@ -45,9 +45,9 @@
         "days": "<span color='#ecc6d9'><b>{}</b></span>",
         "weeks": "<span color='#99ffdd'><b>W{}</b></span>",
         "weekdays": "<span color='#ffcc66'><b>{}</b></span>",
-        "today": "<span color='#ff6699'><b><u>{}</u></b></span>",
-      },
-    },
+        "today": "<span color='#ff6699'><b><u>{}</u></b></span>"
+      }
+    }
   },
   "wlr/taskbar": {
     "format": "{icon}",
@@ -58,7 +58,7 @@
     "on-click-right": "fullscreen",
     "height": "14",
     "icon-size": 22,
-    "spacing": 10,
+    "spacing": 10
   },
   "keyboard-state": {
     "numlock": true,
@@ -66,16 +66,16 @@
     "format": "{name} {icon}",
     "format-icons": {
       "locked": "",
-      "unlocked": "",
-    },
+      "unlocked": ""
+    }
   },
   "cpu": {
     "interval": 1,
-    "format": "  {usage}%",
+    "format": "  {usage}%"
   },
   "memory": {
     "interval": 30,
-    "format": "  {used:0.1f}G/{total:0.1f}G",
+    "format": "  {used:0.1f}G/{total:0.1f}G"
   },
   "wireplumber": {
     "format": "{icon}{volume}%",
@@ -87,18 +87,18 @@
       "phone": "  ",
       "portable": "  ",
       "car": "  ",
-      "default": ["  ", "  ", "  "],
+      "default": ["  ", "  ", "  "]
     },
     "scroll-step": 0.5,
     "on-click-right": "pavucontrol",
-    "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
+    "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
   },
   "temperature": {
-    "format": " {temperatureC}°C ",
+    "format": " {temperatureC}°C "
   },
   "tray": {
     "icon-size": 22,
-    "spacing": 10,
+    "spacing": 10
   },
   "network": {
     // "interface": "wlp2*", // (Optional) To force the use of this interface
@@ -110,17 +110,17 @@
     "format-disconnected": "",
     // "format-alt": "󰇚 {bandwidthDownBytes}  󰇛 {bandwidthUpBytes}",
     // "format-alt": "<span color='#FF1493'> 󰅧 </span>{bandwidthUpBytes}  <span color='#00BFFF'> 󰅢 </span>{bandwidthDownBytes}",
-    "format-wifi": "󰅧 {bandwidthUpBytes} 󰅢 {bandwidthDownBytes}",
+    "format-wifi": "󰅧 {bandwidthUpBytes} 󰅢 {bandwidthDownBytes}"
   },
   "custom/media": {
-    "exec": "playerctl -p yesplaymusic metadata -f '{{emoji(status)}} «{{title}} - {{artist}}»' -F",
-    "on-click": "playerctl -p yesplaymusic play-pause",
-    "on-click-middle": "playerctl -p yesplaymusic stop",
-    "on-scroll-up": "playerctl -p yesplaymusic previous",
-    "on-scroll-down": "playerctl -p yesplaymusic next",
+    "exec": "playerctl -p NeteaseCloudMusicGtk4,yesplaymusic metadata -f '{{emoji(status)}} «{{title}} - {{artist}}»' -F",
+    "on-click": "playerctl -p NeteaseCloudMusicGtk4,yesplaymusic play-pause",
+    "on-click-middle": "playerctl -p NeteaseCloudMusicGtk4,yesplaymusic stop",
+    "on-scroll-up": "playerctl -p NeteaseCloudMusicGtk4,yesplaymusic previous",
+    "on-scroll-down": "playerctl -p NeteaseCloudMusicGtk4,yesplaymusic next",
     "max-length": 500,
     "escape": true,
-    "tooltip": false,
+    "tooltip": false
   },
   "bluetooth": {
     "format": "  {status} ",
@@ -130,6 +130,6 @@
     "tooltip-format": "{controller_alias}\t{controller_address}\n\n{num_connections} connected",
     "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{num_connections} connected\n\n{device_enumerate}",
     "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
-    "tooltip-format-enumerate-connected-battery": "{device_alias}\t{device_address}\t{device_battery_percentage}%",
-  },
+    "tooltip-format-enumerate-connected-battery": "{device_alias}\t{device_address}\t{device_battery_percentage}%"
+  }
 }

@@ -55,13 +55,20 @@ window-rule {
 }
 
 window-rule {
-    match app-id="io.github.waylyrics.Waylyrics"
+    match title="Waylyrics" app-id=r#"^io\.github\.waylyrics\.Waylyrics$"#
+    open-floating true
     default-floating-position x=0 y=5 relative-to="top"
 }
 
 window-rule {
     match app-id="zen"
     open-maximized true
+}
+
+window-rule {
+    match app-id="pot"
+    open-floating true
+    default-floating-position x=32 y=32
 }
 
 // block out two password managers from screen capture.

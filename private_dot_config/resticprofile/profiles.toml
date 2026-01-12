@@ -59,3 +59,4 @@ run-after = [
 [profiles.linux.forget]
 # 只保留最近一天的
 keep-daily = 1
+[profiles.linux.ls]

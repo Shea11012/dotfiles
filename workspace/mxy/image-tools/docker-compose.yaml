@@ -60,17 +60,3 @@ services:
       retries: 3
       start_period: 40s
     network_mode: "service:network-service"
-
-  watchtower:
-    image: containrrr/watchtower
-    container_name: watchtower
-    environment:
-      - TZ=Asia/Shanghai
-    volumes:
-      # - /run/user/1000/docker.sock:/var/run/docker.sock
-      - /var/run/docker.sock:/var/run/docker.sock
-    command: watchtower gpt-load openlist --cleanup --schedule "0 0 1 * * *"
-    restart: on-failure:3
-    network_mode: "service:network-service"
-    # networks:
-    #   - tools

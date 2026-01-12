@@ -19,7 +19,7 @@ const ruleProviders = {
     type: "http",
     behavior: "classical",
     interval: 86400,
-    url: "http://raw.githubusercontent.com/Shea11012/dotfiles/main/workspace/mxy/dotfiles/clash/custom-proxy.yaml",
+    url: "https://gh-proxy.org/https://gist.github.com/Shea11012/2b2a2659468c2c29e0baae906016b31c/raw/custom-proxy.yaml",
     path: "./ruleset/custom-proxy.yaml",
   },
 };
@@ -109,39 +109,39 @@ const geoxURL = {
 
 const countryMeta = {
   香港: {
-    pattern: "(?i)香港|港|HK|hk|Hong Kong|HongKong|hongkong|🇭🇰",
+    pattern: "(?i)香港|港|HK|hk|Hong Kong|HongKong|hongkong|🇭",
     icon: "https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Hong_Kong.png",
   },
   澳门: {
-    pattern: "(?i)澳门|MO|Macau|🇲🇴",
+    pattern: "(?i)澳门|MO|Macau|🇲",
     icon: "https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Macao.png",
   },
   台湾: {
-    pattern: "(?i)台|新北|彰化|TW|Taiwan|🇹🇼",
+    pattern: "(?i)台|新北|彰化|TW|Taiwan|🇹",
     icon: "https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Taiwan.png",
   },
   新加坡: {
-    pattern: "(?i)新加坡|坡|狮城|SG|Singapore|🇸🇬",
+    pattern: "(?i)新加坡|坡|狮城|SG|Singapore|🇸",
     icon: "https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Singapore.png",
   },
   日本: {
-    pattern: "(?i)日本|川日|东京|大阪|泉日|埼玉|沪日|深日|JP|Japan|🇯🇵",
+    pattern: "(?i)日本|川日|东京|大阪|泉日|埼玉|沪日|深日|JP|Japan|🇯",
     icon: "https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Japan.png",
   },
   韩国: {
-    pattern: "(?i)KR|Korea|KOR|首尔|韩|韓|🇰🇷",
+    pattern: "(?i)KR|Korea|KOR|首尔|韩|韓|🇰",
     icon: "https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Korea.png",
   },
   美国: {
-    pattern: "(?i)美国|美|US|United States|🇺🇸",
+    pattern: "(?i)美国|美|US|United States|🇺",
     icon: "https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/United_States.png",
   },
   马来西亚: {
-    pattern: "(?i)马来西亚|马来|MY|Malaysia|🇲🇾",
+    pattern: "(?i)马来西亚|马来|MY|Malaysia|🇲",
     icon: "https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Malaysia.png",
   },
   澳大利亚: {
-    pattern: "(?i)澳洲|澳大利亚|AU|Australia|🇦🇺",
+    pattern: "(?i)澳洲|澳大利亚|AU|Australia|🇦",
     icon: "https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Australia.png",
   },
 };

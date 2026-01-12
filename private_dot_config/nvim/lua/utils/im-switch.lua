@@ -6,7 +6,8 @@ local zh_mode =
   { "busctl", "call", "--user", "org.fcitx.Fcitx5", "/rime", "org.fcitx.Fcitx.Rime1", "SetAsciiMode", "b", "false" }
 
 local function is_linux()
-  local os_name = vim.loop.os_uname().sysname
+  -- local os_name = vim.loop.os_uname().sysname
+  local os_name = jit.os
   return os_name == "Linux"
 end
 
@@ -44,7 +45,6 @@ local function set_ascii_mode(ascii)
   local ok, _ = pcall(vim.fn.system, cmd)
   if not ok or vim.v.shell_error ~= 0 then vim.notify("Fcitx5 Rime mode switch failed", vim.log.levels.WARN) end
 end
-
 -- 判断是否处于注释或字符串中: //,#,",'
 local function comment_or_string()
   local node = vim.treesitter.get_node()

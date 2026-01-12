@@ -21,53 +21,15 @@ local ensure_installed = {
 }
 
 ---@type LazySpec
-return {
-  {
-    "nvim-treesitter/nvim-treesitter-textobjects",
-    branch = "main",
-    version = false,
-    config = function()
-      require("nvim-treesitter-textobjects").setup {
-        select = {
-          lookahead = true,
-          selection_modes = {
-            ["@function.outer"] = "V",
-
-            ["@class.outer"] = "V",
-            ["@parameter.inner"] = "v",
-          },
-          include_surrounding_whitespace = true,
-        },
-        move = {
-          set_jumps = false,
-        },
-      }
-
-      local keymaps = {
-        { "af", "@function.outer", "arround function" },
-        { "ab", "@block.outer", "arround block" },
-      }
-
-      local mode = { "n", "x", "o" }
-      for _, key in pairs(keymaps) do
-        vim.keymap.set(
-          mode,
-          key[1],
-          function() require("nvim-treesitter-textobjects.select").select_textobject(key[2], "textobjects") end,
-          { desc = key[3] }
-        )
-      end
-    end,
-  },
+return { 
   {
     "nvim-treesitter/nvim-treesitter",
     branch = "main",
-    main = nil,
+    version = false,
     event = "BufReadPre",
     build = function()
       if vim.fn.exists ":TSUpdate" == 2 then vim.cmd "TSUpdate" end
     end,
-    version = false,
     config = function()
       local ts = require "nvim-treesitter"
       local available_set = {}
@@ -123,5 +85,41 @@ return {
       })
       ts.install(ensure_installed)
     end,
-  },
+  },{
+    "nvim-treesitter/nvim-treesitter-textobjects",
+    branch = "main",
+    version = false,
+    config = function()
+      require("nvim-treesitter-textobjects").setup {
+        select = {
+          lookahead = true,
+          selection_modes = {
+            ["@function.outer"] = "V",
+
+            ["@class.outer"] = "V",
+            ["@parameter.inner"] = "v",
+          },
+          include_surrounding_whitespace = true,
+        },
+        move = {
+          set_jumps = false,
+        },
+      }
+
+      local keymaps = {
+        { "af", "@function.outer", "arround function" },
+        { "ab", "@block.outer", "arround block" },
+      }
+
+      local mode = { "n", "x", "o" }
+      for _, key in pairs(keymaps) do
+        vim.keymap.set(
+          mode,
+          key[1],
+          function() require("nvim-treesitter-textobjects.select").select_textobject(key[2], "textobjects") end,
+          { desc = key[3] }
+        )
+      end
+    end,
+  }
 }

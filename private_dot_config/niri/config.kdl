@@ -27,12 +27,11 @@ output "HDMI-A-1" {
 
 include "layout.kdl"
 
-spawn-at-startup "waybar"
 spawn-at-startup "swww-daemon"
 spawn-sh-at-startup "~/workspace/mxy/dotfiles/scripts/start.sh"
 
 hotkey-overlay {
-    // skip-at-startup
+    skip-at-startup
 }
 
 prefer-no-csd
@@ -63,6 +62,7 @@ animations {
          curve "ease-out-cubic"
     }
 }
+
 
 include "window.kdl"
 

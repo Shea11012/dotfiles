@@ -43,6 +43,4 @@ return {
       desc = "codecompanion actions",
     },
   },
-
-  event = { "CmdlineEnter" },
 }

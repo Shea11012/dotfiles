@@ -6,7 +6,7 @@ binds {
     Mod+T hotkey-overlay-title="Open a Terminal: alacritty" { spawn "alacritty"; }
     Mod+Ctrl+v { spawn "copyq" "toggle"; }
     // Mod+D hotkey-overlay-title="Run an Application: fuzzel" { spawn "fuzzel"; }
-    alt+space { spawn "vicinae" "toggle"; }
+    alt+space { spawn "anyrun"; }
     Super+Alt+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn "hyprlock"; }
 
     // Using spawn-sh allows to pass multiple arguments together with the command.
@@ -249,4 +249,8 @@ binds {
     // Powers off the monitors. To turn them back on, do any input like
     // moving the mouse or pressing any other key.
     Mod+Shift+P { power-off-monitors; }
+
+    Mod+Shift+T {
+        spawn-sh "xh :60828/selection_translate"
+    }
 }
