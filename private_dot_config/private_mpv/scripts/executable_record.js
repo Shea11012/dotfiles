@@ -65,9 +65,9 @@
 
   function save_data() {
     var str = JSON.stringify(data);
-    print("str: ",str)
+    // print("str: ",str)
     var filename = get_filename();
-    print("filename: ",filename)
+    // print("filename: ",filename)
     mp.utils.write_file("file://" + filename, str);
   }
 

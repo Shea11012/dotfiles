@@ -5,13 +5,15 @@
 	}
 }
 
+:8080 {
+	# uri strip_prefix /sub-store
+	# uri query api 'http://sub-store:3002/2cXaAxRGfddmGz2yx1wA
+	reverse_proxy http://sub-store:3001
+}
+
 :80 {
 	@metacubex {
 		header Cookie "*app_context=metacubex*"
-	}
-
-	@substore {
-		header Cookie "*app_context=substore*"
 	}
 
 	@fromGPTLoad {
@@ -44,18 +46,6 @@
 	}
 
 	handle /sub-store {
-		redir ss?api=http://192.168.32.16:3001/cD7wiTGitLyoBdEguAnFWmqCpHKwhLQh4opXfFhFCEpmY9K7YnPgFu9e2iiUoty2 302
-	}
-
-	@subStoreWithParam {
-		path /ss
-		query api=*
-	}
-	handle @subStoreWithParam {
-		rewrite * "?{http.request.uri.query}"
-		reverse_proxy sub-store:3001 {
-			header_down Set-Cookie "app_context=substore; Path=/; Max-Age=3600; SameSite=Lax; HttpOnly"
-		}
 	}
 
 	handle_path /metacubex {
@@ -72,11 +62,6 @@
 
 	handle_path /test* {
 		respond "path: {path}, uri: {uri}"
-	}
-
-	handle @substore {
-		header x-Route-by "sub-store"
-		reverse_proxy sub-store:3001
 	}
 	
 	handle @fromGPTLoad {

@@ -28,7 +28,8 @@ return {
     version = false,
     event = "BufReadPre",
     build = function()
-      if vim.fn.exists ":TSUpdate" == 2 then vim.cmd "TSUpdate" end
+      local TS = require("nvim-treesitter")
+      TS.update(nil,{summary = true}):wait(5*60*1000)
     end,
     config = function()
       local ts = require "nvim-treesitter"

@@ -35,7 +35,8 @@ const rules = [
 
   // 国内流量
   "GEOSITE,geolocation-cn,DIRECT",
-  "GEOSITE,category-games-cn,DIRECT",
+  "GEOSITE,category-games@cn,DIRECT",
+  "GEOSITE,steam@cn,DIRECT",
   "GEOSITE,microsoft@cn,DIRECT",
   "GEOIP,cn,DIRECT,no-resolve",
 
