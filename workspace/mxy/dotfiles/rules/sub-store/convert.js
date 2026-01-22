@@ -88,7 +88,7 @@ const dnsConfig = {
   "direct-nameserver": direct,
   // 会优先走这个配置项
   "nameserver-policy": {
-    "rule-set:category-ads-all": ["rcode://name_error"],
+    "geosite:category-ads-all": ["rcode://name_error"],
     "geosite:geolocation-cn,category-games@cn":
       ["system",...direct],
   },
