@@ -19,7 +19,7 @@ const ruleProviders = {
     type: "http",
     behavior: "classical",
     interval: 86400,
-    url: "https://gh-proxy.org/https://gist.github.com/Shea11012/2b2a2659468c2c29e0baae906016b31c/raw/custom-proxy.yaml",
+    url: "https://gist.github.com/Shea11012/2b2a2659468c2c29e0baae906016b31c/raw/custom-proxy.yaml",
     path: "./ruleset/custom-proxy.yaml",
   },
 };
@@ -45,7 +45,7 @@ const rules = [
   "GEOSITE,geolocation-!cn,PROXY",
   "GEOIP,google,PROXY,no-resolve",
   "GEOIP,cloudflare,PROXY,no-resolve",
-  "GEOIP,telegram,PROXY,no-resolve",
+  "GEOIP,telegram,TG,no-resolve",
 
   "MATCH,default",
 ];
@@ -74,24 +74,26 @@ const tunConfig = {
   "auto-redirect": true,
 };
 
+const direct = ["https://119.29.29.29/dns-query", "https://223.5.5.5/dns-query"]
+
 const dnsConfig = {
   enable: true,
   "prefer-h3": true,
   "enhanced-mode": "fake-ip",
-  "fake-ip-filter": ["geosite:connectivity-check", "geosite:private"],
+  "fake-ip-filter": ["geosite:connectivity-check", "geosite:private","geosite:cn","+.miwifi.com"],
   "fake-ip-range": "198.18.0.1/16",
   // 用于解析dns域名
-  "default-nameserver": ["223.5.5.5"],
+  "default-nameserver": ["223.5.5.5","119.29.29.29"],
   // 直连走这里
-  "direct-nameserver": ["system"],
+  "direct-nameserver": direct,
   // 会优先走这个配置项
   "nameserver-policy": {
-    "rule-set:custom-direct": ["https://223.5.5.5/dns-query"],
-    "geosite:geolocation-cn,category-games-cn,category-game-platforms-download":
-      ["https://119.29.29.29/dns-query", "https://223.5.5.5/dns-query"],
+    "rule-set:category-ads-all": ["rcode://name_error"],
+    "geosite:geolocation-cn,category-games@cn":
+      ["system",...direct],
   },
   // 其次nameserver 与 fallback 一起查询，使用fallback-filter确认该采用哪个
-  nameserver: ["https://119.29.29.29/dns-query", "https://223.5.5.5/dns-query"],
+  nameserver: direct,
   // 国外doh 必须使用域名请求
   fallback: [
     "https://cloudflare-dns.com/dns-query",
@@ -229,6 +231,12 @@ function buildProxyGroups(countryProxyGroups) {
       proxies: ["台湾节点", "新加坡节点", "ALL"],
     },
     {
+      name: "TG",
+      icon: "https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Global.png",
+      type: "select",
+      proxies: ["PROXY","香港节点","台湾节点","新加坡节点","ALL"]
+    },
+    {
       name: "ALL",
       icon: "https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Global.png",
       type: "select",
@@ -261,11 +269,11 @@ function main(config) {
       "allow-lan": true,
       mode: "rule",
       "unified-delay": true,
-      tun: tunConfig,
       "tcp-concurrent": true,
-      "external-controller": ":9090",
+      tun: tunConfig,
       profile: {
         "store-selected": true,
+        "store-fake-ip": true
       },
     });
   }

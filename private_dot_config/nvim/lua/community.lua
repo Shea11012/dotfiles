@@ -22,6 +22,7 @@ return {
   { import = "astrocommunity.code-runner.overseer-nvim" },
   -- test
   { import = "astrocommunity.test.neotest" },
+  { import = "astrocommunity.programming-language-support.kulala-nvim"},
 
   -- languages
   { import = "astrocommunity.pack.lua" },
