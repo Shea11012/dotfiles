@@ -39,6 +39,19 @@
     return base36(abs(hash));
   }
 
+  /**
+   * @param {Array} array
+   * @param {callable} fn
+   * @return int
+   */
+  function findIndex(arr,fn) {
+    for(var i=0; i<arr.length;i++) {
+      if(fn(arr[i])) return i
+    }
+
+    return -1
+  }
+
   function get_filename() {
     var path = mp.utils.get_user_path("~~/");
     var file = mp.utils.join_path(path, filename);
@@ -96,10 +109,12 @@
     if (!filename || filename === "undefined" || dir === ".") return null;
     var dirKey = dirHash(dir);
     var dirData = data[dirKey]
-    if (dirData && dirData.records[filename]) {
-      return dirData.records[filename] || null;
-    }
-    return null;
+    if(!dirData) return null
+    var record_idx = findIndex(dirData.records,function(val) {
+      return val.filename === filename
+    })
+
+    return record_idx !== -1 ? dirData.records[record_idx] : null
   }
 
   function create_record(dir, filename, time) {
@@ -108,14 +123,21 @@
     if (!data[dirKey]) {
       data[dirKey] = {
         dir: dir,
-        records: {},
+        records: [],
       };
     }
 
-    data[dirKey].records[filename] = {
+    var dir_record = data[dirKey]
+    var record_idx = findIndex(dir_record.records,function(val) {
+      return val.filename === filename
+    })
+    if(record_idx !== -1) {
+      dir_record[record_idx].time = time
+    }
+    dir_record.records.push({
       filename: filename,
       time: time,
-    };
+    })
   }
 
   load_data();
