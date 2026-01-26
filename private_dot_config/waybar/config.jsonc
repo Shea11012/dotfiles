@@ -2,7 +2,13 @@
   "layer": "top",
   "modules-left": ["network", "wlr/taskbar", "wireplumber", "niri/workspaces"],
   "modules-center": ["niri/window"],
-  "modules-right": ["custom/media", "clock", "group/hardware", "tray"],
+  "modules-right": [
+    "custom/media",
+    "clock",
+    "group/hardware",
+    "tray",
+    "custom/power"
+  ],
   "group/hardware": {
     "orientation": "horizontal",
     "modules": ["cpu", "memory", "temperature"]
@@ -91,14 +97,20 @@
     "format-wifi": "󰅧 {bandwidthUpBytes} 󰅢 {bandwidthDownBytes}"
   },
   "custom/media": {
-    "exec": "playerctl -p NeteaseCloudMusicGtk4,yesplaymusic metadata -f '{{emoji(status)}} «{{title}} - {{artist}}»' -F",
-    "on-click": "playerctl -p NeteaseCloudMusicGtk4,yesplaymusic play-pause",
-    "on-click-middle": "playerctl -p NeteaseCloudMusicGtk4,yesplaymusic stop",
-    "on-scroll-up": "playerctl -p NeteaseCloudMusicGtk4,yesplaymusic previous",
-    "on-scroll-down": "playerctl -p NeteaseCloudMusicGtk4,yesplaymusic next",
+    "exec": "playerctl -p chromium,NeteaseCloudMusicGtk4,yesplaymusic metadata -f '{{emoji(status)}} «{{title}} - {{artist}}»' -F",
+    "on-click": "playerctl -p chromium,NeteaseCloudMusicGtk4,yesplaymusic play-pause",
+    "on-click-middle": "playerctl -p chromium,NeteaseCloudMusicGtk4,yesplaymusic stop",
+    "on-scroll-up": "playerctl -p chromium,NeteaseCloudMusicGtk4,yesplaymusic previous",
+    "on-scroll-down": "playerctl -p chromium,NeteaseCloudMusicGtk4,yesplaymusic next",
     "max-length": 500,
     "escape": true,
     "tooltip": false
+  },
+  "custom/power": {
+    "format": "<span color='#FF4040'>  </span>",
+    "on-click": "systemctl poweroff",
+    "tooltip": true,
+    "tooltip-format": "关机"
   },
   "bluetooth": {
     "format": "  {status} ",

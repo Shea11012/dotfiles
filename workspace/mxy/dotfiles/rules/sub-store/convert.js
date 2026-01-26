@@ -22,10 +22,18 @@ const ruleProviders = {
     url: "https://gist.github.com/Shea11012/2b2a2659468c2c29e0baae906016b31c/raw/custom-proxy.yaml",
     path: "./ruleset/custom-proxy.yaml",
   },
+  "adRules": {
+    type: "http",
+    behavior: "domain",
+    format: "mrs",
+    url: "https://testingcf.jsdelivr.net/gh/Cats-Team/AdRules@main/adrules-mihomo.mrs",
+    path: "./ruleset/adRules.mrs",
+  }
 };
 
 const rules = [
   "GEOSITE,category-ads-all,REJECT",
+  "RULE-SET,adRules,REJECT",
   "RULE-SET,custom-direct,DIRECT",
   "RULE-SET,custom-proxy,PROXY",
 

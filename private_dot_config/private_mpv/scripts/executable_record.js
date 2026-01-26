@@ -12,6 +12,8 @@
    */
   var data = {};
   var filename = "record-playlist.json";
+  var path;
+  var isVideo; // 需要在加载时就判断，否则在end-file和shutdown事件则会变为auto
 
   function abs(num) {
     return num < 0 ? num >>> 0 : num;
@@ -62,6 +64,48 @@
     return !!mp.utils.file_info(filename);
   }
 
+  function create_menu_data() {
+    var file_info = split_path(path)
+    var records = get_dirData(file_info.dir).records
+    var menu_data = {
+      type: "records",
+      title: "记录列表",
+      callback: [mp.get_script_name(),"record-event"]
+    }
+    var items = [];
+    for(var i=0;i<records.length;i++) {
+      var record = records[i]
+      items.push({
+        title: record.filename + "  " + record.percent_pos + "%",
+        value: record.filename
+      }) 
+    }
+
+    menu_data.items = items;
+    return menu_data
+  }
+
+  function list_records() {
+    var menu_data = create_menu_data();
+    if(menu_data.length === 0) {
+      mp.osd_message("无记录",3000)
+      return
+    }
+	  mp.commandv("script-message-to", "uosc", "open-menu", JSON.stringify(menu_data))
+  }
+
+  mp.register_script_message("record-event",function(value) {
+    var event = JSON.parse(value);
+    if(event.type === "activate" && event.action === undefined) {
+      var playlists = mp.get_property_native("playlist")
+      var idx = findIndex(playlists,function(val) {
+        var filename = val.filename.substring(2)
+        return filename === event.value
+      })
+      if(idx !== -1) mp.commandv("playlist-play-index",idx)
+    }
+  })
+
   function load_data() {
     try {
       var filename = get_filename();
@@ -105,7 +149,7 @@
    * @param {string} filename
    * @returns {Record}
    */
-  function get_progress(dir, filename) {
+  function get_record(dir, filename) {
     if (!filename || filename === "undefined" || dir === ".") return null;
     var dirKey = dirHash(dir);
     var dirData = data[dirKey]
@@ -117,7 +161,7 @@
     return record_idx !== -1 ? dirData.records[record_idx] : null
   }
 
-  function create_record(dir, filename, time) {
+  function create_record(dir, filename, time,percent_pos) {
     if (!filename || filename === "undefined" || dir === ".") return;
     var dirKey = dirHash(dir);
     if (!data[dirKey]) {
@@ -126,36 +170,27 @@
         records: [],
       };
     }
+    var dirData = data[dirKey]
 
-    var dir_record = data[dirKey]
-    var record_idx = findIndex(dir_record.records,function(val) {
-      return val.filename === filename
-    })
-    if(record_idx !== -1) {
-      dir_record[record_idx].time = time
-    }
-    dir_record.records.push({
+    dirData.records.push({
       filename: filename,
       time: time,
+      percent_pos: percent_pos
     })
   }
 
-  load_data();
+  function get_dirData(dir) {
+    var dirKey = dirHash(dir);
+    return data[dirKey]
+  }
 
-  var last_time_pos;
-  mp.observe_property("time-pos", "native", function (e, v) {
-    v && (last_time_pos = v);
-  });
-
-  var path;
-  var isVideo; // 需要在加载时就判断，否则在end-file和shutdown事件则会变为auto
   function file_loaded(e) {
     var start_path = mp.get_property_native("path");
     if (!start_path) return;
     path = start_path;
     var file_info = split_path(path);
     isVideo = mp.get_property_native("video") === 1; 
-    var record = get_progress(file_info.dir, file_info.filename);
+    var record = get_record(file_info.dir, file_info.filename);
     if (!record) return;
     mp.commandv("seek", record.time, "absolute", "exact");
   }
@@ -166,13 +201,28 @@
     if (!isVideo) return;
     // 将last_time_pos 往回拨点
     var adjustedTime = Math.max(0, (last_time_pos || 0) - 10);
-    var record = get_progress(file_info.dir, file_info.filename);
+    var record = get_record(file_info.dir, file_info.filename);
     if (!record) {
-      create_record(file_info.dir, file_info.filename, adjustedTime);
+      create_record(file_info.dir, file_info.filename, adjustedTime,percent_pos);
     } else {
       record.time = adjustedTime;
+      record.percent_pos = percent_pos;
     }
   }
+
+  load_data();
+
+  var last_time_pos;
+  mp.observe_property("time-pos", "native", function (e, v) {
+    if(v) last_time_pos = v;
+  });
+
+  var percent_pos;
+  mp.observe_property("percent-pos","native",function(e,v) {
+    if(v){
+      percent_pos = Math.round(v)
+    }
+  })
 
   mp.register_event("end-file", function(){
     save_record()
@@ -185,4 +235,6 @@
   mp.register_event("shutdown", function () {
     save_data();
   });
+
+  mp.add_key_binding("","records-list",list_records);
 })();
