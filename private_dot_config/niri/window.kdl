@@ -1,4 +1,6 @@
+workspace "main"
 workspace "chat"
+workspace "tools"
 
 // Work around WezTerm's initial configure bug
 // by setting an empty default-column-width.
@@ -23,7 +25,21 @@ window-rule {
 window-rule {
     match app-id="org.telegram.desktop"
     match app-id="wechat"
+    match app-id="QQ"
     open-on-workspace "chat"
+}
+
+window-rule {
+    match app-id="dtv"
+    match app-id="zen"
+    match app-id=r#"^org\.wezfurlong\.wezterm$"#
+    open-on-workspace "main"
+}
+
+window-rule {
+    match app-id=r#"^eu\.betterbird\.Betterbird$"#
+    match app-id="mihomo-party"
+    open-on-workspace "tools"
 }
 
 window-rule {

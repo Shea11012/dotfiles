@@ -3,6 +3,7 @@ return {
   http = {
     opts = {
       show_presets = false,
+      show_model_choices = true,
     },
     deepseek = function()
       return ad.extend("deepseek", {
@@ -40,5 +41,26 @@ return {
         },
       })
     end,
+    glm = function ()
+      return ad.extend("openai_compatible", {
+        name = "glm",
+        env = {
+          api_key = vim.env.GLM_KEY,
+          url = "https://open.bigmodel.cn/api/paas/v4",
+          chat_url = "/chat/completions"
+        },
+        schema = {
+          model = {
+            default = "glm-4.7",
+            choices = {
+              ["glm-4.7"] = {
+                formatted_name = "GLM 4.7",
+                opts = { can_reson = true, can_use_tools = true}
+              }
+            }
+          }
+        }
+      })
+    end
   },
 }

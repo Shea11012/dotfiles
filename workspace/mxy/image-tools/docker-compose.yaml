@@ -43,7 +43,7 @@ services:
       - ./sub-store/:/opt/app/data
 
   openlist:
-    image: openlistteam/openlist:latest-aio
+    image: ghcr.io/openlistteam/openlist-git:latest-aio
     container_name: openlist
     user: "1000:1000"
     volumes:
@@ -72,3 +72,13 @@ services:
       retries: 3
       start_period: 40s
     network_mode: "service:network-service"
+
+  prompt-optmizier:
+    image: linshen/prompt-optimizer:latest
+    container_name: prompt-optmizier
+    restart: unless-stopped
+    ports:
+      - "28081:80"
+    environment:
+      - ACCESS_USERNAME=admin
+      - ACCESS_PASSWORD=123456

@@ -12,9 +12,11 @@ copy-command = "wl-copy"
 # Increase or decrease the size of the annotations
 annotation-size-factor = 2
 # Filename to use for saving action. Omit to disable saving to file. Might contain format specifiers: https://docs.rs/chrono/latest/chrono/format/strftime/index.html
-output-filename = "/home/mxy/Pictures/Screenshots/satty-%Y-%m-%d_%H:%M:%S.png"
+output-filename = "/home/mxy/Pictures/Screenshots/screenshot.png"
 # Action to perform when the Enter key is pressed [possible values: save-to-clipboard, save-to-file]
-action-on-enter = "save-to-clipboard"
+# 0.21.0之后的版本才支持
+# actions-on-enter = ["save-to-file-as"]
+action-on-enter = "save-to-file-as"
 # After copying the screenshot, save it to a file as well
 save-after-copy = false
 # Right click to copy

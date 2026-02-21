@@ -30,6 +30,7 @@ include "layout.kdl"
 spawn-at-startup "swww-daemon"
 spawn-at-startup "waybar" "-l" "off"
 spawn-sh-at-startup "~/workspace/mxy/dotfiles/scripts/start.sh"
+spawn-sh-at-startup "~/workspace/mxy/dotfiles/scripts/rclone.sh"
 
 hotkey-overlay {
     skip-at-startup
