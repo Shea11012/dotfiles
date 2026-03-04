@@ -1,3 +1,5 @@
+vim.lsp.log.set_level("warn")
+
 local function paste()
   return {
     vim.fn.split(vim.fn.getreg "", "\n"),

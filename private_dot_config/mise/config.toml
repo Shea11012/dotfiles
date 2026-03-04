@@ -7,6 +7,8 @@ pnpm = "latest"
 golangci-lint = "latest"
 biome = "latest"
 rust-analyzer = "latest"
+"go:mvdan.cc/gofumpt" = "latest"
+"go:github.com/go-delve/delve/cmd/dlv" = "latest"
 
 [settings]
 legacy_version_file = true

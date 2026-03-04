@@ -17,7 +17,7 @@ return {
     for _, ft in pairs(biome_ft) do
       opts.formatters_by_ft[ft] = { "biome-organize-imports", "biome" }
     end
-    opts.formatters_by_ft["go"] = { "goimports", "gofumpt" }
+    opts.formatters_by_ft["go"] = { "gofumpt" }
     opts.formatters_by_ft["http"] = { "kulala-fmt" }
     opts.formatters_by_ft["lua"] = { "stylua" }
     opts.formatters_by_ft["rust"] = { "rustfmt" }

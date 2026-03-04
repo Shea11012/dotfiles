@@ -13,7 +13,8 @@
   var data = {};
   var filename = "record-playlist.json";
   var path;
-  var isVideo; // 需要在加载时就判断，否则在end-file和shutdown事件则会变为auto
+  var isImage; // 需要在加载时就判断，否则在end-file和shutdown事件则会变为auto
+  var isAudio;
 
   function abs(num) {
     return num < 0 ? num >>> 0 : num;
@@ -181,6 +182,7 @@
 
   function get_dirData(dir) {
     var dirKey = dirHash(dir);
+    // dump(dir,dirKey)
     return data[dirKey]
   }
 
@@ -189,7 +191,10 @@
     if (!start_path) return;
     path = start_path;
     var file_info = split_path(path);
-    isVideo = mp.get_property_native("video") === 1; 
+    var track = JSON.parse(mp.get_property("track-list"))[0];
+    // dump(track)
+    if(track.image) isImage = true
+    if(track.type === "audio") isAudio = true
     var record = get_record(file_info.dir, file_info.filename);
     if (!record) return;
     mp.commandv("seek", record.time, "absolute", "exact");
@@ -198,7 +203,7 @@
   function save_record() {
     if (!path) return;
     var file_info = split_path(path);
-    if (!isVideo) return;
+    if (isImage || isAudio) return;
     // 将last_time_pos 往回拨点
     var adjustedTime = Math.max(0, (last_time_pos || 0) - 10);
     var record = get_record(file_info.dir, file_info.filename);
@@ -227,7 +232,7 @@
   mp.register_event("end-file", function(){
     save_record()
     path = undefined;
-    isVideo = undefined;
+    isImage = undefined;
   });
 
   mp.register_event("file-loaded", file_loaded);

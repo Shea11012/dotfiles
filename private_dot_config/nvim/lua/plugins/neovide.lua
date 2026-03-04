@@ -3,6 +3,9 @@ if not vim.g.neovide then return {} end
 vim.g.transparency = 0.9
 local alpha = function() return string.format("%x", math.floor(255 * vim.g.transparency or 0.8)) end
 
+local function paste() vim.api.nvim_paste(vim.fn.getreg("+"), true, -1) end
+vim.keymap.set({ "n", "i", "v", "c", "t" }, "<S-C-v>", paste, { silent = true, desc = "Paste" })
+
 local neovide_background_color = "#000000" .. alpha()
 return {
   {

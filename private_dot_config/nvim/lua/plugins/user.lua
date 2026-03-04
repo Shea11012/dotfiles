@@ -82,7 +82,6 @@ return {
       )
     end,
   },
-  { "nvim-neo-tree/neo-tree.nvim", enabled = false },
   {
     "mikavilpas/yazi.nvim",
     event = "VeryLazy",
