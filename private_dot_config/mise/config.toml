@@ -9,6 +9,8 @@ biome = "latest"
 rust-analyzer = "latest"
 "go:mvdan.cc/gofumpt" = "latest"
 "go:github.com/go-delve/delve/cmd/dlv" = "latest"
+"npm:@fission-ai/openspec" = "latest"
+buf = "latest"
 
 [settings]
 legacy_version_file = true
@@ -17,3 +19,8 @@ python_venv_auto_create = true
 experimental = true
 status = { missing_tools = "if_other_versions_installed", show_env = false, show_tools = false }
 idiomatic_version_file_enable_tools = []
+
+[env]
+_.file = [
+    "~/.env.json"
+]

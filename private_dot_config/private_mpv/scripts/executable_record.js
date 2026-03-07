@@ -31,16 +31,43 @@
     return result;
   }
 
-  function dirHash(dir) {
+  function hash(str) {
     var hash = 0;
-    for (var i = 0; i < dir.length; i++) {
-      var char = dir.charCodeAt(i);
+    for (var i = 0; i < str.length; i++) {
+      var char = str.charCodeAt(i);
       hash = (hash << 5) - hash + char;
       // 确保hash是一个32位有符号数
       hash = hash | 0;
     }
     return base36(abs(hash));
+ 
   }
+
+  function dirHash(dir) {
+    var parts = dir.split('/').filter(function(v) {
+     return v !== ""; 
+    });
+    
+    // 从最后部分开始，逐步向前扩展
+    for (var len=parts.length-1;len>=0;len--) {
+      var subDir = parts.slice(len).join('/');
+      if(subDir.length < 5) continue;
+      var hashStr = hash(subDir);
+      var existingDirData = data[hashStr];
+      if(!existingDirData) {
+        return {
+          key: hashStr,
+          dir: subDir,
+        };
+      }
+    }
+
+    // 返回完整路径hash
+    return {
+      key: hash(dir),
+      dir: dir,
+    }
+ }
 
   /**
    * @param {Array} array
@@ -135,12 +162,11 @@
    */
   function split_path(path) {
     var res = mp.utils.split_path(path);
-    var t = res[0].split("/").filter(function(v){
-      return v !== ""
-    })
-    var dir = t[t.length-1]
+    if(res.length !== 2) {
+      mp.msg.fatal("不是正确的path: ",path)
+    }
     return {
-      dir: dir,
+      dir: res[0],
       filename: res[1],
     };
   }
@@ -152,8 +178,8 @@
    */
   function get_record(dir, filename) {
     if (!filename || filename === "undefined" || dir === ".") return null;
-    var dirKey = dirHash(dir);
-    var dirData = data[dirKey]
+    var dirHashObj = dirHash(dir);
+    var dirData = data[dirHashObj.key]
     if(!dirData) return null
     var record_idx = findIndex(dirData.records,function(val) {
       return val.filename === filename
@@ -164,14 +190,14 @@
 
   function create_record(dir, filename, time,percent_pos) {
     if (!filename || filename === "undefined" || dir === ".") return;
-    var dirKey = dirHash(dir);
-    if (!data[dirKey]) {
-      data[dirKey] = {
-        dir: dir,
+    var dirHashObj = dirHash(dir);
+    if (!data[dirHashObj.key]) {
+      data[dirHashObj.key] = {
+        dir: dirHashObj.dir,
         records: [],
       };
     }
-    var dirData = data[dirKey]
+    var dirData = data[dirHashObj.key]
 
     dirData.records.push({
       filename: filename,
@@ -181,9 +207,9 @@
   }
 
   function get_dirData(dir) {
-    var dirKey = dirHash(dir);
+    var dirHashObj = dirHash(dir);
     // dump(dir,dirKey)
-    return data[dirKey]
+    return data[dirHashObj.key]
   }
 
   function file_loaded(e) {
