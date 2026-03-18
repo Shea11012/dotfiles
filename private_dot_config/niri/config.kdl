@@ -20,6 +20,10 @@ input {
     }
 }
 
+output "DP-1" {
+    // position x=0 y=0
+}
+
 output "HDMI-A-1" {
     mode "2560x1440@60"
     position x=0 y=0
@@ -30,7 +34,7 @@ include "layout.kdl"
 spawn-at-startup "swww-daemon"
 spawn-at-startup "waybar" "-l" "off"
 spawn-sh-at-startup "~/workspace/mxy/dotfiles/scripts/start.sh"
-spawn-sh-at-startup "~/workspace/mxy/dotfiles/scripts/rclone.sh"
+// spawn-sh-at-startup "~/workspace/mxy/dotfiles/scripts/rclone.sh"
 
 hotkey-overlay {
     skip-at-startup

@@ -43,3 +43,6 @@ zellij setup --generate-completion fish | source
 # 补全工具
 set -Ux CARAPACE_BRIDGES 'zsh,fish,bash,inshellisense'
 carapace _carapace | source
+
+# OpenClaw Completion
+source "/home/mxy/.openclaw/completions/openclaw.fish"
