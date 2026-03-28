@@ -97,11 +97,11 @@
     "format-wifi": "󰅧 {bandwidthUpBytes} 󰅢 {bandwidthDownBytes}"
   },
   "custom/media": {
-    "exec": "playerctl -p chromium,NeteaseCloudMusicGtk4,yesplaymusic metadata -f '{{emoji(status)}} «{{title}} - {{artist}}»' -F",
-    "on-click": "playerctl -p chromium,NeteaseCloudMusicGtk4,yesplaymusic play-pause",
-    "on-click-middle": "playerctl -p chromium,NeteaseCloudMusicGtk4,yesplaymusic stop",
-    "on-scroll-up": "playerctl -p chromium,NeteaseCloudMusicGtk4,yesplaymusic previous",
-    "on-scroll-down": "playerctl -p chromium,NeteaseCloudMusicGtk4,yesplaymusic next",
+    "exec": "playerctl -p chromium,NeteaseCloudMusicGtk4,splayer metadata -f '{{emoji(status)}} «{{title}} - {{artist}}»' -F",
+    "on-click": "playerctl -p chromium,NeteaseCloudMusicGtk4,splayer play-pause",
+    "on-click-middle": "playerctl -p chromium,NeteaseCloudMusicGtk4,splayer stop",
+    "on-scroll-up": "playerctl -p chromium,NeteaseCloudMusicGtk4,splayer previous",
+    "on-scroll-down": "playerctl -p chromium,NeteaseCloudMusicGtk4,splayer next",
     "max-length": 500,
     "escape": true,
     "tooltip": false

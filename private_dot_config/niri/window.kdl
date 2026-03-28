@@ -39,6 +39,7 @@ window-rule {
 window-rule {
     match app-id=r#"^eu\.betterbird\.Betterbird$"#
     match app-id="mihomo-party"
+    match app-id="cc-switch"
     open-on-workspace "tools"
 }
 
@@ -72,6 +73,7 @@ window-rule {
 
 window-rule {
     match title="Waylyrics" app-id=r#"^io\.github\.waylyrics\.Waylyrics$"#
+    match title="桌面歌词" app-id="SPlayer"
     open-floating true
     default-floating-position x=0 y=5 relative-to="top"
 }
