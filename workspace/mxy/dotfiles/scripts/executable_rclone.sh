@@ -1,15 +1,14 @@
 #!/usr/bin/env bash
 
-alist_target=/home/mxy/rclone/alist
-# onedrive_target=/home/mxy/rclone/onedrive
-mount_opt=(--attr-timeout 1h --buffer-size 128M --dir-cache-time 24h --poll-interval 5m --vfs-cache-mode minimal --no-checksum --no-modtime --vfs-cache-max-size 100G --vfs-cache-max-age 12h --vfs-cache-min-free-space 1G --vfs-fast-fingerprint --vfs-read-ahead 512M --vfs-refresh --transfers 16 --checkers 16 --multi-thread-streams 8 --log-level INFO )
+OPENLIST_MOUNT_TARGET=/home/mxy/rclone/alist
+OPENLIST_MOUNT_OPT=(--attr-timeout 1h --buffer-size 128M --dir-cache-time 24h --poll-interval 5m --vfs-cache-mode minimal --no-checksum --no-modtime --vfs-cache-max-size 100G --vfs-cache-max-age 12h --vfs-cache-min-free-space 1G --vfs-fast-fingerprint --vfs-read-ahead 512M --vfs-refresh --transfers 16 --checkers 16 --multi-thread-streams 8 --log-level INFO)
 
-remote="alist"
-host=":5244"
+OPENLIST_REMOTE="alist"
+OPENLIST_HOST=":5244"
 #$1:count(重试次数)
 #$2:fn(执行函数)
 #$3...传递给fn的参数
-retry() {
+_openlist_retry() {
 	local count=$1
 	local fn=$2
 	shift 2
@@ -41,8 +40,8 @@ retry() {
 	return $exit_code
 }
 
-isOnline_openlist() {
-	local res=$(xh -b "$host/ping")
+_openlist_isOnline() {
+	local res=$(xh -b "$OPENLIST_HOST/ping")
 	if [[ "$res" == "pong" ]]; then
 		return 0
 	fi
@@ -50,14 +49,12 @@ isOnline_openlist() {
 	return 1
 }
 
-mount_alist() {
-	if retry 3 isOnline_openlist ; then
-		rclone mount "$remote:" "$alist_target" "${mount_opt[@]}"
+openlist_mount() {
+	if _openlist_retry 3 _openlist_isOnline; then
+		rclone mount "$OPENLIST_REMOTE:" "$OPENLIST_MOUNT_TARGET" "${OPENLIST_MOUNT_OPT[@]}"
 	fi
 }
 
-umount_alist() {
-	umount "$alist_target"
+openlist_umount() {
+	umount "$OPENLIST_MOUNT_TARGET"
 }
-
-mount_alist
