@@ -31,10 +31,8 @@ output "HDMI-A-1" {
 
 include "layout.kdl"
 
-spawn-at-startup "awww-daemon"
-spawn-at-startup "waybar" "-l" "off"
+spawn-at-startup "qs" "-c" "noctalia-shell"
 spawn-sh-at-startup "~/workspace/mxy/dotfiles/scripts/start.sh"
-// spawn-sh-at-startup "~/workspace/mxy/dotfiles/scripts/rclone.sh"
 
 hotkey-overlay {
     skip-at-startup
@@ -46,6 +44,7 @@ screenshot-path null
 
 environment {
     // QT_IM_MODULES "wayland;fcitx;ibus"
+    // QT_QPA_PLATFORMTHEME "qt6ct"
 }
 
 animations {
@@ -69,6 +68,7 @@ animations {
     }
 }
 
+include "layer.kdl"
 
 include "window.kdl"
 

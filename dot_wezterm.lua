@@ -72,13 +72,11 @@ local keys = {
 
 local config = {
 
-
 	launch_menu = launch_menu,
 
 	color_scheme = "Catppuccin Mocha",
 
 	default_prog = default_prog,
-
 
 	use_ime = true,
 
@@ -127,6 +125,35 @@ local config = {
 	keys = keys,
 }
 local modal = wezterm.plugin.require("https://github.com/MLFlexer/modal.wezterm")
+modal.enable_defaults("https://github.com/MLFlexer/modal.wezterm")
+-- "ui_mode" can be replaced by any filename from the /defaults directory
+local key_table = require("ui_mode").key_table
+
+local icons = {
+	left_seperator = wezterm.nerdfonts.ple_left_half_circle_thick,
+	key_hint_seperator = " | ",
+	mod_seperator = "-",
+}
+local hint_colors = {
+	key_hint_seperator = "Yellow",
+	key = "Green",
+	hint = "Red",
+	bg = "Black",
+	left_bg = "Gray",
+}
+local mode_colors = { bg = "Red", fg = "Black" }
+local status_text = require("ui_mode").get_hint_status_text(icons, hint_colors, mode_colors)
+
+modal.add_mode("UI", key_table, status_text)
 modal.apply_to_config(config)
 modal.set_default_keys(config)
+wezterm.on("modal.enter", function(name, window, pane)
+	modal.set_right_status(window, name)
+	modal.set_window_title(pane, name)
+end)
+
+wezterm.on("modal.exit", function(name, window, pane)
+	window:set_right_status("")
+	modal.reset_window_title(pane)
+end)
 return config
