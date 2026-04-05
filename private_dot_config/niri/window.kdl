@@ -30,7 +30,6 @@ window-rule {
 }
 
 window-rule {
-    match app-id="dtv"
     match app-id="zen"
     match app-id=r#"^org\.wezfurlong\.wezterm$"#
     open-on-workspace "main"

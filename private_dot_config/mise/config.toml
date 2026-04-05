@@ -2,7 +2,6 @@
 node = "latest"
 go = "latest"
 usage = "latest"
-python = "latest"
 pnpm = "latest"
 golangci-lint = "latest"
 biome = "latest"

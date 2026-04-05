@@ -58,3 +58,5 @@ openlist_mount() {
 openlist_umount() {
 	umount "$OPENLIST_MOUNT_TARGET"
 }
+
+openlist_mount
