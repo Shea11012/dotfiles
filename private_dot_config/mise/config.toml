@@ -14,7 +14,6 @@ bun = "latest"
 "npm:node-gyp" = "latest"
 "npm:@tobilu/qmd" = "latest"
 "go:github.com/Yakitrak/notesmd-cli" = "latest"
-"npm:@jackwener/opencli" = "latest"
 
 [settings]
 legacy_version_file = true
