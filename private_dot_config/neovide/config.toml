@@ -1,0 +1,5 @@
+fork = true
+
+[font]
+normal = ["monospace"]
+size = 16
