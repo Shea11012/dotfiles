@@ -4,7 +4,6 @@
 ---@type LazySpec
 local o = {
   "AstroNvim/astrocore",
-  branch = "v3",
   ---@type AstroCoreOpts
   opts = {
     -- Configure core features of AstroNvim
