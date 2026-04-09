@@ -157,9 +157,9 @@ const countryMeta = {
     pattern: "(?i)美国|美|US|United States|🇺",
     icon: "https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/United_States.png",
   },
-  马来西亚: {
-    pattern: "(?i)马来西亚|马来|MY|Malaysia|🇲",
-    icon: "https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Malaysia.png",
+  东南亚: {
+    pattern: "(?i)泰国|马来西亚|马来|越南|菲律宾|印度尼西亚|孟加拉",
+    icon: "",
   },
   澳大利亚: {
     pattern: "(?i)澳洲|澳大利亚|AU|Australia|🇦",
@@ -240,7 +240,14 @@ function buildProxyGroups(countryProxyGroups) {
       name: "PROXY",
       icon: "https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Proxy.png",
       type: "select",
-      proxies: ["DIRECT", "香港节点", "台湾节点", "新加坡节点", "ALL"],
+      proxies: [
+        "DIRECT",
+        "香港节点",
+        "台湾节点",
+        "新加坡节点",
+        "东南亚节点",
+        "ALL",
+      ],
     },
     {
       name: "AI",
