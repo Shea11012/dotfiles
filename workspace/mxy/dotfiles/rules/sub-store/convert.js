@@ -113,7 +113,7 @@ const dnsConfig = {
   // 其次nameserver 与 fallback 一起查询，使用fallback-filter确认该采用哪个
   nameserver: direct,
   // 国外doh 必须使用域名请求
-  "proxy-server-nameserver": [
+  fallback: [
     "https://cloudflare-dns.com/dns-query",
     "https://dns.google/dns-query",
   ],

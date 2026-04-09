@@ -10,7 +10,7 @@ services:
     container_name: tool-network
     ports:
       - "3003:3001" # gpt-load
-      - '3004:8080' # octopus 
+      - "3004:8080" # octopus
     command: tail -f /dev/null
     networks:
       - tools
@@ -29,6 +29,7 @@ services:
     volumes:
       - ./caddy/conf:/etc/caddy
       - ./caddy/assets:/srv
+      - /home/mxy/workspace/mxy/dotfiles:/srv/dotfiles
     restart: unless-stopped
 
   sub-store:
