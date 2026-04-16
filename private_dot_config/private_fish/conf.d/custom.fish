@@ -57,8 +57,8 @@ function check-gui
 
     if echo "$maps" | rg -qi "libflutter_linux_gtk"
         echo "✅ Flutter + GTK3"
-    else if echo "$maps" | rg -qi "chrome|ozone|electron"
-        echo "✅ Electron / Chromium (VSCode)"
+    else if echo "$maps" | rg -qi "chrome|ozone|electron|chromium"
+        echo "✅ Electron / Chromium"
     else if echo "$maps" | rg -qi "qt.*\.so|PySide6|PyQt"
         echo "✅ Qt（Qt5/Qt6/PySide6/PyQt）"
     else if echo "$maps" | rg -qi "libgtk-3|libgtk-4"

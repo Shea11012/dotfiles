@@ -8,7 +8,7 @@ binds {
     Mod+S { spawn-sh "qs -c noctalia-shell ipc call controlCenter toggle"; }
     Mod+Comma { spawn-sh "qs -c noctalia-shell ipc call settings toggle"; }
 
-    // Mod+T hotkey-overlay-title="Open a Terminal: alacritty" { spawn "alacritty"; }
+    Mod+T hotkey-overlay-title="Open a Terminal: alacritty" { spawn "alacritty"; }
     // 使用键盘模拟鼠标移动，左右中点击分别为ghb
     Mod+k { spawn "wl-kbptr"; }
     Mod+Ctrl+v { spawn "copyq" "toggle"; }

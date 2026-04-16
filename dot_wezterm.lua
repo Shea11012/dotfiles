@@ -11,9 +11,7 @@ local xim_im_name = ""
 -- windows
 
 if wezterm.target_triple == "x86_64-pc-windows-msvc" then
-	default_prog = { "nu" }
-
-	--   default_prog = { 'nu' }
+	default_prog = { "pwsh" }
 
 	table.insert(launch_menu, { label = "pwsh", args = { "pwsh", "-NoLogo" } })
 

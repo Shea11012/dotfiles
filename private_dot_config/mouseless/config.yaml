@@ -32,3 +32,4 @@ layers:
       f: button left
       d: button middle
       s: button right
+      x: leftmeta+q

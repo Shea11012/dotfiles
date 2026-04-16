@@ -129,29 +129,15 @@ const geoxURL = {
 };
 
 const countryMeta = {
-  香港: {
-    pattern: "(?i)香港|港|HK|hk|Hong Kong|HongKong|hongkong|🇭",
+  港澳台新: {
+    pattern:
+      "(?i)香港|港|澳门|台|新北|彰化|新加坡|坡|SG|TW|Taiwan|MO|Macau|HK|hk|Hong Kong|HongKong|hongkong|🇭",
     icon: "https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Hong_Kong.png",
   },
-  澳门: {
-    pattern: "(?i)澳门|MO|Macau|🇲",
-    icon: "https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Macao.png",
-  },
-  台湾: {
-    pattern: "(?i)台|新北|彰化|TW|Taiwan|🇹",
-    icon: "https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Taiwan.png",
-  },
-  新加坡: {
-    pattern: "(?i)新加坡|坡|狮城|SG|Singapore|🇸",
-    icon: "https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Singapore.png",
-  },
-  日本: {
-    pattern: "(?i)日本|川日|东京|大阪|泉日|埼玉|沪日|深日|JP|Japan|🇯",
+  日韩: {
+    pattern:
+      "(?i)首尔|韩|KR|Korea|日本|川日|东京|大阪|泉日|埼玉|沪日|深日|JP|Japan|🇯",
     icon: "https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Japan.png",
-  },
-  韩国: {
-    pattern: "(?i)KR|Korea|KOR|首尔|韩|韓|🇰",
-    icon: "https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Korea.png",
   },
   美国: {
     pattern: "(?i)美国|美|US|United States|🇺",
@@ -240,26 +226,19 @@ function buildProxyGroups(countryProxyGroups) {
       name: "PROXY",
       icon: "https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Proxy.png",
       type: "select",
-      proxies: [
-        "DIRECT",
-        "香港节点",
-        "台湾节点",
-        "新加坡节点",
-        "东南亚节点",
-        "ALL",
-      ],
+      proxies: ["DIRECT", "港澳台新节点", "日韩节点", "东南亚节点", "ALL"],
     },
     {
       name: "AI",
       icon: "https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Bot.png",
       type: "select",
-      proxies: ["台湾节点", "新加坡节点", "ALL"],
+      proxies: ["港澳台新节点", "日韩节点", "东南亚节点", "ALL"],
     },
     {
       name: "TG",
       icon: "https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Global.png",
       type: "select",
-      proxies: ["PROXY", "香港节点", "台湾节点", "新加坡节点", "ALL"],
+      proxies: ["PROXY", "港澳台新节点", "日韩节点", "东南亚节点", "ALL"],
     },
     {
       name: "ALL",
