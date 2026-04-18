@@ -1,5 +1,5 @@
 fork = true
 
 [font]
-normal = ["monospace"]
+normal = ["monospace","LXGW WenKai Screen","Maple Mono NF"]
 size = 18

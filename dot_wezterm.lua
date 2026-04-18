@@ -13,6 +13,8 @@ local xim_im_name = ""
 if wezterm.target_triple == "x86_64-pc-windows-msvc" then
 	default_prog = { "pwsh" }
 
+	--   default_prog = { 'nu' }
+
 	table.insert(launch_menu, { label = "pwsh", args = { "pwsh", "-NoLogo" } })
 
 	table.insert(launch_menu, { label = "git bash", args = { "C:/Program Files/Git/bin/bash.exe", "--login" } })
@@ -90,7 +92,7 @@ local config = {
 
 	adjust_window_size_when_changing_font_size = true,
 
-	window_background_opacity = 0.9,
+	window_background_opacity = 0.8,
 	text_background_opacity = 0.3,
 
 	window_padding = { left = 5, right = 5, top = 5, bottom = 5 },
