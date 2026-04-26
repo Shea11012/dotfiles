@@ -80,7 +80,7 @@ const tunConfig = {
   "auto-route": true,
   "auto-detect-interfacce": true,
   "auto-redirect": true,
-  "rule-exclude-address-set": ["GEOIP:private"],
+  "route-exclude-address-set": ["GEOIP:private"],
 };
 
 const direct = [
@@ -292,6 +292,11 @@ function main(config) {
     rules: rules,
     sniffer: sniffConfig,
     dns: dnsConfig,
+    tun: tunConfig,
+    profile: {
+      "store-selected": true,
+      "store-fake-ip": true,
+    },
     "geodata-mode": true,
     "geo-auto-update": true,
     "geo-update-interval": 24,
