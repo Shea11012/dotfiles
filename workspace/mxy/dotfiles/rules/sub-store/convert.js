@@ -12,14 +12,14 @@ const ruleProviders = {
     type: "http",
     behavior: "classical",
     interval: 86400,
-    url: "http://raw.githubusercontent.com/Shea11012/dotfiles/main/workspace/mxy/dotfiles/clash/custom-direct.yaml",
+    url: "http://arch.local/assets/dotfiles/clash/custom-direct.yaml",
     path: "./ruleset/custom-direct.yaml",
   },
   "custom-proxy": {
     type: "http",
     behavior: "classical",
     interval: 86400,
-    url: "https://gist.github.com/Shea11012/2b2a2659468c2c29e0baae906016b31c/raw/custom-proxy.yaml",
+    url: "http://arch.local/assets/dotfiles/clash/custom_proxy.yaml",
     path: "./ruleset/custom-proxy.yaml",
   },
   adRules: {
@@ -80,6 +80,7 @@ const tunConfig = {
   "auto-route": true,
   "auto-detect-interfacce": true,
   "auto-redirect": true,
+  "rule-exclude-address-set": ["GEOIP:private"],
 };
 
 const direct = [
@@ -93,6 +94,9 @@ const dnsConfig = {
   "use-hosts": true,
   "enhanced-mode": "fake-ip",
   "fake-ip-filter": [
+    "+.local",
+    "time.*.com",
+    "ntp.*.com",
     "dns.google",
     "cloudflare-dns.com",
     "geosite:connectivity-check",
