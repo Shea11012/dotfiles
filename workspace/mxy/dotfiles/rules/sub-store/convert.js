@@ -7,53 +7,115 @@ const inArg = typeof $arguments !== "undefined" ? $arguments : {};
 const full = parseBool(inArg.full) || false;
 const loadBalance = parseBool(inArg.loadbalance) || false;
 
-const ruleProviders = {
-  "custom-direct": {
+const defaultRuleProvider = (url, behavior) => {
+  return {
     type: "http",
-    behavior: "classical",
     interval: 86400,
-    url: "http://arch.local/assets/dotfiles/clash/custom-direct.yaml",
-    path: "./ruleset/custom-direct.yaml",
-  },
-  "custom-proxy": {
-    type: "http",
-    behavior: "classical",
-    interval: 86400,
-    url: "http://arch.local/assets/dotfiles/clash/custom_proxy.yaml",
-    path: "./ruleset/custom-proxy.yaml",
-  },
-  adRules: {
-    type: "http",
-    behavior: "domain",
+    url,
+    behavior,
     format: "mrs",
-    url: "https://testingcf.jsdelivr.net/gh/Cats-Team/AdRules@main/adrules-mihomo.mrs",
-    path: "./ruleset/adRules.mrs",
+  };
+};
+
+const domainRuleProvider = (url) => defaultRuleProvider(url, "domain");
+const ipRuleProvider = (url) => defaultRuleProvider(url, "ipcidr");
+
+const ruleProviders = {
+  "custom-proxy": {
+    ...domainRuleProvider(
+      "http://arch.local/assets/dotfiles/clash/custom_proxy.yaml",
+    ),
+    format: "yaml",
   },
+  adrules_domain: domainRuleProvider(
+    "https://raw.githubusercontent.com/QuixoticHeart/rule-set/ruleset/meta/domain/adrules.mrs",
+  ),
+  adrules_ip: ipRuleProvider(
+    "https://raw.githubusercontent.com/QuixoticHeart/rule-set/ruleset/meta/ipcidr/adrules.mrs",
+  ),
+  Ai_Domain: domainRuleProvider(
+    "https://raw.githubusercontent.com/QuixoticHeart/rule-set/ruleset/meta/domain/ai.mrs",
+  ),
+  tld_proxy_domain: domainRuleProvider(
+    "https://raw.githubusercontent.com/QuixoticHeart/rule-set/ruleset/meta/domain/tld-proxy.mrs",
+  ),
+  fake_ip_filter_domain: domainRuleProvider(
+    "https://raw.githubusercontent.com/QuixoticHeart/rule-set/ruleset/meta/domain/fake-ip-filter.mrs",
+  ),
+  proxy_domain: domainRuleProvider(
+    "https://raw.githubusercontent.com/QuixoticHeart/rule-set/ruleset/meta/domain/proxy.mrs",
+  ),
+  proxy_ip: ipRuleProvider(
+    "https://raw.githubusercontent.com/QuixoticHeart/rule-set/ruleset/meta/ipcidr/proxy.mrs",
+  ),
+  cn_domain: domainRuleProvider(
+    "https://raw.githubusercontent.com/QuixoticHeart/rule-set/ruleset/meta/domain/cn.mrs",
+  ),
+  cn_ip: ipRuleProvider(
+    "https://raw.githubusercontent.com/QuixoticHeart/rule-set/ruleset/meta/ipcidr/cn.mrs",
+  ),
+  games_cn_domain: domainRuleProvider(
+    "https://raw.githubusercontent.com/QuixoticHeart/rule-set/ruleset/meta/domain/games-cn.mrs",
+  ),
+  socialmedia_cn_domain: domainRuleProvider(
+    "https://raw.githubusercontent.com/QuixoticHeart/rule-set/ruleset/meta/domain/socialmedia-cn.mrs",
+  ),
+  socialmedia_cn_ip: ipRuleProvider(
+    "https://raw.githubusercontent.com/QuixoticHeart/rule-set/ruleset/meta/ipcidr/socialmedia-cn.mrs",
+  ),
+  httpdns_domain: domainRuleProvider(
+    "https://raw.githubusercontent.com/QuixoticHeart/rule-set/ruleset/meta/domain/httpdns.mrs",
+  ),
+  httpdns_ip: ipRuleProvider(
+    "https://raw.githubusercontent.com/QuixoticHeart/rule-set/ruleset/meta/ipcidr/httpdns.mrs",
+  ),
+  gits_domain: domainRuleProvider(
+    "https://raw.githubusercontent.com/QuixoticHeart/rule-set/ruleset/meta/domain/gits.mrs",
+  ),
+  cdn_domain: domainRuleProvider(
+    "https://raw.githubusercontent.com/QuixoticHeart/rule-set/ruleset/meta/domain/cdn.mrs",
+  ),
+  private_domain: domainRuleProvider(
+    "https://raw.githubusercontent.com/QuixoticHeart/rule-set/ruleset/meta/domain/private.mrs",
+  ),
+  private_ip: ipRuleProvider(
+    "https://raw.githubusercontent.com/QuixoticHeart/rule-set/ruleset/meta/ipcidr/private.mrs",
+  ),
+  microsoft_cn_domain: domainRuleProvider(
+    "https://raw.githubusercontent.com/QuixoticHeart/rule-set/ruleset/meta/domain/microsoft-cn.mrs",
+  ),
+  tiktok_domain: domainRuleProvider(
+    "https://raw.githubusercontent.com/QuixoticHeart/rule-set/ruleset/meta/domain/tiktok.mrs",
+  ),
 };
 
 const rules = [
-  "GEOSITE,category-ads-all,REJECT",
-  "RULE-SET,adRules,REJECT",
-  "RULE-SET,custom-direct,DIRECT",
+  "RULE-SET,adrules_domain,REJECT",
+  "RULE-SET,adrules_ip,REJECT",
   "RULE-SET,custom-proxy,PROXY",
 
   // 内网流量
-  "GEOSITE,private,DIRECT",
-  "GEOIP,private,DIRECT,no-resolve",
+  "RULE-SET,private_domain,DIRECT",
+  "RULE-SET,private_ip,DIRECT,no-resolve",
 
   // 国内流量
-  "GEOSITE,geolocation-cn,DIRECT",
-  "GEOSITE,category-games@cn,DIRECT",
-  "GEOSITE,steam@cn,DIRECT",
-  "GEOSITE,microsoft@cn,DIRECT",
-  "GEOIP,cn,DIRECT,no-resolve",
+  "RULE-SET,games_cn_domain,DIRECT",
+  "RULE-SET,microsoft_cn_domain,Microsoft",
+  "RULE-SET,socialmedia_cn_domain,DIRECT",
+  "RULE-SET,socialmedia_cn_ip,DIRECT,no-resolve",
+  "RULE-SET,httpdns_domain,DIRECT",
+  "RULE-SET,httpdns_ip,DIRECT,no-resolve",
+  "RULE-SET,cn_domain,DIRECT",
+  "RULE-SET,cn_ip,DIRECT,no-resolve",
 
   // 国外流量
-  "GEOSITE,category-ai-!cn,AI",
-  "GEOSITE,geolocation-!cn,PROXY",
-  "GEOIP,google,PROXY,no-resolve",
-  "GEOIP,cloudflare,PROXY,no-resolve",
-  "GEOIP,telegram,TG,no-resolve",
+  "RULE-SET,Ai_Domain,AI",
+  "RULE-SET,gits_domain,PROXY",
+  "RULE-SET,cdn_domain,PROXY",
+  "RULE-SET,tiktok_domain,TikTok",
+  "RULE-SET,tld_proxy_domain,PROXY",
+  "RULE-SET,proxy_domain,PROXY",
+  "RULE-SET,proxy_ip,PROXY,no-resolve",
 
   "MATCH,default",
 ];
@@ -74,13 +136,64 @@ const sniffConfig = {
   "skip-domain": ["Mijia Cloud", "dlg.io.mi.com", "+.push.apple.com"],
 };
 
+const bypassPrivateAddressSet = [
+  "198.51.100.0/30",
+  "1.0.0.0/8",
+  "2.0.0.0/7",
+  "4.0.0.0/6",
+  "8.0.0.0/7",
+  "11.0.0.0/8",
+  "12.0.0.0/6",
+  "16.0.0.0/4",
+  "32.0.0.0/3",
+  "64.0.0.0/3",
+  "96.0.0.0/4",
+  "112.0.0.0/5",
+  "120.0.0.0/6",
+  "124.0.0.0/7",
+  "126.0.0.0/8",
+  "128.0.0.0/3",
+  "160.0.0.0/5",
+  "168.0.0.0/8",
+  "169.0.0.0/9",
+  "169.128.0.0/10",
+  "169.192.0.0/11",
+  "169.224.0.0/12",
+  "169.240.0.0/13",
+  "169.248.0.0/14",
+  "169.252.0.0/15",
+  "169.255.0.0/16",
+  "170.0.0.0/7",
+  "172.0.0.0/12",
+  "172.32.0.0/11",
+  "172.64.0.0/10",
+  "172.128.0.0/9",
+  "173.0.0.0/8",
+  "174.0.0.0/7",
+  "176.0.0.0/4",
+  "192.0.0.0/9",
+  "192.128.0.0/11",
+  "192.160.0.0/13",
+  "192.169.0.0/16",
+  "192.170.0.0/15",
+  "192.172.0.0/14",
+  "192.176.0.0/12",
+  "192.192.0.0/10",
+  "193.0.0.0/8",
+  "194.0.0.0/7",
+  "196.0.0.0/6",
+  "200.0.0.0/5",
+  "208.0.0.0/4",
+  "2000::/3",
+];
 const tunConfig = {
   enable: true,
   stack: "mixed",
   "auto-route": true,
   "auto-detect-interfacce": true,
   "auto-redirect": true,
-  "route-exclude-address-set": ["GEOIP:private"],
+  // "route-exclude-address-set": ["GEOIP:private"],
+  // "route-exclude-address": bypassPrivateAddressSet,
 };
 
 const direct = [
@@ -99,9 +212,7 @@ const dnsConfig = {
     "ntp.*.com",
     "dns.google",
     "cloudflare-dns.com",
-    "geosite:connectivity-check",
-    "geosite:private",
-    "geosite:cn",
+    "rule-set:fake_ip_filter_domain",
     "+.miwifi.com",
   ],
   "fake-ip-range": "198.18.0.1/16",
@@ -110,10 +221,17 @@ const dnsConfig = {
   // 直连走这里
   "direct-nameserver": direct,
   // 会优先走这个配置项
-  "nameserver-policy": {
-    "geosite:category-ads-all": ["rcode://name_error"],
-    "geosite:geolocation-cn,category-games@cn": ["system", ...direct],
-  },
+  // "nameserver-policy": {
+  //   "rule-set:adrules_domain": ["rcode://name_error"],
+  //   "rule-set:cn_domain,socialmedia_cn_domain,games_cn_domain": [
+  //     // "system",
+  //     ...direct,
+  //   ],
+  //   "rule-set:proxy_domain,tld_proxy_domain,gits_domain": [
+  //     "https://cloudflare-dns.com/dns-query",
+  //     "https://dns.google/dns-query",
+  //   ],
+  // },
   // 其次nameserver 与 fallback 一起查询，使用fallback-filter确认该采用哪个
   nameserver: direct,
   // 国外doh 必须使用域名请求
@@ -243,6 +361,18 @@ function buildProxyGroups(countryProxyGroups) {
       icon: "https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Global.png",
       type: "select",
       proxies: ["PROXY", "港澳台新节点", "日韩节点", "东南亚节点", "ALL"],
+    },
+    {
+      name: "TikTok",
+      icon: "https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/TikTok.png",
+      type: "select",
+      "include-all-proxies": true,
+    },
+    {
+      name: "Microsoft",
+      icon: "https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Microsoft.png",
+      type: "select",
+      proxies: ["DIRECT", "PROXY"],
     },
     {
       name: "ALL",

@@ -20,6 +20,8 @@ return {
 
         -- install any other package
         "tree-sitter-cli",
+        -- typst
+        "tinymist",
       },
     },
   },

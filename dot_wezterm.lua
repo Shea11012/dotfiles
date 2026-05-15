@@ -36,23 +36,12 @@ wezterm.on("gui-startup", function(cmd)
 	window:gui_window():maximize()
 end)
 
-wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_width)
-	-- local index = ""
-
-	-- if #tabs > 1 then
-	-- 	index = string.format("%d: ", tab.tab_index + 1)
-	-- end
-
-	return { {
-		Text = " " .. tab.tab_index + 1 .. " ",
-	} }
-end)
-
-local leader_key = { key = "a", mods = "CTRL", timeout_milliseconds = 1000 }
+local mod = wezterm.target_triple:find("windows") and "SHIFT|CTRL" or "SHIFT|SUPER"
+local leader_key = { key = "L", mods = mod, timeout_milliseconds = 2000 }
 local keys = {
 
 	{ key = "F2", mods = "NONE", action = act.ActivateCommandPalette },
-	{ key = "F3", mods = "NONE", action = act.ShowLauncher },
+	-- { key = "F3", mods = "NONE", action = act.ShowLauncher },
 	-- { key = "Space", mods = "CTRL|SHIFT", action = act.ActivateCopyMode },
 	-- { key = 'UpArrow',    mods = 'ALT',    action = act { ActivatePaneDirection = 'Up' } },
 	-- { key = 'DownArrow',  mods = 'ALT',    action = act { ActivatePaneDirection = 'Down' } },
@@ -61,11 +50,13 @@ local keys = {
 	-- { key = "-", mods = "CTRL", action = act({ CloseCurrentTab = { confirm = false } }) },
 
 	-- pane
+	{ key = "S", mods = "SHIFT|CTRL", action = act.PaneSelect({}) },
 	-- { key = "RightArrow", mods = "ALT", action = act({ ActivatePaneDirection = "Prev" }) },
 	-- { key = "LeftArrow", mods = "ALT", action = act({ ActivatePaneDirection = "Next" }) },
 	-- { key = "w", mods = "CTRL", action = act({ CloseCurrentPane = { confirm = false } }) ,
-	-- { key = "-", mods = "LEADER", action = act.SplitVertical({ domain = "CurrentPaneDomain" }) },
-	-- { key = "|", mods = "LEADER|SHIFT", action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
+	-- { key = "s", mods = "LEADER", action = wezterm.action.PaneSelect({}) },
+	-- { key = "_", mods = mod, action = act.SplitVertical({ domain = "CurrentPaneDomain" }) },
+	-- { key = "|", mods = mod, action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
 }
 
 local config = {
@@ -77,7 +68,7 @@ local config = {
 	default_prog = default_prog,
 
 	use_ime = true,
-
+	-- enable_kitty_keyboard = true,
 	-- xim_im_name = xim_im_name,
 
 	--   ime_preedit_rendering = "System",
@@ -116,7 +107,8 @@ local config = {
 
 	-- keys
 	leader = leader_key,
-	disable_default_key_bindings = false,
+	send_composed_key_when_left_alt_is_pressed = false,
+	-- disable_default_key_bindings = false,
 
 	use_dead_keys = false,
 

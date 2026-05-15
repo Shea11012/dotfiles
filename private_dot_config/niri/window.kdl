@@ -39,6 +39,7 @@ window-rule {
     match app-id=r#"^eu\.betterbird\.Betterbird$"#
     match app-id="mihomo-party"
     match app-id="cc-switch"
+    match app-id="com.github.wwmm.easyeffects"
     open-on-workspace "tools"
 }
 

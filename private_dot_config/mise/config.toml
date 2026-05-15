@@ -2,7 +2,6 @@
 node = "latest"
 go = "latest"
 usage = "latest"
-pnpm = "latest"
 golangci-lint = "latest"
 biome = "latest"
 rust-analyzer = "latest"
@@ -14,6 +13,12 @@ bun = "latest"
 "npm:node-gyp" = "latest"
 "npm:@tobilu/qmd" = "latest"
 "go:github.com/Yakitrak/notesmd-cli" = "latest"
+"npm:@earendil-works/pi-coding-agent" = "latest"
+"github:endevco/aube" = "latest"
+
+[tools."github:pnpm/pnpm"]
+version = "latest"
+asset_pattern = "pnpm-linux-x64.tar.gz"
 
 [settings]
 legacy_version_file = true
@@ -24,9 +29,6 @@ idiomatic_version_file_enable_tools = []
 
 [settings.python]
 uv_venv_auto = true
-
-[settings.npm]
-package_manager = "bun"
 
 [env]
 _.file = [
