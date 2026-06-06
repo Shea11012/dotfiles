@@ -1,3 +1,4 @@
+test ! -e "$HOME/.x-cmd.root/local/data/fish/rc.fish" || source "$HOME/.x-cmd.root/local/data/fish/rc.fish" # boot up x-cmd.
 if not status is-interactive
   return
 end
@@ -7,7 +8,6 @@ if not functions -q fisher
   curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher install jorgebucaran/fisher   
 end
 
-test ! -f "$HOME/.x-cmd.root/local/data/fish/rc.fish" || source "$HOME/.x-cmd.root/local/data/fish/rc.fish" # boot up x-cmd.
 
 function is_wsl --description "Check if running in WSL"
   if string match -q -r "microsoft|wsl" < /proc/version
@@ -43,6 +43,9 @@ jj util completion fish | source
 zellij setup --generate-completion fish | source
 # tirith 终端执行命令安全检测工具
 tirith init --shell fish | source
+
+# go-task
+task --completion fish | source
 # 补全工具
-set -Ux CARAPACE_BRIDGES 'zsh,fish,bash,inshellisense'
-carapace _carapace | source
+# set -Ux CARAPACE_BRIDGES 'zsh,fish,bash,inshellisense'
+# carapace _carapace | source

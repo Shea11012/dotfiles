@@ -18,3 +18,8 @@ Host arch
   HostName 192.168.32.16
   User mxy
   IdentityFile ~/.ssh/id_ecdsa
+
+Host tx
+  HostName 118.195.128.168
+  User ubuntu
+  IdentityFile ~/.ssh/test_id_ed25519

@@ -29,15 +29,18 @@ window-rule {
     open-on-workspace "chat"
 }
 
+// main workspace
 window-rule {
     match app-id="zen"
     match app-id=r#"^org\.wezfurlong\.wezterm$"#
     open-on-workspace "main"
 }
 
+// tools workspace
 window-rule {
     match app-id=r#"^eu\.betterbird\.Betterbird$"#
     match app-id="mihomo-party"
+    match app-id="clash-verge"
     match app-id="cc-switch"
     match app-id="com.github.wwmm.easyeffects"
     open-on-workspace "tools"

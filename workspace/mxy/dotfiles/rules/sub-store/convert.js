@@ -196,9 +196,14 @@ const tunConfig = {
   // "route-exclude-address": bypassPrivateAddressSet,
 };
 
-const direct = [
+const direct_nameserver = [
   "https://119.29.29.29/dns-query",
   "https://223.5.5.5/dns-query",
+];
+
+const proxy_nameserver = [
+  "https://cloudflare-dns.com/dns-query",
+  "https://dns.google/dns-query",
 ];
 
 const dnsConfig = {
@@ -219,26 +224,23 @@ const dnsConfig = {
   // 用于解析dns域名
   "default-nameserver": ["223.5.5.5", "119.29.29.29"],
   // 直连走这里
-  "direct-nameserver": direct,
+  "direct-nameserver": direct_nameserver,
   // 会优先走这个配置项
-  // "nameserver-policy": {
-  //   "rule-set:adrules_domain": ["rcode://name_error"],
-  //   "rule-set:cn_domain,socialmedia_cn_domain,games_cn_domain": [
-  //     // "system",
-  //     ...direct,
-  //   ],
-  //   "rule-set:proxy_domain,tld_proxy_domain,gits_domain": [
-  //     "https://cloudflare-dns.com/dns-query",
-  //     "https://dns.google/dns-query",
-  //   ],
-  // },
+  "nameserver-policy": {
+    "rule-set:adrules_domain": ["rcode://name_error"],
+    "rule-set:cn_domain,socialmedia_cn_domain,games_cn_domain": [
+      // "system",
+      ...direct_nameserver,
+    ],
+    "rule-set:proxy_domain,tld_proxy_domain,gits_domain": [
+      "https://cloudflare-dns.com/dns-query",
+      "https://dns.google/dns-query",
+    ],
+  },
   // 其次nameserver 与 fallback 一起查询，使用fallback-filter确认该采用哪个
-  nameserver: direct,
+  nameserver: proxy_nameserver,
   // 国外doh 必须使用域名请求
-  fallback: [
-    "https://cloudflare-dns.com/dns-query",
-    "https://dns.google/dns-query",
-  ],
+  fallback: [],
 };
 
 const geoxURL = {

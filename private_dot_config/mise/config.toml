@@ -15,6 +15,9 @@ bun = "latest"
 "go:github.com/Yakitrak/notesmd-cli" = "latest"
 "npm:@earendil-works/pi-coding-agent" = "latest"
 "github:endevco/aube" = "latest"
+"npm:gitnexus" = "latest"
+"aqua:go-task/task" = "latest"
+"go:github.com/pressly/goose/v3/cmd/goose" = "latest"
 
 [tools."github:pnpm/pnpm"]
 version = "latest"
@@ -28,7 +31,7 @@ status = { missing_tools = "if_other_versions_installed", show_env = false, show
 idiomatic_version_file_enable_tools = []
 
 [settings.python]
-uv_venv_auto = true
+uv_venv_auto = "source"
 
 [env]
 _.file = [

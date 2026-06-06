@@ -36,13 +36,13 @@ wezterm.on("gui-startup", function(cmd)
 	window:gui_window():maximize()
 end)
 
-local mod = wezterm.target_triple:find("windows") and "SHIFT|CTRL" or "SHIFT|SUPER"
-local leader_key = { key = "L", mods = mod, timeout_milliseconds = 2000 }
+local mod = wezterm.target_triple:find("windows") and "CTRL" or "SUPER"
+local leader_key = { key = "a", mods = mod, timeout_milliseconds = 2000 }
 local keys = {
 
 	{ key = "F2", mods = "NONE", action = act.ActivateCommandPalette },
 	-- { key = "F3", mods = "NONE", action = act.ShowLauncher },
-	-- { key = "Space", mods = "CTRL|SHIFT", action = act.ActivateCopyMode },
+	{ key = "Space", mods = "CTRL|SHIFT", action = act.ActivateCopyMode },
 	-- { key = 'UpArrow',    mods = 'ALT',    action = act { ActivatePaneDirection = 'Up' } },
 	-- { key = 'DownArrow',  mods = 'ALT',    action = act { ActivatePaneDirection = 'Down' } },
 
@@ -50,13 +50,13 @@ local keys = {
 	-- { key = "-", mods = "CTRL", action = act({ CloseCurrentTab = { confirm = false } }) },
 
 	-- pane
-	{ key = "S", mods = "SHIFT|CTRL", action = act.PaneSelect({}) },
+	{ key = "s", mods = "LEADER", action = act.PaneSelect({}) },
 	-- { key = "RightArrow", mods = "ALT", action = act({ ActivatePaneDirection = "Prev" }) },
 	-- { key = "LeftArrow", mods = "ALT", action = act({ ActivatePaneDirection = "Next" }) },
 	-- { key = "w", mods = "CTRL", action = act({ CloseCurrentPane = { confirm = false } }) ,
 	-- { key = "s", mods = "LEADER", action = wezterm.action.PaneSelect({}) },
-	-- { key = "_", mods = mod, action = act.SplitVertical({ domain = "CurrentPaneDomain" }) },
-	-- { key = "|", mods = mod, action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
+	{ key = "h", mods = "LEADER", action = act.SplitVertical({ domain = "CurrentPaneDomain" }) },
+	{ key = "v", mods = "LEADER", action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
 }
 
 local config = {
@@ -108,42 +108,10 @@ local config = {
 	-- keys
 	leader = leader_key,
 	send_composed_key_when_left_alt_is_pressed = false,
-	-- disable_default_key_bindings = false,
+	-- disable_default_key_bindings = true,
 
 	use_dead_keys = false,
 
 	keys = keys,
 }
-local modal = wezterm.plugin.require("https://github.com/MLFlexer/modal.wezterm")
-modal.enable_defaults("https://github.com/MLFlexer/modal.wezterm")
--- "ui_mode" can be replaced by any filename from the /defaults directory
-local key_table = require("ui_mode").key_table
-
-local icons = {
-	left_seperator = wezterm.nerdfonts.ple_left_half_circle_thick,
-	key_hint_seperator = " | ",
-	mod_seperator = "-",
-}
-local hint_colors = {
-	key_hint_seperator = "Yellow",
-	key = "Green",
-	hint = "Red",
-	bg = "Black",
-	left_bg = "Gray",
-}
-local mode_colors = { bg = "Red", fg = "Black" }
-local status_text = require("ui_mode").get_hint_status_text(icons, hint_colors, mode_colors)
-
-modal.add_mode("UI", key_table, status_text)
-modal.apply_to_config(config)
-modal.set_default_keys(config)
-wezterm.on("modal.enter", function(name, window, pane)
-	modal.set_right_status(window, name)
-	modal.set_window_title(pane, name)
-end)
-
-wezterm.on("modal.exit", function(name, window, pane)
-	window:set_right_status("")
-	modal.reset_window_title(pane)
-end)
 return config
