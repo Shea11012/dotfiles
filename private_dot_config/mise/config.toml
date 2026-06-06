@@ -35,5 +35,7 @@ uv_venv_auto = "source"
 
 [env]
 _.file = [
-    "~/.env.json"
+    '~/.envs/third-party.toml',
+    '~/.envs/vpn.toml',
+    { path = "~/.envs/ai-api-key.json", redact = true }
 ]
