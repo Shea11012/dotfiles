@@ -4,7 +4,7 @@
 encryption = "age"
 {{ if eq .chezmoi.os "windows" }}
 [cd]
-command = "nu"
+command = "pwsh"
 {{ end }}
 
 [diff]
@@ -15,7 +15,7 @@ autoAdd = true
 autoCommit = true
 
 [age]
-identity = "~/workspace/mxy/key.txt"
+identity = "~/.envs/key.txt"
 recipient = "age1ve3lsmesxm4azuf8vm8uf28av4t6575kttjh9jqc52wwsrkhhd3stph76r"
 
 [edit]
