@@ -1,5 +1,5 @@
 [tools]
-node = "latest"
+node = "24.16.0"
 go = "latest"
 usage = "latest"
 golangci-lint = "latest"
@@ -10,14 +10,13 @@ rust-analyzer = "latest"
 "npm:@fission-ai/openspec" = "latest"
 buf = "latest"
 bun = "latest"
-"npm:node-gyp" = "latest"
 "npm:@tobilu/qmd" = "latest"
 "go:github.com/Yakitrak/notesmd-cli" = "latest"
-"npm:@earendil-works/pi-coding-agent" = "latest"
-"github:endevco/aube" = "latest"
-"npm:gitnexus" = "latest"
 "aqua:go-task/task" = "latest"
 "go:github.com/pressly/goose/v3/cmd/goose" = "latest"
+"npm:mcporter" = "latest"
+"npm:@jackwener/opencli" = "latest"
+"npm:@earendil-works/pi-coding-agent" = "latest"
 
 [tools."github:pnpm/pnpm"]
 version = "latest"
@@ -32,6 +31,9 @@ idiomatic_version_file_enable_tools = []
 
 [settings.python]
 uv_venv_auto = "source"
+
+[settings.npm]
+package_manager = "npm"
 
 [env]
 _.file = [

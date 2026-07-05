@@ -32,6 +32,7 @@ window-rule {
 // main workspace
 window-rule {
     match app-id="zen"
+    match app-id="google-chrome"
     match app-id=r#"^org\.wezfurlong\.wezterm$"#
     open-on-workspace "main"
 }

@@ -1,6 +1,6 @@
 layout {
     // Set gaps around windows in logical pixels.
-    gaps 4
+    gaps 7
 
     center-focused-column "never"
 

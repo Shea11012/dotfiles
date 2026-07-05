@@ -4,10 +4,10 @@ Host github.com
   User shea
   IdentityFile ~/.ssh/id_ecdsa
 
-Host openwrt
-  HostName 192.168.32.100
-  User root
-  IdentityFile ~/.ssh/openwrt_ed25519
+Host y7000p
+  HostName 192.168.0.100
+  User mxy
+  IdentityFile ~/.ssh/id_ed25519
 
 # 连接termux局域网
 Host 192.168.32.1?

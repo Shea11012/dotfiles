@@ -21,7 +21,7 @@ end
 
 if not is_wsl
   # set -gx DOCKER_HOST unix://$XDG_RUNTIME_DIR/docker.sock
-  set -gx BROWSER zen-browser
+  # set -gx BROWSER zen-browser
 end
 
 fzf_configure_bindings --git_status= --git_log= --directory= --processes= --variables=
@@ -49,3 +49,4 @@ task --completion fish | source
 # 补全工具
 # set -Ux CARAPACE_BRIDGES 'zsh,fish,bash,inshellisense'
 # carapace _carapace | source
+

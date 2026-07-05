@@ -57,6 +57,7 @@ local keys = {
 	-- { key = "s", mods = "LEADER", action = wezterm.action.PaneSelect({}) },
 	{ key = "h", mods = "LEADER", action = act.SplitVertical({ domain = "CurrentPaneDomain" }) },
 	{ key = "v", mods = "LEADER", action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
+	{ key = "t", mods = "LEADER", action = act.SpawnTab("CurrentPaneDomain") },
 }
 
 local config = {
