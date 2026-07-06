@@ -7,17 +7,14 @@ layers:
   # the first layer is active at start
   - name: initial
     bindings:
-      # when tab is held and another key pressed, activate mouse layer
-      tab: tap-hold-next tab ; toggle-layer mouse ; 500
-      # when a is held for 300ms, activate mouse layer
-      # a: tap-hold a ; toggle-layer mouse ; 300
+      f+d: layer mouse
       capslock: esc
-      # a layer for mouse movement
+  # a layer for mouse movement
   - name: mouse
     # when true, keys that are not mapped keep their original meaning
     passThrough: true
     bindings:
-      # quit mouse layer
+      # quit mouse layer (only needed if toggled in via other means)
       q: layer initial
       # keep the mouse layer active
       space: layer mouse
@@ -25,7 +22,7 @@ layers:
       h: move -1  0
       j: move  0  1
       k: move  0 -1
-      u: scroll up
+      p: scroll up
       n: scroll down
       leftalt: speed 4.0
       e: speed 0.3
