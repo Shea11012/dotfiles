@@ -91,7 +91,12 @@ local config = {
 
 	-- font
 
-	font = wezterm.font_with_fallback({ "Maple Mono NF", "LXGW WenKai GB Medium" }),
+	font = wezterm.font_with_fallback({
+		"Maple Mono NF",
+		{ family = "LXGW WenKai GB", weight = "Bold" },
+		"Fluent Emoji Color",
+		"Twemoji",
+	}),
 
 	font_size = 18,
 

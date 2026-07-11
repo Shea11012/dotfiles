@@ -48,5 +48,5 @@ tirith init --shell fish | source
 task --completion fish | source
 # 补全工具
 # set -Ux CARAPACE_BRIDGES 'zsh,fish,bash,inshellisense'
-# carapace _carapace | source
+carapace _carapace | source
 

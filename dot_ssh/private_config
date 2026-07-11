@@ -5,7 +5,7 @@ Host github.com
   IdentityFile ~/.ssh/id_ecdsa
 
 Host y7000p
-  HostName 192.168.0.100
+  HostName 192.168.0.103
   User mxy
   IdentityFile ~/.ssh/id_ed25519
 

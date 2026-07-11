@@ -7,7 +7,7 @@ layers:
   # the first layer is active at start
   - name: initial
     bindings:
-      f+d: layer mouse
+      leftalt: mod-layer leftalt mouse
       capslock: esc
   # a layer for mouse movement
   - name: mouse
@@ -24,7 +24,7 @@ layers:
       k: move  0 -1
       p: scroll up
       n: scroll down
-      leftalt: speed 4.0
+      # leftalt: speed 4.0
       e: speed 0.3
       f: button left
       d: button middle
