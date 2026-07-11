@@ -7,3 +7,4 @@ set -gx MANPAGER "nvim +Man!"
 set -Ux CARAPACE_BRIDGES 'zsh,fish,bash,inshellisense' # optional
 set -gx PNPM_HOME "/home/mxy/.local/share/pnpm"
 set -gx PATH "$PNPM_HOME/bin" $PATH
+fish_add_path "$HOME/.local/bin"

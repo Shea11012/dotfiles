@@ -41,8 +41,6 @@ navi widget fish | source
 jj util completion fish | source
 # zellij
 zellij setup --generate-completion fish | source
-# tirith 终端执行命令安全检测工具
-tirith init --shell fish | source
 
 # go-task
 task --completion fish | source
