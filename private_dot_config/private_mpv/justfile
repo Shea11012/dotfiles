@@ -1,0 +1,11 @@
+set windows-shell := ["C:/Program Files/Git/bin/bash.exe", "-uc"]
+
+install-uosc:
+    mkdir -p tmp
+    xh -o ./tmp/uosc.zip -d https://github.com/tomasklaen/uosc/releases/latest/download/uosc.zip
+    xh -o ./tmp/uosc.conf -d https://github.com/tomasklaen/uosc/releases/latest/download/uosc.conf
+    ouch d ./tmp/uosc.zip -d tmp/uosc
+    cp tmp/uosc.conf script-opts/
+    cp -r tmp/uosc/fonts/* fonts/
+    cp -r ./tmp/uosc/scripts/ ./scripts/
+    rm -rf tmp

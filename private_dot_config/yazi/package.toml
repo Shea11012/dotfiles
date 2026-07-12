@@ -1,0 +1,29 @@
+[[plugin.deps]]
+use = "boydaihungst/gvfs"
+rev = "3abc0a2"
+hash = "eed89e75671723c8f9390a2862af0e4e"
+
+[[plugin.deps]]
+use = "yazi-rs/plugins:mount"
+rev = "5d5c480"
+hash = "e3260d0b1feded8c8e3ae3afa1169e30"
+
+[[plugin.deps]]
+use = "boydaihungst/simple-tag"
+rev = "e8be031"
+hash = "50ba6725b86ae62c626d27eb5836decb"
+
+[[plugin.deps]]
+use = "imsi32/yatline"
+rev = "c5d4b48"
+hash = "e6e98d12b1648d1894c2b560d85eeaa7"
+
+[[plugin.deps]]
+use = "imsi32/yatline-catppuccin"
+rev = "6c3f166"
+hash = "e1d5b1c34c53c4c4661d910eb3a6fd95"
+
+[[flavor.deps]]
+use = "yazi-rs/flavors:catppuccin-mocha"
+rev = "0670801"
+hash = "7dfe41c9c3d9be76da8a844263d0bbed"

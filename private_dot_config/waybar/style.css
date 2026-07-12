@@ -1,0 +1,136 @@
+* {
+  font-family:
+    "Maple Mono nf cn", "Font Awesome 6 Free", "Font Awesome 6 Free Solid";
+  font-size: 14px;
+  border-radius: 0;
+  border: none;
+  font-weight: bold;
+}
+
+#waybar {
+  background-color: #2a2a2a; /* 统一主背景 */
+  color: #e0e0e0; /* 统一默认文字颜色 */
+}
+
+#workspaces {
+  padding: 2px;
+  margin: 0 5px 0 7px;
+}
+
+#tray {
+  margin: 6px 3px;
+  padding: 6px 12px;
+  border-radius: 6px;
+  border-width: 0px;
+  background-color: #333333; /* 统一模块背景 */
+}
+
+/* 所有左侧和右侧的模块统一背景和样式 */
+#clock,
+#custom-power,
+#bluetooth,
+#wireplumber,
+#backlight,
+#temperature,
+#memory,
+#cpu,
+#network {
+  border-radius: 4px;
+  margin: 6px 3px;
+  padding: 6px 12px;
+  background-color: #333333; /* 统一模块背景 */
+  color: #e0e0e0; /* 统一默认文字颜色 */
+  transition: background-color 0.2s ease-in-out;
+}
+
+/* 根据功能调整前景色，而不是背景色 */
+
+/* 时钟 - 关键信息，用淡蓝色 */
+#clock {
+  color: #bbdefb;
+}
+
+/* 蓝牙 - 连接状态，用淡绿色 */
+#bluetooth {
+  color: #81c784;
+}
+
+/* 音量 - 正常状态，用淡绿色 */
+#wireplumber {
+  color: #81c784;
+}
+
+/* 亮度 - 中性信息，用默认浅灰白 */
+#backlight {
+  color: #e0e0e0;
+}
+
+/* 温度 - 状态信息，用淡蓝色 */
+#temperature {
+  color: #bbdefb;
+}
+
+/* 内存 - 警告状态，用淡橙色 */
+#memory {
+  color: #ffab91;
+}
+
+/* CPU - 警告状态，用淡橙色 */
+#cpu {
+  color: #ffab91;
+}
+
+/* 网络 - 关键信息，用淡蓝色 */
+#network {
+  color: #bbdefb;
+}
+
+/* 鼠标悬停时的高亮效果 */
+#clock:hover,
+#bluetooth:hover,
+#wireplumber:hover,
+#backlight:hover,
+#temperature:hover,
+#memory:hover,
+#cpu:hover,
+#network:hover {
+  background-color: #444444; /* 高亮背景 */
+}
+
+#waybar.hidden {
+  opacity: 0.5;
+}
+
+/* 工作区按钮 - 保持原有结构，但颜色与整体协调 */
+#workspaces button {
+  min-width: 0;
+  padding: 6px 18px;
+  margin: 6px 3px;
+  border-radius: 4px;
+  background-color: #333333; /* 与模块背景一致 */
+  color: #e0e0e0; /* 与默认文字颜色一致 */
+}
+
+#workspaces button.active {
+  background-color: #444444; /* 高亮背景 */
+  color: #bbdefb; /* 淡蓝色，表示活跃 */
+}
+
+#workspaces button:hover {
+  background-color: #444444; /* 高亮背景 */
+  color: #ffffff; /* 白色，表示悬停 */
+}
+
+/* 工具提示 - 保持原有风格，但颜色更协调 */
+tooltip {
+  border-radius: 8px;
+  padding: 16px;
+  background-color: #131822;
+  color: #c0c0c0;
+}
+
+tooltip label {
+  padding: 5px;
+  background-color: #131822;
+  color: #c0c0c0;
+}

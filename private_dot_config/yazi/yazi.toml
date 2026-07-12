@@ -1,0 +1,9 @@
+[mgr]
+show_hidden = true
+sort_by = "natural"
+
+[plugin]
+prepend_fetchers = [
+    { id = "simple-tag", url = "*", run = "simple-tag",group = "simple-tag" },
+    { id = "simple-tag", url = "*/", run = "simple-tag",group = "simple-tag"},
+]
