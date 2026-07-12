@@ -98,7 +98,7 @@ local config = {
 		"Twemoji",
 	}),
 
-	font_size = 18,
+	font_size = {{ if eq .chezmoi.hostname "myarch" }}18{{ else if eq .chezmoi.hostname "y7000p" }}14{{ else }}16{{ end }},
 
 	-- freetype_load_target = "Mono",
 
