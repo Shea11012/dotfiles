@@ -9,6 +9,7 @@
     editor = nvim
     pager = delta
 
+	hooksPath = /home/mxy/.config/git/hooks
 [interactive]
     diffFilter = delta --color-only
 

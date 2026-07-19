@@ -1,1 +1,2 @@
 spawn-at-startup "kdeconnectd"
+spawn-sh-at-startup "headroom proxy"

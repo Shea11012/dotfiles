@@ -17,6 +17,7 @@ bun = "latest"
 "npm:mcporter" = "latest"
 "npm:@jackwener/opencli" = "latest"
 "npm:@earendil-works/pi-coding-agent" = "latest"
+"npm:@openai/codex" = "latest"
 
 [tools."github:pnpm/pnpm"]
 version = "latest"

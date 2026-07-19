@@ -35,6 +35,7 @@ window-rule {
     match app-id="clash-verge"
     match app-id="cc-switch"
     match app-id="com.github.wwmm.easyeffects"
+    match app-id="Bettbox"
     open-on-workspace "tools"
 }
 
