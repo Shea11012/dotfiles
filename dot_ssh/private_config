@@ -14,8 +14,8 @@ Host 192.168.32.1?
   Port 8022
   IdentityFile ~/.ssh/id_ecdsa
 
-Host arch
-  HostName 192.168.32.16
+Host arch-gem12
+  HostName 192.168.0.107
   User mxy
   IdentityFile ~/.ssh/id_ecdsa
 
