@@ -1,0 +1,16 @@
+{
+    "enabled": true,
+    "allowCompactionContinuityBreak": false,
+
+    "compactionModel": "cpa-response/gpt-5.4-mini",
+    "compactionThinkingLevel": "off",
+
+    "responsesCompactApis": ["openai-responses", "openai-codex-responses"],
+
+    "notifyOnLoad": false,
+    "debug": false,
+    "logProviderPayloads": false,
+    "logCompactResponses": false,
+    "redactSensitiveData": true,
+    "artifactRoot": "~/.pi/agent/artifacts/pi-better-compaction"
+}
