@@ -1,5 +1,5 @@
 {
-  "lastChangelogVersion": "0.80.3",
+  "lastChangelogVersion": "0.80.10",
   "defaultThinkingLevel": "medium",
   "hideThinkingBlock": false,
   "packages": [
@@ -17,19 +17,20 @@
     "npm:pi-total-recall",
     "npm:pi-tool-display",
     "npm:pi-subagents",
-    "npm:@tintinweb/pi-tasks"
+    "npm:@tintinweb/pi-tasks",
+    "npm:@lll9p/pi-better-compaction"
   ],
   "observational-memory": {
     "model": {
       "provider": "cpa",
-      "id": "ds/deepseek-v4-flash",
+      "id": "deepseek-v4-flash",
       "thinking": "low"
     }
   },
   "defaultProvider": "cpa-response",
   "defaultModel": "gpt-5.6-sol",
   "subagents": {
-    "defaultModel": "cpa/ds/deepseek-v4-pro"
+    "defaultModel": "cpa/deepseek-v4-pro"
   },
   "skills": [],
   "theme": "dark"

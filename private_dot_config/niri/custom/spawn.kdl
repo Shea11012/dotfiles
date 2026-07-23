@@ -1,2 +1,3 @@
 spawn-at-startup "kdeconnectd"
 spawn-sh-at-startup "headroom proxy"
+spawn-at-startup "bash" "-c" "wl-paste --watch cliphist store &"

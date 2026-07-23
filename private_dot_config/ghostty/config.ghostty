@@ -4,7 +4,7 @@ theme="Catppuccin Mocha"
 
 
 # Window Appearance
-background-opacity = 0.85
+background-opacity = 0.9
 background-blur-radius = 30
 macos-titlebar-style = transparent
 window-padding-x = 10
