@@ -1,0 +1,11 @@
+[terminalFontSize.home-laptop]
+wezterm = 16
+alacritty = 14
+
+[terminalFontSize.myarch]
+wezterm = 18
+alacritty = 16
+
+[terminalFontSize.y7000p]
+wezterm = 14
+alacritty = 14

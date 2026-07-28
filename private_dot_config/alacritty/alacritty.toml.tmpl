@@ -4,7 +4,7 @@ import = [
 ]
 
 [font]
-size = {{ if eq .chezmoi.hostname "myarch" }}16{{ else if eq .chezmoi.hostname "y7000p" }}14{{ else }}14{{ end }}
+size = {{ (index .terminalFontSize .chezmoi.hostname).alacritty }}
 
 [window]
 decorations = "None"
