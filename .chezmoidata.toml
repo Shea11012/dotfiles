@@ -7,8 +7,3 @@ ghostty = 14
 wezterm = 18
 alacritty = 16
 ghostty = 16
-
-[terminalFontSize.y7000p]
-wezterm = 14
-alacritty = 14
-ghostty = 14
