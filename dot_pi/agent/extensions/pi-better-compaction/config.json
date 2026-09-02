@@ -2,7 +2,7 @@
     "enabled": true,
     "allowCompactionContinuityBreak": false,
 
-    "compactionModel": "cpa-response/gpt-5.4-mini",
+    "compactionModel": "cpa-response/gpt-5.4",
     "compactionThinkingLevel": "off",
 
     "responsesCompactApis": ["openai-responses", "openai-codex-responses"],

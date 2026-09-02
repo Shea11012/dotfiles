@@ -35,6 +35,7 @@ zoxide init fish | source
 starship init fish | source
 uv generate-shell-completion fish | source
 buf completion fish | source
+herdr completion fish | source
 # 自定义cheat补全
 navi widget fish | source
 # 新版本管理工具
@@ -46,5 +47,8 @@ zellij setup --generate-completion fish | source
 task --completion fish | source
 # 补全工具
 # set -Ux CARAPACE_BRIDGES 'zsh,fish,bash,inshellisense'
-carapace _carapace | source
+# carapace _carapace | source
 
+
+# moonbit
+fish_add_path "$HOME/.moon/bin"

@@ -2,6 +2,18 @@
 show_hidden = true
 sort_by = "natural"
 
+[opener]
+web_browser = [
+    { run = 'open "$@"', desc = "Open in Browser", for = "macos" },
+    { run = 'xdg-open "$@"', desc = "Open in Browser", for = "linux" },
+    { run = 'start "" "$@"', desc = "Open in Browser", for = "windows" }
+]
+
+[open]
+prepend_rules = [
+    { url = "*.html", use = [ "web_browser", "edit" ] }
+]
+
 [plugin]
 prepend_fetchers = [
     { id = "simple-tag", url = "*", run = "simple-tag",group = "simple-tag" },

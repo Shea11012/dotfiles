@@ -1,37 +1,30 @@
 {
-  "lastChangelogVersion": "0.80.10",
+  "lastChangelogVersion": "0.84.2",
   "defaultThinkingLevel": "medium",
-  "hideThinkingBlock": false,
+  "hideThinkingBlock": true,
   "packages": [
     "npm:@juicesharp/rpiv-ask-user-question",
     "npm:@juicesharp/rpiv-btw",
     "npm:pi-web-access",
-    "npm:pi-smart-fetch",
     "npm:pi-rtk-optimizer",
     "npm:pi-observational-memory",
-    "npm:@narumitw/pi-statusline",
-    "npm:spotme",
     "npm:pi-mcp-adapter",
     "npm:@ff-labs/pi-fff",
     "npm:@gotgenes/pi-permission-system",
-    "npm:pi-total-recall",
     "npm:pi-tool-display",
-    "npm:pi-subagents",
     "npm:@tintinweb/pi-tasks",
-    "npm:@lll9p/pi-better-compaction"
+    "npm:@lll9p/pi-better-compaction",
+    "npm:@tintinweb/pi-subagents",
+    "npm:@narumitw/pi-starship"
   ],
   "observational-memory": {
     "model": {
-      "provider": "cpa",
-      "id": "deepseek-v4-flash",
-      "thinking": "low"
+      "provider": "cpa-response",
+      "id": "gpt-5.4"
     }
   },
   "defaultProvider": "cpa-response",
   "defaultModel": "gpt-5.6-sol",
-  "subagents": {
-    "defaultModel": "cpa/deepseek-v4-pro"
-  },
   "skills": [],
   "theme": "dark"
 }
