@@ -1,8 +1,3 @@
-local catppuccin_theme = require("yatline-catppuccin"):setup("mocha") -- or "latte" | "frappe" | "macchiato"
-require("yatline"):setup({
-	theme = catppuccin_theme,
-})
-
 require("gvfs"):setup({
 	-- (Optional) Allowed keys to select device.
 	which_keys = "1234567890qwertyuiopasdfghjklzxcvbnm-=[]\\;',./!@#$%^&*()_+{}|:\"<>?",
