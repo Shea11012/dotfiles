@@ -2,7 +2,7 @@
     "enabled": true,
     "allowCompactionContinuityBreak": false,
 
-    "compactionModel": "cpa-response/gpt-5.6-sol",
+    "compactionModel": "cpa-response/deepseek-flash",
     "compactionThinkingLevel": "off",
 
     "responsesCompactApis": ["openai-responses", "openai-codex-responses"],

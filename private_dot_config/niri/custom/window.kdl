@@ -39,6 +39,13 @@ window-rule {
     open-on-workspace "tools"
 }
 
+// 截图工具
+window-rule {
+    match app-id="mark-shot"
+    open-fullscreen false
+    open-floating true
+}
+
 window-rule {
     match app-id=r#"wechat"#
     open-focused false // 解决搜索框失去焦点
@@ -70,9 +77,12 @@ window-rule {
 window-rule {
     match title="Waylyrics" app-id=r#"^io\.github\.waylyrics\.Waylyrics$"#
     match title="桌面歌词" app-id="SPlayer"
+    match title="Open Orpheus Lyrics"
+    match title="歌词" app-id="qqmusic"
     open-floating true
-    default-floating-position x=0 y=5 relative-to="top"
+    default-floating-position x=400 y=0 relative-to="top-left"
 }
+
 
 window-rule {
     match app-id="pot"

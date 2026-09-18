@@ -5,5 +5,6 @@ binds {
     // 屏幕录制（wf-recorder+slurp）：第一次按下选择录制区域并开始录制（gif），再次按下停止并保存
     Mod+o { spawn-sh "if pgrep -x wf-recorder > /dev/null; then killall wf-recorder; else dir=\"$(xdg-user-dir VIDEOS 2>/dev/null)\"; [ -z \"$dir\" ] && dir=\"$HOME/Videos\"; mkdir -p \"$dir\"; wf-recorder -g \"$(slurp)\" -c gif -r 30 -f \"$dir/Recording from $(date \"+%Y-%m-%d %H:%M:%S\").gif\" & fi"; }
 
+    Mod+Shift+s { spawn "mark-shot"; }
     // Print { spawn-sh "set -e; grim -t ppm -g \"$(slurp -o -d -F monospace)\" - | satty --filename - --copy-command=wl-copy --annotation-size-factor 2.0 --output-filename=\"$(xdg-user-dir PICTURES)/Screenshots/Screenshot from %Y-%m-%d %H:%M:%S.png\" --actions-on-enter=\"save-to-clipboard,exit\" --brush-smooth-history-size=5 --disable-notifications"; }
 }
