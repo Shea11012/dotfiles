@@ -36,8 +36,6 @@ starship init fish | source
 uv generate-shell-completion fish | source
 buf completion fish | source
 herdr completion fish | source
-# 自定义cheat补全
-navi widget fish | source
 # 新版本管理工具
 jj util completion fish | source
 # zellij
@@ -45,9 +43,10 @@ zellij setup --generate-completion fish | source
 
 # go-task
 task --completion fish | source
-# 补全工具
+
+# ${UserConfigDir}/fish/config.fish
 # set -Ux CARAPACE_BRIDGES 'zsh,fish,bash,inshellisense'
-# carapace _carapace | source
+# carapace _carapace fish | source
 
 
 # moonbit
