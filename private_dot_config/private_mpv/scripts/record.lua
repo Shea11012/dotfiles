@@ -22,6 +22,9 @@ local video_extensions = {
     ogv = true,
 }
 
+-- 只在本次播放列表开始时自动选集，不能在每次切集时跳回历史记录。
+local resume_playlist = true
+
 local state = {
     path = nil,
     dir = nil,
@@ -43,9 +46,22 @@ local function reset_state()
 end
 
 local function split_path(path)
-    if not path then
+    if type(path) ~= "string" or path:match("^%a[%w+.-]*://") then
         return nil, nil
     end
+    if path:sub(1, 1) ~= "/" then
+        path = utils.join_path(mp.get_property_native("working-directory", "."), path)
+    end
+    -- 统一相对路径、./ 和 ../，以完整目录区分同名视频。
+    local parts = {}
+    for part in path:gmatch("[^/]+") do
+        if part == ".." then
+            table.remove(parts)
+        elseif part ~= "." then
+            parts[#parts + 1] = part
+        end
+    end
+    path = "/" .. table.concat(parts, "/")
     local dir, filename = utils.split_path(path)
     if not dir or not filename or filename == "" then
         return nil, nil
@@ -58,7 +74,8 @@ local function record_path(dir)
 end
 
 local function empty_data()
-    return { version = 1, records = {} }
+    -- mpv 默认把空 Lua 表编码成 []；records 必须是以文件名为键的对象。
+    return { version = 1, records = utils.parse_json("{}") }
 end
 
 local function file_exists(path)
@@ -155,6 +172,9 @@ local function read_data(dir, recover)
         end
         return empty_data()
     end
+    -- 旧文件可能包含 records: []。保留内容，但去掉 JSON 数组元表，
+    -- 否则后续 records[filename] 的字符串键在 format_json 时会被忽略。
+    setmetatable(data.records, getmetatable(utils.parse_json("{}")))
     return data
 end
 
@@ -199,6 +219,10 @@ local function prune_missing_records(dir, data)
             data.records[filename] = nil
             changed = true
         end
+    end
+    if data.last_played and not data.records[data.last_played] then
+        data.last_played = nil
+        changed = true
     end
     return changed
 end
@@ -246,6 +270,8 @@ local function save_current_record(show_error)
         percent = state.percent_pos,
         updated_at = os.time(),
     }
+    -- 显式保存最后观看的文件；updated_at 精度为秒，快速切集可能同秒。
+    data.last_played = state.filename
     prune_missing_records(state.dir, data)
 
     if not write_data(state.dir, data, show_error) then
@@ -255,8 +281,50 @@ local function save_current_record(show_error)
     return true
 end
 
+local function restore_playlist()
+    if not resume_playlist then
+        return false
+    end
+    resume_playlist = false
+
+    local playlist = mp.get_property_native("playlist", {})
+    local current = mp.get_property_native("playlist-pos", 0)
+    local cache = {}
+    local latest_index, latest_time, latest_is_last
+    for index, item in ipairs(playlist) do
+        local dir, filename = split_path(item.filename)
+        if dir and is_video_file(filename) then
+            if not cache[dir] then
+                cache[dir] = read_data(dir, false)
+            end
+            local data = cache[dir]
+            local record = data.records[filename]
+            if type(record) == "table" and type(record.time) == "number" then
+                local updated_at = tonumber(record.updated_at) or 0
+                local is_last = data.last_played == filename
+                if latest_index == nil or updated_at > latest_time
+                    or (updated_at == latest_time and is_last and not latest_is_last) then
+                    latest_index = index - 1
+                    latest_time = updated_at
+                    latest_is_last = is_last
+                end
+            end
+        end
+    end
+
+    if latest_index ~= nil and latest_index ~= current then
+        -- 此时尚未初始化 state：不能把被跳过的首集写成最新观看记录。
+        mp.commandv("playlist-play-index", latest_index)
+        return true
+    end
+    return false
+end
+
 local function on_file_loaded()
     reset_state()
+    if restore_playlist() then
+        return
+    end
 
     local path = mp.get_property_native("path")
     local dir, filename = split_path(path)
@@ -329,7 +397,8 @@ local function create_menu_data()
 
     for _, filename in ipairs(filenames) do
         local record = data.records[filename]
-        local percent = type(record.percent) == "number" and record.percent or 0
+        local percent = type(record) == "table" and tonumber(record.percent) or 0
+        percent = percent or 0
         menu.items[#menu.items + 1] = {
             title = filename .. "  " .. tostring(percent) .. "%",
             value = filename,
@@ -359,8 +428,8 @@ mp.register_script_message("record-event", function(value)
 
     local playlist = mp.get_property_native("playlist", {})
     for index, item in ipairs(playlist) do
-        local _, filename = split_path(item.filename)
-        if filename == event.value then
+        local dir, filename = split_path(item.filename)
+        if dir == state.dir and filename == event.value then
             mp.commandv("playlist-play-index", index - 1)
             return
         end
@@ -380,6 +449,12 @@ mp.observe_property("percent-pos", "native", function(_, value)
     end
     local rounded = math.floor(value + 0.5)
     state.percent_pos = rounded
+end)
+
+mp.observe_property("idle-active", "native", function(_, idle)
+    if idle then
+        resume_playlist = true
+    end
 end)
 
 mp.register_event("file-loaded", on_file_loaded)

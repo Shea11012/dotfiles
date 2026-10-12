@@ -93,7 +93,6 @@ ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
 # Initialize modules
 # ------------------
 
-
 ZIM_HOME=${ZDOTDIR:-${HOME}}/.zim
 # Download zimfw plugin manager if missing.
 if [[ ! -e ${ZIM_HOME}/zimfw.zsh ]]; then
@@ -147,7 +146,6 @@ eval "$(zoxide init --cmd cd zsh)"
 eval "$(uv generate-shell-completion zsh)"
 
 # eval "$(zellij setup --generate-auto-start zsh)"
-
 
 # rust mirror
 export RUSTUP_DIST_SERVER="https://rsproxy.cn"

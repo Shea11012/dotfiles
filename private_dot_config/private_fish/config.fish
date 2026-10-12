@@ -28,8 +28,6 @@ fzf_configure_bindings --git_status= --git_log= --directory= --processes= --vari
 
 # 配置tool
 mise activate fish | source
-# hermes
-hermes completion fish | source
 # devbox global shellenv --init-hook | source
 zoxide init fish | source
 starship init fish | source

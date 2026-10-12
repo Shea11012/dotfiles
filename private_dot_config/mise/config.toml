@@ -17,6 +17,7 @@ bun = "latest"
 "npm:@kitschpatrol/tldraw-cli" = "latest"
 "github:tree-sitter/tree-sitter" = "latest"
 "github:pranshuparmar/witr" = "latest"
+python = "3.14.8"
 
 [tools."github:pnpm/pnpm"]
 version = "latest"

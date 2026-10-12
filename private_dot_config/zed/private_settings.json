@@ -7,6 +7,17 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "project_panel": {
+    "hide_hidden": true
+  },
+  "agent_servers": {
+    "pi-acp": {
+      "default_config_options": {
+        "model": "shuai-coding/gpt-6-astra"
+      },
+      "type": "registry"
+    }
+  },
   "vim": {
     "use_smartcase_find": true,
     "toggle_relative_line_numbers": true
