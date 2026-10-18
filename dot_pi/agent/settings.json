@@ -1,6 +1,6 @@
 {
-  "lastChangelogVersion": "1.1.0",
-  "defaultThinkingLevel": "medium",
+  "lastChangelogVersion": "1.3.0",
+  "defaultThinkingLevel": "high",
   "hideThinkingBlock": false,
   "packages": [
     "npm:@juicesharp/rpiv-ask-user-question",
@@ -14,14 +14,12 @@
     "npm:pi-atelier",
     "npm:pi-workspace-history"
   ],
-  "defaultProvider": "cpa-response",
-  "defaultModel": "gpt-6-astra",
+  "defaultProvider": "magpie",
+  "defaultModel": "api/gpt-6-astra",
   "defaultTools": [
     "+codemode"
   ],
   "skills": [],
   "theme": "dark",
-  "workspaceHistory": {
-    "enabled": true
-  }
+  "workspaceHistory": {}
 }

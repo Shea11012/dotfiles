@@ -1,6 +1,7 @@
 [mgr]
 show_hidden = true
 sort_by = "natural"
+ratio = [1,2,5]
 
 [opener]
 web_browser = [
@@ -14,8 +15,3 @@ prepend_rules = [
     { url = "*.html", use = [ "web_browser", "edit" ] }
 ]
 
-[plugin]
-prepend_fetchers = [
-    { id = "simple-tag", url = "*", run = "simple-tag",group = "simple-tag" },
-    { id = "simple-tag", url = "*/", run = "simple-tag",group = "simple-tag"},
-]
