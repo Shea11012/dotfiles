@@ -31,6 +31,7 @@ mise activate fish | source
 # devbox global shellenv --init-hook | source
 zoxide init fish | source
 starship init fish | source
+sctl completion fish | source
 uv generate-shell-completion fish | source
 buf completion fish | source
 herdr completion fish | source

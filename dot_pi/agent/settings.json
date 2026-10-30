@@ -7,12 +7,10 @@
     "npm:@juicesharp/rpiv-btw",
     "npm:pi-web-access",
     "npm:pi-tool-display",
-    "npm:@lll9p/pi-better-compaction",
-    "npm:@tintinweb/pi-subagents",
     "npm:@aliou/pi-guardrails",
-    "npm:pi-blackhole",
     "npm:pi-atelier",
-    "npm:pi-workspace-history"
+    "npm:pi-workspace-history",
+    "npm:billion-context-pi"
   ],
   "defaultProvider": "magpie",
   "defaultModel": "api/gpt-6-astra",
